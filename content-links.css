@@ -51,7 +51,9 @@
 }
 
 .platform-card {
-  min-height: 360px;
+  min-height: 230px;
+  padding-top: 30px;
+  padding-bottom: 30px;
 }
 
 .platform-label {
@@ -60,7 +62,12 @@
 }
 
 .platform-card h3 {
-  margin-top: 55px;
+  margin-top: 24px;
+  margin-bottom: 12px;
+}
+
+.platform-card p {
+  margin-bottom: 18px;
 }
 
 .platform-card a {
@@ -87,6 +94,10 @@
   .content-topic:last-child {
     border-bottom: 0;
   }
+
+  .platform-card {
+    min-height: 220px;
+  }
 }
 
 @media (max-width: 560px) {
@@ -106,5 +117,15 @@
 
   .channel-links {
     margin-top: 18px;
+  }
+
+  .platform-card {
+    min-height: 200px;
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .platform-card h3 {
+    margin-top: 20px;
   }
 }
