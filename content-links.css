@@ -1,0 +1,32 @@
+.platform-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+}
+
+.platform-card {
+  min-height: 360px;
+}
+
+.platform-label {
+  font-family: "Manrope", sans-serif;
+  letter-spacing: .16em;
+}
+
+.platform-card h3 {
+  margin-top: 55px;
+}
+
+.platform-card a {
+  transition: color .25s ease, padding-left .25s ease;
+}
+
+.platform-card a:hover {
+  color: var(--gold);
+  padding-left: 6px;
+}
+
+@media (max-width: 900px) {
+  .platform-grid {
+    grid-template-columns: 1fr;
+  }
+}
