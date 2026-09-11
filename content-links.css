@@ -14,97 +14,69 @@
   border-right: 1px solid white;
 }
 
-.content-topic:last-child {
-  border-right: 0;
+.content-topic:last-child { border-right: 0; }
+.content-topic.featured { background: var(--navy); color: white; }
+.content-topic h3 { margin: 62px 0 18px; font-size: 25px; line-height: 1.4; font-weight: 700; }
+.content-topic p { margin: 0; color: var(--muted); font-size: 14px; font-weight: 400; }
+.content-topic.featured p { color: rgba(255,255,255,.62); }
+.platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1px; }
+.channel-links { margin-top: 24px; }
+.platform-card { min-height: 360px; }
+.platform-label { font-family: "Manrope", sans-serif; letter-spacing: .16em; }
+.platform-card h3 { margin-top: 55px; }
+.platform-card a { transition: color .25s ease, padding-left .25s ease; }
+.platform-card a:hover { color: var(--gold); padding-left: 6px; }
+
+/* Bareun logo */
+.brand-logo-link {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
-.content-topic.featured {
-  background: var(--navy);
-  color: white;
+.brand-logo-image {
+  display: block;
+  width: 112px;
+  height: auto;
+  background: #fff;
+  padding: 3px 6px;
+  border-radius: 2px;
 }
 
-.content-topic h3 {
-  margin: 62px 0 18px;
-  font-size: 25px;
-  line-height: 1.4;
-  font-weight: 700;
+.site-header.scrolled .brand-logo-link { height: 56px; }
+.site-header.scrolled .brand-logo-image { width: 100px; }
+
+.footer-logo-wrap {
+  display: flex;
+  align-items: center;
 }
 
-.content-topic p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 14px;
-  font-weight: 400;
-}
-
-.content-topic.featured p {
-  color: rgba(255,255,255,.62);
-}
-
-.platform-grid {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1px;
-}
-
-.channel-links {
-  margin-top: 24px;
-}
-
-.platform-card {
-  min-height: 360px;
-}
-
-.platform-label {
-  font-family: "Manrope", sans-serif;
-  letter-spacing: .16em;
-}
-
-.platform-card h3 {
-  margin-top: 55px;
-}
-
-.platform-card a {
-  transition: color .25s ease, padding-left .25s ease;
-}
-
-.platform-card a:hover {
-  color: var(--gold);
-  padding-left: 6px;
+.footer-logo-image {
+  display: block;
+  width: 128px;
+  height: auto;
+  background: #fff;
+  padding: 5px 8px;
+  border-radius: 2px;
 }
 
 @media (max-width: 900px) {
   .content-topic-grid,
-  .platform-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .content-topic {
-    min-height: 300px;
-    border-right: 0;
-    border-bottom: 1px solid white;
-  }
-
-  .content-topic:last-child {
-    border-bottom: 0;
-  }
+  .platform-grid { grid-template-columns: 1fr; }
+  .content-topic { min-height: 300px; border-right: 0; border-bottom: 1px solid white; }
+  .content-topic:last-child { border-bottom: 0; }
+  .brand-logo-image { width: 96px; }
+  .site-header.scrolled .brand-logo-image { width: 90px; }
 }
 
 @media (max-width: 560px) {
-  .content-topic-grid {
-    margin-top: 50px;
-  }
-
-  .content-topic {
-    min-height: 270px;
-    padding: 30px;
-  }
-
-  .content-topic h3 {
-    margin-top: 45px;
-    font-size: 23px;
-  }
-
-  .channel-links {
-    margin-top: 18px;
-  }
+  .content-topic-grid { margin-top: 50px; }
+  .content-topic { min-height: 270px; padding: 30px; }
+  .content-topic h3 { margin-top: 45px; font-size: 23px; }
+  .channel-links { margin-top: 18px; }
+  .brand-logo-link { height: 56px; }
+  .brand-logo-image { width: 88px; padding: 2px 5px; }
+  .site-header.scrolled .brand-logo-image { width: 84px; }
+  .footer-logo-image { width: 110px; }
 }
