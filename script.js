@@ -1,3 +1,8 @@
+const mobileFixStyles = document.createElement('link');
+mobileFixStyles.rel = 'stylesheet';
+mobileFixStyles.href = 'mobile-fix.css?v=20260913-0100';
+document.head.appendChild(mobileFixStyles);
+
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
