@@ -5,7 +5,7 @@ document.head.appendChild(mobileFixStyles);
 
 const mobileAnchorFixStyles = document.createElement('link');
 mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0233';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0242';
 document.head.appendChild(mobileAnchorFixStyles);
 
 const desktopPropertyFitStyles = document.createElement('link');
@@ -42,7 +42,7 @@ function goToMobileSection(hash) {
     requestAnimationFrame(() => {
       const headerHeight = header ? header.getBoundingClientRect().height : 70;
       const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
     });
   });
 }
@@ -61,7 +61,7 @@ function moveToMobileHash(hash) {
   history.pushState(null, '', hash);
 
   if (hash === '#home' || hash === '#top') {
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
 
@@ -79,7 +79,7 @@ mobileLinks.forEach((link) => {
   });
 });
 
-// 모바일에서 홈 화면의 '상담 문의' 등 내부 링크도 햄버거 메뉴와 같은 방식으로 정확히 이동합니다.
+// 모바일에서 홈 화면의 '상가 매물 보기', '상담 문의' 등 내부 링크도 햄버거 메뉴와 같은 방식으로 정확히 이동합니다.
 document.addEventListener('click', (event) => {
   if (window.innerWidth > 900) return;
 
