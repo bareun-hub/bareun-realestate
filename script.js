@@ -5,7 +5,7 @@ document.head.appendChild(mobileFixStyles);
 
 const mobileAnchorFixStyles = document.createElement('link');
 mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0218';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0233';
 document.head.appendChild(mobileAnchorFixStyles);
 
 const desktopPropertyFitStyles = document.createElement('link');
@@ -40,7 +40,8 @@ function goToMobileSection(hash) {
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const targetTop = target.getBoundingClientRect().top + window.scrollY;
+      const headerHeight = header ? header.getBoundingClientRect().height : 70;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight;
       window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
     });
   });
