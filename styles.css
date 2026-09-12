@@ -196,8 +196,8 @@ button { font: inherit; }
   .mobile-nav { position: absolute; display: flex; flex-direction: column; gap: 0; top: 70px; left: 0; right: 0; padding: 20px 24px 30px; background: rgba(7,27,47,.98); transform: translateY(-140%); opacity: 0; pointer-events: none; transition: .3s; }
   .mobile-nav.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
   .mobile-nav a { padding: 15px 0; border-bottom: 1px solid rgba(255,255,255,.1); font-weight: 600; }
-  .hero { min-height: 850px; }
-  .hero-content { padding-bottom: 140px; }
+  .hero { min-height: 100svh; }
+  .hero-content { padding-bottom: 105px; }
   .hero-region-nav { width: 100%; }
   .scroll-indicator { display: none; }
   .intro { grid-template-columns: 1fr; gap: 10px; }
@@ -219,27 +219,45 @@ button { font: inherit; }
   .brand-mark { width: 30px; height: 30px; }
   .brand-text small { display: none; }
   .brand-text strong { font-size: 13px; }
-  .hero { min-height: 780px; }
-  .hero-content { width: calc(100% - 36px); }
-  .hero h1 { font-size: 43px; }
-  .hero h1 > span:last-child { font-size: .68em; line-height: 1.25; letter-spacing: -.045em; }
-  .hero-copy { margin-top: 26px; max-width: 100%; font-size: 14px; line-height: 1.85; letter-spacing: -.015em; word-break: keep-all; }
-  .hero-copy br { display: block; content: ""; margin-top: 4px; }
-  .hero-actions { flex-direction: column; align-items: stretch; width: min(300px,100%); }
-  .hero-region-nav a { min-height: 90px; padding: 16px 12px; }
-  .hero-region-nav span { display: none; }
-  .hero-region-nav strong { font-size: 11px; }
-  .section { padding: 90px 20px; }
-  .section-heading h2 { font-size: 35px; }
-  .strength-grid { grid-template-columns: 1fr; }
-  .strength-card { min-height: auto; border-right: 0; border-bottom: 1px solid var(--line); }
-  .strength-card h3 { margin-top: 35px; }
-  .property-image { min-height: 310px; }
-  .property-panel { padding: 38px 25px; }
-  .analysis-note { grid-template-columns: 1fr; gap: 15px; }
-  .content-card { min-height: 350px; padding: 30px; }
+  .hero {
+    min-height: 100svh;
+    height: 100svh;
+    align-items: center;
+  }
+  .hero-content {
+    width: calc(100% - 36px);
+    padding-top: 48px;
+    padding-bottom: 86px;
+  }
+  .eyebrow { margin-bottom: 14px; font-size: 9px; letter-spacing: .17em; }
+  .hero h1 { font-size: 36px; line-height: 1.08; }
+  .hero h1 > span:first-child { margin-bottom: .12em !important; }
+  .hero h1 > span:last-child { font-size: .68em; line-height: 1.2; letter-spacing: -.045em; }
+  .hero-copy { margin-top: 18px; max-width: 100%; font-size: 13px; line-height: 1.65; letter-spacing: -.02em; word-break: keep-all; }
+  .hero-copy br { display: block; }
+  .hero-actions { flex-direction: column; align-items: stretch; gap: 8px; width: 100%; margin-top: 22px; }
+  .hero-actions .button { min-height: 44px; }
+  .hero-region-nav a { min-height: 72px; padding: 10px 12px; }
+  .hero-region-nav span { display: block; font-size: 10px; }
+  .hero-region-nav strong { font-size: 10px; }
+  .hero-region-nav small { font-size: 9px; }
+  .section { padding: 64px 20px; }
+  .section-heading h2 { font-size: 31px; }
+  .intro-copy { font-size: 15px; line-height: 1.7; }
+  .strength-grid { grid-template-columns: 1fr; margin-top: 28px; }
+  .strength-card { min-height: auto; padding: 22px 20px; border-right: 0; border-bottom: 1px solid var(--line); }
+  .strength-card h3 { margin: 16px 0 8px; font-size: 19px; }
+  .property-feature { margin-top: 42px; }
+  .property-image { min-height: 280px; }
+  .property-panel { padding: 32px 24px; }
+  .analysis-grid { margin-top: 42px; }
+  .area-card { min-height: 340px; }
+  .analysis-note { grid-template-columns: 1fr; gap: 12px; margin-top: 36px; padding-top: 22px; }
+  .content-grid { margin-top: 42px; }
+  .content-card { min-height: 310px; padding: 26px; }
   .contact-placeholder-grid { grid-template-columns: 1fr; }
-  .naver-map { height: 280px; }
+  .contact-visual, .contact-panel { padding-top: 64px; padding-bottom: 64px; }
+  .naver-map { height: 260px; }
   .site-footer { align-items: flex-start; flex-direction: column; gap: 20px; }
   .site-footer > a { margin-left: 0; }
 }
