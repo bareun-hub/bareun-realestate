@@ -1,0 +1,119 @@
+/* Final override for mobile menu sections. Loaded last from index.html. */
+@media (max-width: 560px) {
+  html { scroll-padding-top: 0 !important; }
+
+  #properties,
+  #analysis,
+  #contents,
+  #contact { scroll-margin-top: 0 !important; }
+
+  /* 상가 매물: 헤더 아래에서 정확히 시작하고 전체 내용은 자연스럽게 스크롤 */
+  #properties:target {
+    display: block !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding: 86px 16px 64px !important;
+    background: var(--navy-deep) !important;
+  }
+
+  #properties:target .section-heading {
+    margin: 0 !important;
+    max-width: none !important;
+  }
+
+  #properties:target .eyebrow {
+    margin: 0 0 7px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+  }
+
+  #properties:target .section-heading h2 {
+    margin: 0 !important;
+    font-size: 28px !important;
+    line-height: 1.08 !important;
+  }
+
+  #properties:target .section-heading > p:last-child {
+    margin: 11px 0 0 !important;
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+  }
+
+  #properties:target .property-feature {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin-top: 20px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+
+  #properties:target .property-image {
+    height: 210px !important;
+    min-height: 210px !important;
+    width: 100% !important;
+  }
+
+  #properties:target .image-label {
+    left: 16px !important;
+    bottom: 12px !important;
+    font-size: 7px !important;
+  }
+
+  #properties:target .property-panel {
+    display: block !important;
+    height: auto !important;
+    min-height: 0 !important;
+    padding: 20px 18px 22px !important;
+  }
+
+  #properties:target .panel-index { font-size: 8px !important; }
+
+  #properties:target .property-panel h3 {
+    margin: 10px 0 8px !important;
+    font-size: 21px !important;
+    line-height: 1.2 !important;
+  }
+
+  #properties:target .property-panel p {
+    margin: 0 !important;
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+  }
+
+  #properties:target .button-light {
+    display: flex !important;
+    width: 100% !important;
+    min-height: 46px !important;
+    margin-top: 16px !important;
+    padding: 0 14px !important;
+    font-size: 11px !important;
+  }
+
+  /* 다른 메뉴도 상단 헤더에 가리지 않고, 하단이 잘리지 않게 자연스럽게 스크롤 */
+  #analysis:target,
+  #contents:target {
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-top: 86px !important;
+    padding-bottom: 64px !important;
+  }
+
+  #contact:target {
+    height: auto !important;
+    min-height: 100svh !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-top: 70px !important;
+    padding-bottom: 64px !important;
+  }
+}
