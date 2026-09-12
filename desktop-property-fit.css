@@ -1,0 +1,107 @@
+/* Desktop-only property section viewport fit */
+@media (min-width: 901px) {
+  #properties:target {
+    box-sizing: border-box !important;
+    min-height: 100dvh !important;
+    height: 100dvh !important;
+    padding-top: 82px !important;
+    padding-bottom: 12px !important;
+    overflow: hidden !important;
+  }
+
+  #properties:target .section-heading {
+    max-width: 720px !important;
+    flex: 0 0 auto !important;
+  }
+
+  #properties:target .eyebrow {
+    margin: 0 0 5px !important;
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+  }
+
+  #properties:target .section-heading h2 {
+    margin: 0 !important;
+    font-size: clamp(30px, 2.7vw, 40px) !important;
+    line-height: 1.06 !important;
+  }
+
+  #properties:target .section-heading > p:last-child {
+    margin: 7px 0 0 !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  #properties:target .property-feature {
+    margin-top: 12px !important;
+    min-height: 0 !important;
+    height: clamp(300px, calc(100dvh - 315px), 470px) !important;
+    grid-template-columns: 1.45fr .8fr !important;
+    overflow: hidden !important;
+  }
+
+  #properties:target .property-image {
+    min-height: 0 !important;
+    height: 100% !important;
+  }
+
+  #properties:target .property-panel {
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 22px 26px !important;
+    justify-content: center !important;
+  }
+
+  #properties:target .panel-index {
+    font-size: 9px !important;
+  }
+
+  #properties:target .property-panel h3 {
+    margin: 10px 0 7px !important;
+    font-size: clamp(23px, 2vw, 30px) !important;
+    line-height: 1.2 !important;
+  }
+
+  #properties:target .property-panel p {
+    margin: 0 !important;
+    font-size: 12px !important;
+    line-height: 1.45 !important;
+  }
+
+  #properties:target .button-light {
+    margin-top: 10px !important;
+    min-height: 40px !important;
+    padding: 0 16px !important;
+    font-size: 11px !important;
+  }
+}
+
+@media (min-width: 901px) and (max-height: 760px) {
+  #properties:target {
+    padding-top: 76px !important;
+    padding-bottom: 8px !important;
+  }
+
+  #properties:target .section-heading h2 {
+    font-size: 32px !important;
+  }
+
+  #properties:target .section-heading > p:last-child {
+    font-size: 11px !important;
+    line-height: 1.35 !important;
+  }
+
+  #properties:target .property-feature {
+    margin-top: 9px !important;
+    height: calc(100dvh - 275px) !important;
+    min-height: 285px !important;
+  }
+
+  #properties:target .property-panel {
+    padding: 18px 22px !important;
+  }
+
+  #properties:target .property-panel h3 {
+    font-size: 24px !important;
+  }
+}
