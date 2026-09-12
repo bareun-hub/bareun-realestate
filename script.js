@@ -31,8 +31,8 @@ const BARUN_SITE_URL = 'https://parkhm750910-hue.github.io/bareun-realestate/';
 const BARUN_PLACE = {
   name: '바른부동산공인중개사사무소',
   address: '경남 김해시 율하6로 61 성호루브루 102호',
+  mapAddress: '경남 김해시 율하6로 61',
   phone: '055-313-0222',
-  // 율하6로 61 건물 위치. Geocoding 성공 시 네이버가 반환한 좌표로 다시 보정합니다.
   lat: 35.17156,
   lng: 128.82298
 };
@@ -49,8 +49,8 @@ function setMapMessage(message, isError = false) {
 }
 
 function buildNaverWebPlaceUrl(lat, lng) {
-  const query = encodeURIComponent(`${BARUN_PLACE.name} ${BARUN_PLACE.address}`);
-  return `https://map.naver.com/p/search/${query}?c=${lng},${lat},17,0,0,0,dh`;
+  const address = encodeURIComponent(BARUN_PLACE.mapAddress);
+  return `https://map.naver.com/p/search/${address}?c=${lng},${lat},17,0,0,0,dh`;
 }
 
 function buildNaverWebDirectionsUrl(lat, lng) {
@@ -152,12 +152,10 @@ function initBarunNaverMap() {
     return;
   }
 
-  // 지도와 길찾기는 Geocoding 설정과 무관하게 우선 정상 동작하도록 기본 좌표로 즉시 표시합니다.
   renderBarunMap(BARUN_PLACE.lat, BARUN_PLACE.lng);
 
-  // Geocoding을 사용할 수 있으면 네이버가 주소로 확인한 좌표를 길찾기 목적지에 반영합니다.
   if (naver.maps.Service) {
-    naver.maps.Service.geocode({ query: BARUN_PLACE.address }, (status, response) => {
+    naver.maps.Service.geocode({ query: BARUN_PLACE.mapAddress }, (status, response) => {
       if (status === naver.maps.Service.Status.OK && response.v2.addresses.length) {
         const result = response.v2.addresses[0];
         setDirectionsUrl(Number(result.y), Number(result.x));
@@ -169,7 +167,6 @@ function initBarunNaverMap() {
 function loadNaverMaps() {
   if (!mapElement) return;
 
-  // 네이버 공식 인증 실패 콜백
   window.navermap_authFailure = function () {
     setMapMessage('네이버지도 인증이 거부되었습니다. 네이버 클라우드에서 Dynamic Map 사용 여부와 Web 서비스 URL(parkhm750910-hue.github.io)을 확인해 주세요.', true);
   };
@@ -182,7 +179,6 @@ function loadNaverMaps() {
   document.head.appendChild(script);
 }
 
-// API가 로드되지 않아도 PC 길찾기 버튼은 처음부터 바른부동산을 목적지로 갖습니다.
 setDirectionsUrl(BARUN_PLACE.lat, BARUN_PLACE.lng);
 loadNaverMaps();
 
