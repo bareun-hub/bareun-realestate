@@ -3,6 +3,11 @@ mobileFixStyles.rel = 'stylesheet';
 mobileFixStyles.href = 'mobile-fix.css?v=20260913-0100';
 document.head.appendChild(mobileFixStyles);
 
+const mobileAnchorFixStyles = document.createElement('link');
+mobileAnchorFixStyles.rel = 'stylesheet';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0118';
+document.head.appendChild(mobileAnchorFixStyles);
+
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
@@ -19,12 +24,44 @@ menuButton.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
 });
 
+function goToSectionWithoutGap(hash) {
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      const top = target.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'auto' });
+    });
+  });
+}
+
 mobileLinks.forEach((link) => {
-  link.addEventListener('click', () => {
+  link.addEventListener('click', (event) => {
+    const hash = link.getAttribute('href');
+
     mobileNav.classList.remove('open');
     menuButton.setAttribute('aria-expanded', 'false');
     menuButton.setAttribute('aria-label', '메뉴 열기');
+
+    if (!hash || !hash.startsWith('#')) return;
+
+    event.preventDefault();
+    history.pushState(null, '', hash);
+
+    if (hash === '#home') {
+      window.scrollTo({ top: 0, behavior: 'auto' });
+      return;
+    }
+
+    goToSectionWithoutGap(hash);
   });
+});
+
+window.addEventListener('hashchange', () => {
+  if (window.innerWidth > 900) return;
+  const hash = window.location.hash;
+  if (hash && hash !== '#home') goToSectionWithoutGap(hash);
 });
 
 naverPropertyLink.addEventListener('click', (event) => {
