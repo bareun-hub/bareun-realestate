@@ -1,4 +1,4 @@
-/* Final mobile anchor/viewport fix: keep selected sections flush under the fixed header. */
+/* Final mobile anchor/viewport fix */
 @media (max-width: 900px) {
   html {
     scroll-padding-top: 0 !important;
@@ -11,58 +11,68 @@
     scroll-margin-top: 0 !important;
   }
 
+  /* JS가 고정 헤더 높이를 빼고 이동하므로 섹션 안에 큰 상단 패딩을 두지 않습니다. */
   #properties:target,
   #analysis:target,
   #contents:target {
-    padding-top: 78px !important;
+    padding-top: 24px !important;
   }
 
   #contact:target {
-    padding-top: 70px !important;
+    padding-top: 0 !important;
   }
 }
 
 @media (max-width: 560px) {
+  /* 상가 매물: 상단 흰 여백 제거 + CTA 버튼까지 자연스럽게 보이도록 컴팩트하게 구성 */
   #properties:target {
-    padding: 76px 14px 24px !important;
-    min-height: 100svh !important;
+    padding: 22px 14px 34px !important;
+    min-height: 0 !important;
+    height: auto !important;
     box-sizing: border-box !important;
+    overflow: visible !important;
+  }
+
+  #properties:target .section-heading {
+    margin: 0 !important;
   }
 
   #properties:target .eyebrow {
-    margin-bottom: 6px !important;
+    margin: 0 0 6px !important;
     font-size: 9px !important;
   }
 
   #properties:target .section-heading h2 {
-    font-size: 27px !important;
+    margin: 0 !important;
+    font-size: 26px !important;
     line-height: 1.08 !important;
   }
 
   #properties:target .section-heading > p:last-child {
-    margin-top: 8px !important;
-    font-size: 12px !important;
-    line-height: 1.5 !important;
+    margin: 8px 0 0 !important;
+    font-size: 11.5px !important;
+    line-height: 1.45 !important;
   }
 
   #properties:target .property-feature {
     margin-top: 14px !important;
     border-radius: 14px !important;
+    overflow: hidden !important;
   }
 
   #properties:target .property-image {
-    height: 170px !important;
-    min-height: 170px !important;
+    height: 155px !important;
+    min-height: 155px !important;
   }
 
   #properties:target .image-label {
     left: 14px !important;
-    bottom: 11px !important;
+    bottom: 10px !important;
     font-size: 7px !important;
   }
 
   #properties:target .property-panel {
-    padding: 16px 16px 18px !important;
+    padding: 14px 16px 16px !important;
   }
 
   #properties:target .panel-index {
@@ -70,20 +80,26 @@
   }
 
   #properties:target .property-panel h3 {
-    margin: 8px 0 7px !important;
-    font-size: 20px !important;
-    line-height: 1.2 !important;
+    margin: 7px 0 6px !important;
+    font-size: 19px !important;
+    line-height: 1.18 !important;
   }
 
   #properties:target .property-panel p {
-    font-size: 11px !important;
-    line-height: 1.45 !important;
+    margin: 0 !important;
+    font-size: 10.5px !important;
+    line-height: 1.42 !important;
   }
 
   #properties:target .button-light {
-    margin-top: 12px !important;
-    min-height: 44px !important;
-    padding: 0 13px !important;
-    font-size: 11px !important;
+    margin-top: 10px !important;
+    min-height: 42px !important;
+    padding: 0 12px !important;
+    font-size: 10.5px !important;
+  }
+
+  /* 휴대폰 하단 브라우저 UI와 버튼이 겹치지 않게 여유 확보 */
+  #properties:target .property-panel {
+    padding-bottom: max(18px, env(safe-area-inset-bottom)) !important;
   }
 }
