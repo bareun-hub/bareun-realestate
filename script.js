@@ -8,6 +8,11 @@ mobileAnchorFixStyles.rel = 'stylesheet';
 mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0148';
 document.head.appendChild(mobileAnchorFixStyles);
 
+const desktopPropertyFitStyles = document.createElement('link');
+desktopPropertyFitStyles.rel = 'stylesheet';
+desktopPropertyFitStyles.href = 'desktop-property-fit.css?v=20260913-0154';
+document.head.appendChild(desktopPropertyFitStyles);
+
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
