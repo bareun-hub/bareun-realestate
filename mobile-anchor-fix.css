@@ -1,0 +1,89 @@
+/* Final mobile anchor/viewport fix: keep selected sections flush under the fixed header. */
+@media (max-width: 900px) {
+  html {
+    scroll-padding-top: 0 !important;
+  }
+
+  #properties,
+  #analysis,
+  #contents,
+  #contact {
+    scroll-margin-top: 0 !important;
+  }
+
+  #properties:target,
+  #analysis:target,
+  #contents:target {
+    padding-top: 78px !important;
+  }
+
+  #contact:target {
+    padding-top: 70px !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #properties:target {
+    padding: 76px 14px 24px !important;
+    min-height: 100svh !important;
+    box-sizing: border-box !important;
+  }
+
+  #properties:target .eyebrow {
+    margin-bottom: 6px !important;
+    font-size: 9px !important;
+  }
+
+  #properties:target .section-heading h2 {
+    font-size: 27px !important;
+    line-height: 1.08 !important;
+  }
+
+  #properties:target .section-heading > p:last-child {
+    margin-top: 8px !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  #properties:target .property-feature {
+    margin-top: 14px !important;
+    border-radius: 14px !important;
+  }
+
+  #properties:target .property-image {
+    height: 170px !important;
+    min-height: 170px !important;
+  }
+
+  #properties:target .image-label {
+    left: 14px !important;
+    bottom: 11px !important;
+    font-size: 7px !important;
+  }
+
+  #properties:target .property-panel {
+    padding: 16px 16px 18px !important;
+  }
+
+  #properties:target .panel-index {
+    font-size: 8px !important;
+  }
+
+  #properties:target .property-panel h3 {
+    margin: 8px 0 7px !important;
+    font-size: 20px !important;
+    line-height: 1.2 !important;
+  }
+
+  #properties:target .property-panel p {
+    font-size: 11px !important;
+    line-height: 1.45 !important;
+  }
+
+  #properties:target .button-light {
+    margin-top: 12px !important;
+    min-height: 44px !important;
+    padding: 0 13px !important;
+    font-size: 11px !important;
+  }
+}
