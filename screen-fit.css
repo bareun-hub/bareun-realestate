@@ -1,0 +1,219 @@
+/* 메뉴로 이동한 섹션을 PC/모바일 화면 안에 맞추는 최종 보정 */
+#properties:target,
+#analysis:target,
+#contents:target,
+#contact:target {
+  min-height: calc(100dvh - 70px) !important;
+  max-height: calc(100dvh - 70px) !important;
+  overflow: hidden !important;
+}
+
+#properties:target,
+#analysis:target,
+#contents:target {
+  padding-top: 28px !important;
+  padding-bottom: 28px !important;
+}
+
+#properties:target .section-heading h2,
+#analysis:target .section-heading h2,
+#contents:target .section-heading h2 {
+  font-size: clamp(28px, 3vw, 42px) !important;
+  line-height: 1.08 !important;
+}
+
+#properties:target .eyebrow,
+#analysis:target .eyebrow,
+#contents:target .eyebrow {
+  margin-bottom: 8px !important;
+}
+
+#properties:target .section-heading > p:last-child,
+#analysis:target .section-heading > p:last-child,
+#contents:target .section-heading > p:last-child {
+  margin-top: 8px !important;
+}
+
+/* PC: 상가 매물 */
+#properties:target .property-feature {
+  margin-top: 18px !important;
+  min-height: 0 !important;
+  height: calc(100dvh - 260px) !important;
+}
+#properties:target .property-image { min-height: 0 !important; height: 100% !important; }
+#properties:target .property-panel { padding: 26px !important; }
+#properties:target .property-panel h3 { margin: 12px 0 8px !important; font-size: clamp(22px, 2.2vw, 32px) !important; }
+#properties:target .button-light { margin-top: 12px !important; }
+
+/* PC: 상권 분석 */
+#analysis:target .analysis-grid {
+  margin-top: 18px !important;
+  height: calc(100dvh - 275px) !important;
+}
+#analysis:target .area-card { min-height: 0 !important; height: 100% !important; }
+#analysis:target .area-content { inset: auto 20px 18px !important; }
+#analysis:target .area-content p { margin-top: 12px !important; }
+#analysis:target .area-content h3 { font-size: 24px !important; }
+#analysis:target .analysis-note { margin-top: 12px !important; padding-top: 10px !important; }
+
+/* PC: 부동산 콘텐츠 */
+#contents:target .content-topic-grid {
+  margin-top: 18px !important;
+  height: calc((100dvh - 330px) * .58) !important;
+}
+#contents:target .content-topic {
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 20px !important;
+}
+#contents:target .content-topic h3 { margin: 18px 0 8px !important; font-size: 18px !important; }
+#contents:target .content-topic p { font-size: 12px !important; line-height: 1.4 !important; }
+#contents:target .channel-links {
+  margin-top: 8px !important;
+  height: calc((100dvh - 330px) * .42) !important;
+}
+#contents:target .platform-card {
+  min-height: 0 !important;
+  height: 100% !important;
+  padding: 16px 20px !important;
+}
+#contents:target .platform-card h3 { margin: 8px 0 6px !important; font-size: 17px !important; }
+#contents:target .platform-card p { margin-bottom: 6px !important; font-size: 11px !important; line-height: 1.35 !important; }
+#contents:target .platform-card a { padding-top: 8px !important; font-size: 10px !important; }
+
+/* PC: 오시는 길·상담 */
+#contact:target {
+  grid-template-columns: 1fr 1fr !important;
+  height: calc(100dvh - 70px) !important;
+}
+#contact:target .contact-visual,
+#contact:target .contact-panel {
+  height: 100% !important;
+  min-height: 0 !important;
+  padding-top: 34px !important;
+  padding-bottom: 34px !important;
+}
+#contact:target .contact-visual h2 { font-size: clamp(32px, 4vw, 48px) !important; }
+#contact:target .contact-visual > p:last-child { margin-top: 14px !important; }
+#contact:target .contact-placeholder-grid { margin: 14px 0 !important; }
+#contact:target .contact-placeholder-grid > div { padding: 10px 0 !important; }
+#contact:target .naver-map { height: 190px !important; }
+#contact:target .naver-map-wrap { margin-bottom: 12px !important; }
+#contact:target .naver-directions-button { margin-top: 8px !important; min-height: 40px !important; }
+#contact:target .contact-button { min-height: 40px !important; }
+
+@media (max-width: 900px) {
+  #properties:target,
+  #analysis:target,
+  #contents:target,
+  #contact:target {
+    min-height: calc(100svh - 70px) !important;
+    max-height: calc(100svh - 70px) !important;
+    overflow: hidden !important;
+  }
+
+  #properties:target,
+  #analysis:target,
+  #contents:target {
+    padding: 10px 10px 12px !important;
+  }
+
+  #properties:target .eyebrow,
+  #analysis:target .eyebrow,
+  #contents:target .eyebrow {
+    margin-bottom: 4px !important;
+    font-size: 7px !important;
+  }
+
+  #properties:target .section-heading h2,
+  #analysis:target .section-heading h2,
+  #contents:target .section-heading h2 {
+    font-size: 18px !important;
+    line-height: 1.05 !important;
+  }
+
+  #properties:target .section-heading > p:last-child,
+  #analysis:target .section-heading > p:last-child,
+  #contents:target .section-heading > p:last-child {
+    margin-top: 5px !important;
+    font-size: 8px !important;
+    line-height: 1.25 !important;
+  }
+
+  /* 모바일 상가 매물 */
+  #properties:target .property-feature {
+    margin-top: 7px !important;
+    height: calc(100svh - 155px) !important;
+    grid-template-columns: 1.05fr .95fr !important;
+  }
+  #properties:target .property-image { height: 100% !important; min-height: 0 !important; }
+  #properties:target .property-panel { padding: 8px !important; }
+  #properties:target .panel-index { font-size: 7px !important; }
+  #properties:target .property-panel h3 { margin: 6px 0 4px !important; font-size: 13px !important; line-height: 1.15 !important; }
+  #properties:target .property-panel p { font-size: 8px !important; line-height: 1.2 !important; }
+  #properties:target .button-light { margin-top: 6px !important; min-height: 28px !important; padding: 0 6px !important; font-size: 8px !important; }
+
+  /* 모바일 상권 분석 */
+  #analysis:target .analysis-grid {
+    margin-top: 7px !important;
+    height: calc(100svh - 190px) !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+    gap: 4px !important;
+  }
+  #analysis:target .area-card { height: 100% !important; min-height: 0 !important; }
+  #analysis:target .area-content { inset: auto 5px 6px !important; }
+  #analysis:target .area-content span { font-size: 7px !important; }
+  #analysis:target .area-content p { margin: 3px 0 1px !important; font-size: 6px !important; }
+  #analysis:target .area-content h3 { font-size: 11px !important; }
+  #analysis:target .area-content small { font-size: 7px !important; line-height: 1.15 !important; display: block; }
+  #analysis:target .analysis-note { margin-top: 6px !important; padding-top: 5px !important; grid-template-columns: 1fr !important; gap: 2px !important; font-size: 8px !important; line-height: 1.2 !important; }
+
+  /* 모바일 부동산 콘텐츠 */
+  #contents:target .content-topic-grid {
+    margin-top: 7px !important;
+    height: calc((100svh - 180px) * .56) !important;
+    grid-template-columns: repeat(3, minmax(0,1fr)) !important;
+  }
+  #contents:target .content-topic { min-height: 0 !important; height: 100% !important; padding: 7px !important; }
+  #contents:target .content-category { font-size: 7px !important; }
+  #contents:target .content-topic h3 { margin: 6px 0 4px !important; font-size: 10px !important; line-height: 1.15 !important; }
+  #contents:target .content-topic p { font-size: 7px !important; line-height: 1.2 !important; }
+  #contents:target .channel-links {
+    margin-top: 4px !important;
+    height: calc((100svh - 180px) * .44) !important;
+  }
+  #contents:target .platform-grid { grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 3px !important; }
+  #contents:target .platform-card { min-height: 0 !important; height: 100% !important; padding: 7px !important; }
+  #contents:target .platform-card h3 { margin: 5px 0 3px !important; font-size: 9px !important; line-height: 1.15 !important; }
+  #contents:target .platform-card p { margin-bottom: 3px !important; font-size: 7px !important; line-height: 1.2 !important; }
+  #contents:target .platform-card a { padding-top: 4px !important; font-size: 7px !important; }
+
+  /* 모바일 오시는 길·상담 */
+  #contact:target {
+    display: grid !important;
+    grid-template-columns: .9fr 1.1fr !important;
+    height: calc(100svh - 70px) !important;
+  }
+  #contact:target .contact-visual,
+  #contact:target .contact-panel {
+    height: 100% !important;
+    min-height: 0 !important;
+    padding: 10px !important;
+  }
+  #contact:target .contact-visual .eyebrow { margin-bottom: 5px !important; font-size: 7px !important; }
+  #contact:target .contact-visual h2 { font-size: 18px !important; line-height: 1.08 !important; }
+  #contact:target .contact-visual > p:last-child { margin-top: 7px !important; font-size: 8px !important; line-height: 1.25 !important; }
+  #contact:target .contact-label { font-size: 7px !important; }
+  #contact:target .contact-panel h3 { margin: 5px 0 2px !important; font-size: 13px !important; }
+  #contact:target .contact-panel p { font-size: 8px !important; }
+  #contact:target .contact-placeholder-grid { margin: 7px 0 !important; grid-template-columns: repeat(2, minmax(0,1fr)) !important; gap: 0 6px !important; }
+  #contact:target .contact-placeholder-grid > div { padding: 5px 0 !important; }
+  #contact:target .contact-placeholder-grid span { font-size: 7px !important; }
+  #contact:target .contact-placeholder-grid strong { font-size: 8px !important; line-height: 1.2 !important; }
+  #contact:target .naver-map { height: calc(100svh - 330px) !important; min-height: 120px !important; }
+  #contact:target .naver-map-wrap { margin-bottom: 6px !important; }
+  #contact:target .naver-directions-button { margin-top: 5px !important; min-height: 28px !important; padding: 0 7px !important; font-size: 8px !important; }
+  #contact:target .naver-map-note { margin-top: 4px !important; font-size: 7px !important; }
+  #contact:target .contact-button { min-height: 28px !important; padding: 0 8px !important; font-size: 8px !important; }
+  #contact:target .contact-note { margin-top: 5px !important; font-size: 7px !important; }
+}
