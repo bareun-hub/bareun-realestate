@@ -5,7 +5,7 @@ document.head.appendChild(mobileFixStyles);
 
 const mobileAnchorFixStyles = document.createElement('link');
 mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0122';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0128';
 document.head.appendChild(mobileAnchorFixStyles);
 
 const header = document.querySelector('.site-header');
@@ -30,10 +30,8 @@ function goToMobileSection(hash) {
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const headerHeight = header.getBoundingClientRect().height || 70;
       const targetTop = target.getBoundingClientRect().top + window.scrollY;
-      const top = Math.max(0, targetTop - headerHeight);
-      window.scrollTo({ top, behavior: 'auto' });
+      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'auto' });
     });
   });
 }
