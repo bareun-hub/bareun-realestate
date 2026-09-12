@@ -5,7 +5,7 @@ document.head.appendChild(mobileFixStyles);
 
 const mobileAnchorFixStyles = document.createElement('link');
 mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0118';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0122';
 document.head.appendChild(mobileAnchorFixStyles);
 
 const header = document.querySelector('.site-header');
@@ -24,13 +24,15 @@ menuButton.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
 });
 
-function goToSectionWithoutGap(hash) {
+function goToMobileSection(hash) {
   const target = document.querySelector(hash);
   if (!target) return;
 
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const top = target.getBoundingClientRect().top + window.scrollY;
+      const headerHeight = header.getBoundingClientRect().height || 70;
+      const targetTop = target.getBoundingClientRect().top + window.scrollY;
+      const top = Math.max(0, targetTop - headerHeight);
       window.scrollTo({ top, behavior: 'auto' });
     });
   });
@@ -54,14 +56,14 @@ mobileLinks.forEach((link) => {
       return;
     }
 
-    goToSectionWithoutGap(hash);
+    goToMobileSection(hash);
   });
 });
 
 window.addEventListener('hashchange', () => {
   if (window.innerWidth > 900) return;
   const hash = window.location.hash;
-  if (hash && hash !== '#home') goToSectionWithoutGap(hash);
+  if (hash && hash !== '#home') goToMobileSection(hash);
 });
 
 naverPropertyLink.addEventListener('click', (event) => {
