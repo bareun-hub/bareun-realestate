@@ -15,7 +15,7 @@ document.head.appendChild(desktopPropertyFitStyles);
 
 const desktopContentsFitStyles = document.createElement('link');
 desktopContentsFitStyles.rel = 'stylesheet';
-desktopContentsFitStyles.href = 'desktop-contents-fit.css?v=20260913-0204';
+desktopContentsFitStyles.href = 'desktop-contents-fit.css?v=20260913-0208';
 document.head.appendChild(desktopContentsFitStyles);
 
 const header = document.querySelector('.site-header');
