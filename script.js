@@ -5,7 +5,7 @@ document.head.appendChild(mobileFixStyles);
 
 const mobileAnchorFixStyles = document.createElement('link');
 mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0148';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0218';
 document.head.appendChild(mobileAnchorFixStyles);
 
 const desktopPropertyFitStyles = document.createElement('link');
@@ -46,32 +46,58 @@ function goToMobileSection(hash) {
   });
 }
 
+function closeMobileMenu() {
+  mobileNav.classList.remove('open');
+  menuButton.setAttribute('aria-expanded', 'false');
+  menuButton.setAttribute('aria-label', '메뉴 열기');
+}
+
+function moveToMobileHash(hash) {
+  if (!hash || !hash.startsWith('#')) return;
+  const target = document.querySelector(hash);
+  if (!target) return;
+
+  history.pushState(null, '', hash);
+
+  if (hash === '#home' || hash === '#top') {
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    return;
+  }
+
+  goToMobileSection(hash);
+}
+
 mobileLinks.forEach((link) => {
   link.addEventListener('click', (event) => {
     const hash = link.getAttribute('href');
-
-    mobileNav.classList.remove('open');
-    menuButton.setAttribute('aria-expanded', 'false');
-    menuButton.setAttribute('aria-label', '메뉴 열기');
-
     if (!hash || !hash.startsWith('#')) return;
 
     event.preventDefault();
-    history.pushState(null, '', hash);
-
-    if (hash === '#home') {
-      window.scrollTo({ top: 0, behavior: 'auto' });
-      return;
-    }
-
-    goToMobileSection(hash);
+    closeMobileMenu();
+    moveToMobileHash(hash);
   });
+});
+
+// 모바일에서 홈 화면의 '상담 문의' 등 내부 링크도 햄버거 메뉴와 같은 방식으로 정확히 이동합니다.
+document.addEventListener('click', (event) => {
+  if (window.innerWidth > 900) return;
+
+  const link = event.target.closest('a[href^="#"]');
+  if (!link || link.closest('.mobile-nav')) return;
+
+  const hash = link.getAttribute('href');
+  if (!hash || hash === '#') return;
+  if (!document.querySelector(hash)) return;
+
+  event.preventDefault();
+  closeMobileMenu();
+  moveToMobileHash(hash);
 });
 
 window.addEventListener('hashchange', () => {
   if (window.innerWidth > 900) return;
   const hash = window.location.hash;
-  if (hash && hash !== '#home') goToMobileSection(hash);
+  if (hash && hash !== '#home' && hash !== '#top') goToMobileSection(hash);
 });
 
 naverPropertyLink.addEventListener('click', (event) => {
