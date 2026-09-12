@@ -1,66 +1,87 @@
-/* Mobile section alignment fix: preserve the current design while making every section land cleanly below the fixed header. */
+/* Final mobile navigation/scroll fix: keep the existing design, but never clip section bottoms. */
 @media (max-width: 900px) {
-  html {
-    height: auto !important;
-    min-height: 100% !important;
-    overflow-y: auto !important;
-    scroll-behavior: smooth;
-    scroll-padding-top: 70px !important;
-  }
-
-  body,
-  main {
+  html,
+  body {
     height: auto !important;
     min-height: 100% !important;
     max-height: none !important;
     overflow-x: hidden !important;
-    overflow-y: visible !important;
+    overflow-y: auto !important;
+    scroll-padding-top: 70px !important;
+    scroll-snap-type: none !important;
   }
 
-  /* Do not force selected sections into artificial viewport heights. */
+  main {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
   #home,
   #intro,
   #properties,
   #analysis,
   #contents,
-  #contact {
-    box-sizing: border-box !important;
-    max-height: none !important;
-    overflow: visible !important;
-    scroll-margin-top: 70px !important;
-  }
-
+  #contact,
   #properties:target,
   #analysis:target,
   #contents:target,
   #contact:target {
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-  }
-
-  /* Keep all target content fully scrollable to its real bottom. */
-  #properties:target,
-  #analysis:target,
-  #contents:target {
-    min-height: calc(100svh - 70px) !important;
-    padding-bottom: max(48px, calc(env(safe-area-inset-bottom) + 28px)) !important;
-  }
-
-  #contact,
-  #contact:target {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
+    box-sizing: border-box !important;
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
+    scroll-margin-top: 70px !important;
+    scroll-snap-align: none !important;
+  }
+
+  /* 상가 매물 / 상권 분석 / 부동산 콘텐츠: 기존 구성 유지 + 아래까지 정상 스크롤 */
+  #properties:target,
+  #analysis:target,
+  #contents:target {
+    padding-top: 64px !important;
+    padding-bottom: max(64px, calc(env(safe-area-inset-bottom) + 40px)) !important;
+  }
+
+  #properties:target .property-feature,
+  #analysis:target .analysis-grid,
+  #contents:target .content-topic-grid,
+  #contents:target .channel-links {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  #properties:target .property-panel,
+  #contents:target .content-topic,
+  #contents:target .platform-card {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+
+  /* 카드의 이미지 잘라내기/둥근 모서리는 유지하고 섹션 전체만 자르지 않음 */
+  #properties:target .property-feature,
+  #analysis:target .area-card {
+    overflow: hidden !important;
+  }
+
+  /* 오시는 길·상담: 이미지 → 사무실 정보 → 지도 → 버튼 → 푸터까지 끝까지 표시 */
+  #contact,
+  #contact:target {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    padding: 0 !important;
   }
 
   #contact .contact-visual,
   #contact .contact-panel,
   #contact:target .contact-visual,
-  #contact:target .contact-panel {
+  #contact:target .contact-panel,
+  #contact .naver-map-wrap,
+  #contact:target .naver-map-wrap {
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
@@ -68,42 +89,50 @@
 
   #contact .contact-panel,
   #contact:target .contact-panel {
-    padding-bottom: max(56px, calc(env(safe-area-inset-bottom) + 34px)) !important;
+    min-height: 0 !important;
+    padding-bottom: max(72px, calc(env(safe-area-inset-bottom) + 48px)) !important;
   }
 
-  #contact .naver-map-wrap,
-  #contact:target .naver-map-wrap,
   .site-footer {
     height: auto !important;
+    min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
-  }
-
-  .site-footer {
-    min-height: 0 !important;
-    padding-bottom: max(36px, calc(env(safe-area-inset-bottom) + 20px)) !important;
+    padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 24px)) !important;
   }
 }
 
 @media (max-width: 560px) {
-  #home,
-  #intro,
-  #properties,
-  #analysis,
-  #contents,
-  #contact {
-    scroll-margin-top: 70px !important;
-  }
-
-  /* Preserve the current mobile card/layout design; only guarantee safe bottom space. */
   #properties:target,
   #analysis:target,
   #contents:target {
-    padding-bottom: max(54px, calc(env(safe-area-inset-bottom) + 32px)) !important;
+    padding-top: 48px !important;
+    padding-bottom: max(72px, calc(env(safe-area-inset-bottom) + 48px)) !important;
+  }
+
+  /* 상가 매물: 버튼까지 자연스럽게 이어지고 모바일 하단 UI에 가려지지 않음 */
+  #properties:target .property-feature {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto auto !important;
+    margin-bottom: 0 !important;
+  }
+
+  #properties:target .property-image {
+    height: 240px !important;
+    min-height: 240px !important;
+  }
+
+  #properties:target .property-panel {
+    padding-bottom: 28px !important;
+  }
+
+  #properties:target .button-light {
+    margin-bottom: 0 !important;
   }
 
   #contact .contact-panel,
   #contact:target .contact-panel {
-    padding-bottom: max(60px, calc(env(safe-area-inset-bottom) + 36px)) !important;
+    padding-bottom: max(84px, calc(env(safe-area-inset-bottom) + 56px)) !important;
   }
 }
