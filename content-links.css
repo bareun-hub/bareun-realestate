@@ -79,6 +79,14 @@
   padding-left: 6px;
 }
 
+/* 고정 헤더 아래로 각 메뉴 섹션의 시작점이 가려지지 않도록 보정 */
+#properties,
+#analysis,
+#contents,
+#contact {
+  scroll-margin-top: 92px;
+}
+
 @media (max-width: 900px) {
   .content-topic-grid,
   .platform-grid {
@@ -97,6 +105,13 @@
 
   .platform-card {
     min-height: 220px;
+  }
+
+  #properties,
+  #analysis,
+  #contents,
+  #contact {
+    scroll-margin-top: 82px;
   }
 }
 
@@ -127,5 +142,12 @@
 
   .platform-card h3 {
     margin-top: 20px;
+  }
+
+  #properties,
+  #analysis,
+  #contents,
+  #contact {
+    scroll-margin-top: 78px;
   }
 }
