@@ -100,6 +100,36 @@
 #contact:target .naver-directions-button { margin-top: 8px !important; min-height: 40px !important; }
 #contact:target .contact-button { min-height: 40px !important; }
 
+/* PC 앵커 이동 시 헤더 아래 흰색 빈 공간이 생기지 않도록 섹션 자체를 헤더 뒤까지 올리고 내부 여백으로 맞춤 */
+@media (min-width: 901px) {
+  html { scroll-padding-top: 0 !important; }
+
+  #properties,
+  #analysis,
+  #contents,
+  #contact {
+    scroll-margin-top: 0 !important;
+  }
+
+  #properties:target,
+  #analysis:target,
+  #contents:target {
+    padding-top: 98px !important;
+  }
+
+  #contact:target {
+    padding-top: 70px !important;
+    box-sizing: border-box !important;
+    height: 100dvh !important;
+    min-height: 100dvh !important;
+  }
+
+  #contact:target .contact-visual,
+  #contact:target .contact-panel {
+    height: calc(100dvh - 70px) !important;
+  }
+}
+
 /* 모바일은 억지로 한 화면에 압축하지 않고, 보기 좋은 세로형 레이아웃으로 구성 */
 @media (max-width: 900px) {
   #properties:target,
