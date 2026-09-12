@@ -1,35 +1,110 @@
-/* Mobile navigation target fix: keep the selected section fully visible and naturally scrollable. */
+/* Final mobile flow fix: all sections remain naturally scrollable and never clip at the bottom. */
 @media (max-width: 900px) {
-  html { scroll-padding-top: 0 !important; }
+  html {
+    scroll-padding-top: 0 !important;
+    height: auto !important;
+    min-height: 100% !important;
+    overflow-y: auto !important;
+  }
+
+  body,
+  main {
+    height: auto !important;
+    min-height: 100% !important;
+    max-height: none !important;
+    overflow-x: hidden !important;
+    overflow-y: visible !important;
+  }
 
   #properties,
   #analysis,
   #contents,
   #contact {
+    box-sizing: border-box !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
     scroll-margin-top: 0 !important;
+    scroll-snap-align: none !important;
   }
 
   #properties:target,
   #analysis:target,
-  #contents:target,
-  #contact:target {
-    box-sizing: border-box !important;
+  #contents:target {
     height: auto !important;
-    min-height: 100svh !important;
+    min-height: calc(100svh - 70px) !important;
     max-height: none !important;
     overflow: visible !important;
+    padding-top: 78px !important;
+    padding-bottom: max(56px, calc(env(safe-area-inset-bottom) + 32px)) !important;
+  }
+
+  /* 상담 문의/오시는 길: 이미지, 사무실 정보, 지도, 버튼이 모두 정상적으로 이어져 보이게 함 */
+  #contact,
+  #contact:target {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #contact:target {
+    padding-top: 70px !important;
+    padding-bottom: max(56px, calc(env(safe-area-inset-bottom) + 32px)) !important;
+  }
+
+  #contact .contact-visual,
+  #contact .contact-panel,
+  #contact:target .contact-visual,
+  #contact:target .contact-panel {
+    box-sizing: border-box !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #contact .contact-visual,
+  #contact:target .contact-visual {
+    min-height: 300px !important;
+    padding: 34px 22px !important;
+  }
+
+  #contact .contact-panel,
+  #contact:target .contact-panel {
+    min-height: 0 !important;
+    padding: 28px 18px max(56px, calc(env(safe-area-inset-bottom) + 34px)) !important;
+  }
+
+  #contact .naver-map-wrap,
+  #contact:target .naver-map-wrap {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #contact .naver-map,
+  #contact:target .naver-map {
+    height: 240px !important;
+    min-height: 240px !important;
+  }
+
+  .site-footer {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-bottom: max(36px, calc(env(safe-area-inset-bottom) + 20px)) !important;
   }
 }
 
 @media (max-width: 560px) {
-  /* 상가 매물: 고정 헤더에 가리지 않게 시작하고, 아래 내용은 잘리지 않고 자연스럽게 스크롤 */
+  /* 상가 매물은 기존 모바일 구성과 비율을 유지하면서 하단까지 자연스럽게 스크롤 */
   #properties:target {
     display: block !important;
-    height: auto !important;
-    min-height: 100svh !important;
-    max-height: none !important;
-    overflow: visible !important;
-    padding: 88px 14px 54px !important;
+    padding: 78px 14px max(58px, calc(env(safe-area-inset-bottom) + 34px)) !important;
     background: var(--navy-deep) !important;
   }
 
@@ -85,14 +160,12 @@
 
   #properties:target .property-panel {
     display: block !important;
-    min-height: 0 !important;
     height: auto !important;
+    min-height: 0 !important;
     padding: 20px 18px 22px !important;
   }
 
-  #properties:target .panel-index {
-    font-size: 8px !important;
-  }
+  #properties:target .panel-index { font-size: 8px !important; }
 
   #properties:target .property-panel h3 {
     margin: 10px 0 8px !important;
@@ -109,29 +182,37 @@
   #properties:target .button-light {
     display: flex !important;
     width: 100% !important;
-    margin-top: 16px !important;
     min-height: 46px !important;
+    margin-top: 16px !important;
     padding: 0 14px !important;
     font-size: 11px !important;
   }
 
-  /* 다른 모바일 메뉴도 같은 방식으로 상단 헤더에 가리지 않고 자연스럽게 스크롤 */
   #analysis:target,
   #contents:target {
-    min-height: 100svh !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    padding-top: 88px !important;
-    padding-bottom: 54px !important;
+    padding-top: 78px !important;
+    padding-bottom: max(58px, calc(env(safe-area-inset-bottom) + 34px)) !important;
   }
 
   #contact:target {
-    min-height: 100svh !important;
-    height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
     padding-top: 70px !important;
-    padding-bottom: 54px !important;
+    padding-bottom: max(58px, calc(env(safe-area-inset-bottom) + 34px)) !important;
+  }
+
+  #contact .contact-visual,
+  #contact:target .contact-visual {
+    min-height: 270px !important;
+    padding: 30px 20px !important;
+  }
+
+  #contact .contact-panel,
+  #contact:target .contact-panel {
+    padding: 26px 18px max(60px, calc(env(safe-area-inset-bottom) + 36px)) !important;
+  }
+
+  #contact .naver-map,
+  #contact:target .naver-map {
+    height: 220px !important;
+    min-height: 220px !important;
   }
 }
