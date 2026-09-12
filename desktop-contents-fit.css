@@ -1,0 +1,50 @@
+/* PC: 부동산 콘텐츠 메뉴 클릭 시 다음 섹션이 아래에 비치지 않도록 화면 높이에 맞춤 */
+@media (min-width: 901px) {
+  #contents:target {
+    box-sizing: border-box !important;
+    min-height: calc(100dvh - 70px) !important;
+    height: calc(100dvh - 70px) !important;
+    padding-top: 92px !important;
+    padding-bottom: 18px !important;
+    overflow: hidden !important;
+  }
+
+  #contents:target .section-heading h2 {
+    font-size: clamp(28px, 2.7vw, 40px) !important;
+    line-height: 1.08 !important;
+  }
+
+  #contents:target .eyebrow {
+    margin-bottom: 7px !important;
+  }
+
+  #contents:target .content-topic-grid {
+    margin-top: 14px !important;
+    height: calc((100dvh - 300px) * .58) !important;
+  }
+
+  #contents:target .channel-links {
+    margin-top: 7px !important;
+    height: calc((100dvh - 300px) * .42) !important;
+  }
+
+  #contents:target .content-topic {
+    padding: 18px !important;
+  }
+
+  #contents:target .content-topic h3 {
+    margin: 14px 0 7px !important;
+  }
+
+  #contents:target .platform-card {
+    padding: 14px 18px !important;
+  }
+
+  #contents:target .platform-card h3 {
+    margin: 7px 0 5px !important;
+  }
+
+  #contents:target .platform-card a {
+    padding-top: 6px !important;
+  }
+}
