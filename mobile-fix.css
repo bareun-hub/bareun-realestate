@@ -1,0 +1,291 @@
+/* Mobile-only navigation target layout fixes */
+@media (max-width: 900px) {
+  html {
+    scroll-padding-top: 0 !important;
+  }
+
+  #properties,
+  #analysis,
+  #contents,
+  #contact {
+    scroll-margin-top: 0 !important;
+  }
+
+  /* Target sections begin at the very top; internal padding clears the fixed header.
+     This removes the white gap that appeared above the selected section. */
+  #properties:target,
+  #analysis:target,
+  #contents:target {
+    padding-top: 92px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    padding-bottom: 28px !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  #properties:target .section-heading h2,
+  #analysis:target .section-heading h2,
+  #contents:target .section-heading h2 {
+    font-size: 30px !important;
+    line-height: 1.12 !important;
+  }
+
+  #properties:target .eyebrow,
+  #analysis:target .eyebrow,
+  #contents:target .eyebrow {
+    margin-bottom: 8px !important;
+    font-size: 9px !important;
+  }
+
+  #properties:target .section-heading > p:last-child,
+  #analysis:target .section-heading > p:last-child,
+  #contents:target .section-heading > p:last-child {
+    margin-top: 10px !important;
+    font-size: 12px !important;
+    line-height: 1.55 !important;
+  }
+
+  /* PROPERTY: compact but readable card, with the CTA visible before the phone safe area. */
+  #properties:target .property-feature {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    margin-top: 18px !important;
+    min-height: 0 !important;
+    height: auto !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+
+  #properties:target .property-image {
+    min-height: 0 !important;
+    height: 210px !important;
+  }
+
+  #properties:target .image-label {
+    left: 18px !important;
+    bottom: 14px !important;
+    font-size: 8px !important;
+  }
+
+  #properties:target .property-panel {
+    padding: 20px 20px 22px !important;
+  }
+
+  #properties:target .panel-index {
+    font-size: 9px !important;
+  }
+
+  #properties:target .property-panel h3 {
+    margin: 10px 0 8px !important;
+    font-size: 23px !important;
+    line-height: 1.23 !important;
+  }
+
+  #properties:target .property-panel p {
+    margin: 0 !important;
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  #properties:target .button-light {
+    margin-top: 14px !important;
+    min-height: 44px !important;
+    padding: 0 14px !important;
+    font-size: 11px !important;
+  }
+
+  /* ANALYSIS: attractive single-column cards with normal scrolling; no clipping. */
+  #analysis:target .analysis-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    gap: 12px !important;
+    margin-top: 18px !important;
+    height: auto !important;
+  }
+
+  #analysis:target .area-card {
+    min-height: 250px !important;
+    height: 250px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+  }
+
+  #analysis:target .area-content {
+    inset: auto 18px 18px !important;
+  }
+
+  #analysis:target .area-content p {
+    margin: 10px 0 2px !important;
+    font-size: 9px !important;
+  }
+
+  #analysis:target .area-content h3 {
+    font-size: 23px !important;
+  }
+
+  #analysis:target .area-content small {
+    font-size: 11px !important;
+  }
+
+  #analysis:target .analysis-note {
+    margin-top: 16px !important;
+    padding-top: 12px !important;
+    grid-template-columns: 1fr !important;
+    gap: 5px !important;
+    font-size: 11px !important;
+  }
+
+  /* CONTENT: clean stacked cards instead of squeezed columns. */
+  #contents:target .content-topic-grid,
+  #contents:target .platform-grid {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    gap: 10px !important;
+  }
+
+  #contents:target .content-topic-grid {
+    margin-top: 18px !important;
+    border: 0 !important;
+  }
+
+  #contents:target .content-topic,
+  #contents:target .platform-card {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 20px !important;
+    border-radius: 15px !important;
+  }
+
+  #contents:target .content-topic h3 {
+    margin: 12px 0 7px !important;
+    font-size: 19px !important;
+    line-height: 1.3 !important;
+  }
+
+  #contents:target .content-topic p,
+  #contents:target .platform-card p {
+    font-size: 12px !important;
+    line-height: 1.5 !important;
+  }
+
+  #contents:target .channel-links {
+    margin-top: 10px !important;
+    height: auto !important;
+  }
+
+  #contents:target .platform-card h3 {
+    margin: 10px 0 6px !important;
+    font-size: 18px !important;
+  }
+
+  #contents:target .platform-card a {
+    padding-top: 12px !important;
+    font-size: 10px !important;
+  }
+
+  /* CONTACT: no clipping and no forced desktop two-column layout on phones. */
+  #contact:target {
+    display: grid !important;
+    grid-template-columns: 1fr !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    padding-top: 70px !important;
+  }
+
+  #contact:target .contact-visual {
+    min-height: 300px !important;
+    height: auto !important;
+    padding: 34px 22px !important;
+  }
+
+  #contact:target .contact-visual h2 {
+    font-size: 32px !important;
+  }
+
+  #contact:target .contact-panel {
+    min-height: 0 !important;
+    height: auto !important;
+    padding: 28px 18px 34px !important;
+  }
+
+  #contact:target .contact-placeholder-grid {
+    grid-template-columns: 1fr 1fr !important;
+    margin: 18px 0 !important;
+    gap: 0 10px !important;
+  }
+
+  #contact:target .contact-placeholder-grid > div {
+    padding: 10px 0 !important;
+  }
+
+  #contact:target .naver-map {
+    height: 240px !important;
+    min-height: 240px !important;
+  }
+
+  #contact:target .naver-map-wrap {
+    margin-bottom: 16px !important;
+  }
+
+  #contact:target .naver-directions-button,
+  #contact:target .contact-button {
+    min-height: 44px !important;
+    font-size: 11px !important;
+  }
+
+  /* Extra safe-area room so the last button/text is never hidden by mobile browser UI. */
+  #properties:target,
+  #analysis:target,
+  #contents:target,
+  #contact:target .contact-panel {
+    padding-bottom: max(34px, env(safe-area-inset-bottom)) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  #properties:target,
+  #analysis:target,
+  #contents:target {
+    padding-top: 88px !important;
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  #properties:target .section-heading h2,
+  #analysis:target .section-heading h2,
+  #contents:target .section-heading h2 {
+    font-size: 28px !important;
+  }
+
+  #properties:target .property-image {
+    height: 190px !important;
+  }
+
+  #properties:target .property-panel {
+    padding: 18px !important;
+  }
+
+  #properties:target .property-panel h3 {
+    font-size: 21px !important;
+  }
+
+  #analysis:target .area-card {
+    height: 230px !important;
+    min-height: 230px !important;
+  }
+
+  #contact:target .contact-visual {
+    min-height: 270px !important;
+  }
+
+  #contact:target .naver-map {
+    height: 220px !important;
+    min-height: 220px !important;
+  }
+}
