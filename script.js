@@ -18,6 +18,12 @@ desktopContentsFitStyles.rel = 'stylesheet';
 desktopContentsFitStyles.href = 'desktop-contents-fit.css?v=20260913-0208';
 document.head.appendChild(desktopContentsFitStyles);
 
+// 가장 마지막에 적용되는 모바일 전용 전체화면 보정 CSS입니다.
+const mobileFullscreenFitStyles = document.createElement('link');
+mobileFullscreenFitStyles.rel = 'stylesheet';
+mobileFullscreenFitStyles.href = 'mobile-fullscreen-fit.css?v=20260913-0305';
+document.head.appendChild(mobileFullscreenFitStyles);
+
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
@@ -34,15 +40,79 @@ menuButton.addEventListener('click', () => {
   menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
 });
 
+const MOBILE_FIT_SECTION_IDS = ['intro', 'properties', 'analysis', 'contents', 'contact'];
+let mobileFitFrame = 0;
+
+function ensureMobileFitWrappers() {
+  MOBILE_FIT_SECTION_IDS.forEach((id) => {
+    const section = document.getElementById(id);
+    if (!section || section.querySelector(':scope > .mobile-fit-inner')) return;
+
+    const wrapper = document.createElement('div');
+    wrapper.className = 'mobile-fit-inner';
+    while (section.firstChild) wrapper.appendChild(section.firstChild);
+    section.appendChild(wrapper);
+  });
+}
+
+function getVisibleMobileHeight() {
+  return Math.round(window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight);
+}
+
+function fitOneMobileSection(section, availableHeight) {
+  const inner = section.querySelector(':scope > .mobile-fit-inner');
+  if (!inner) return;
+
+  section.style.setProperty('--mobile-fit-scale', '1');
+
+  // 먼저 원래 비율로 높이를 재고, 화면보다 길 때만 전체 구성을 균일하게 축소합니다.
+  const naturalHeight = Math.max(inner.scrollHeight, inner.getBoundingClientRect().height || 0);
+  let scale = naturalHeight > availableHeight ? availableHeight / naturalHeight : 1;
+  scale = Math.min(1, Math.max(0.35, scale));
+  section.style.setProperty('--mobile-fit-scale', scale.toFixed(4));
+
+  // 폭이 scale에 맞춰 넓어진 뒤 줄바꿈이 달라질 수 있으므로 한 번 더 보정합니다.
+  requestAnimationFrame(() => {
+    const secondHeight = Math.max(inner.scrollHeight, 1);
+    let secondScale = secondHeight > availableHeight ? availableHeight / secondHeight : 1;
+    secondScale = Math.min(1, Math.max(0.35, secondScale));
+    section.style.setProperty('--mobile-fit-scale', secondScale.toFixed(4));
+  });
+}
+
+function fitMobileSections() {
+  cancelAnimationFrame(mobileFitFrame);
+  mobileFitFrame = requestAnimationFrame(() => {
+    ensureMobileFitWrappers();
+
+    if (window.innerWidth > 900) {
+      document.documentElement.style.removeProperty('--mobile-vh');
+      MOBILE_FIT_SECTION_IDS.forEach((id) => {
+        document.getElementById(id)?.style.removeProperty('--mobile-fit-scale');
+      });
+      return;
+    }
+
+    const viewportHeight = getVisibleMobileHeight();
+    const headerHeight = Math.round(header?.getBoundingClientRect().height || 70);
+    const availableHeight = Math.max(320, viewportHeight - headerHeight);
+    document.documentElement.style.setProperty('--mobile-vh', `${viewportHeight}px`);
+
+    MOBILE_FIT_SECTION_IDS.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) fitOneMobileSection(section, availableHeight);
+    });
+  });
+}
+
 function goToMobileSection(hash) {
   const target = document.querySelector(hash);
   if (!target) return;
 
+  fitMobileSections();
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
-      const headerHeight = header ? header.getBoundingClientRect().height : 70;
-      const targetTop = target.getBoundingClientRect().top + window.scrollY - headerHeight;
-      window.scrollTo({ top: Math.max(0, targetTop), behavior: 'smooth' });
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 }
@@ -79,7 +149,7 @@ mobileLinks.forEach((link) => {
   });
 });
 
-// 모바일에서 홈 화면의 '상가 매물 보기', '상담 문의' 등 내부 링크도 햄버거 메뉴와 같은 방식으로 정확히 이동합니다.
+// 모바일 홈의 '상가 매물 보기', '상담 문의', 지역 버튼도 햄버거 메뉴와 같은 화면 맞춤 방식으로 이동합니다.
 document.addEventListener('click', (event) => {
   if (window.innerWidth > 900) return;
 
@@ -100,6 +170,17 @@ window.addEventListener('hashchange', () => {
   const hash = window.location.hash;
   if (hash && hash !== '#home' && hash !== '#top') goToMobileSection(hash);
 });
+
+window.addEventListener('resize', fitMobileSections);
+window.addEventListener('orientationchange', () => setTimeout(fitMobileSections, 120));
+window.visualViewport?.addEventListener('resize', fitMobileSections);
+window.addEventListener('load', () => {
+  fitMobileSections();
+  setTimeout(fitMobileSections, 250);
+});
+
+ensureMobileFitWrappers();
+fitMobileSections();
 
 naverPropertyLink.addEventListener('click', (event) => {
   if (naverPropertyLink.getAttribute('href') === '#') event.preventDefault();
