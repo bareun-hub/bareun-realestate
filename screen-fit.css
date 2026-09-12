@@ -141,6 +141,75 @@
   #contact:target .contact-panel {
     height: calc(100dvh - 70px) !important;
   }
+
+  /* 오시는 길 클릭 시 하단 사업자 정보 푸터까지 한 화면에 함께 보이도록 비율 조정 */
+  #contact:target {
+    height: calc(100dvh - 145px) !important;
+    min-height: calc(100dvh - 145px) !important;
+  }
+
+  #contact:target .contact-visual,
+  #contact:target .contact-panel {
+    height: calc(100dvh - 215px) !important;
+    padding-top: 22px !important;
+    padding-bottom: 22px !important;
+  }
+
+  #contact:target .contact-visual h2 {
+    font-size: clamp(30px, 3.2vw, 42px) !important;
+    line-height: 1.12 !important;
+  }
+
+  #contact:target .contact-visual > p:last-child {
+    margin-top: 10px !important;
+    font-size: 13px !important;
+  }
+
+  #contact:target .contact-panel h3 {
+    margin: 8px 0 2px !important;
+    font-size: 20px !important;
+  }
+
+  #contact:target .contact-placeholder-grid {
+    margin: 10px 0 !important;
+  }
+
+  #contact:target .contact-placeholder-grid > div {
+    padding: 7px 0 !important;
+  }
+
+  #contact:target .naver-map {
+    height: 145px !important;
+  }
+
+  #contact:target .naver-map-wrap {
+    margin-bottom: 8px !important;
+  }
+
+  #contact:target .naver-directions-button,
+  #contact:target .contact-button {
+    min-height: 34px !important;
+    font-size: 11px !important;
+  }
+
+  #contact:target .naver-map-note,
+  #contact:target .contact-note {
+    font-size: 9px !important;
+  }
+
+  body:has(#contact:target) .site-footer {
+    min-height: 145px !important;
+    height: 145px !important;
+    padding-top: 18px !important;
+    padding-bottom: 18px !important;
+    gap: 28px !important;
+    font-size: 10px !important;
+    line-height: 1.45 !important;
+  }
+
+  body:has(#contact:target) .footer-brand strong {
+    font-size: 12px !important;
+  }
 }
 
 /* 모바일은 억지로 한 화면에 압축하지 않고, 보기 좋은 세로형 레이아웃으로 구성 */
@@ -192,7 +261,6 @@
     line-height: 1.7 !important;
   }
 
-  /* 상가 매물: 이미지와 설명을 자연스럽게 세로 배치 */
   #properties:target .property-feature {
     display: grid !important;
     grid-template-columns: 1fr !important;
@@ -234,7 +302,6 @@
     font-size: 13px !important;
   }
 
-  /* 상권 분석: 카드 1개씩 크게 보여 가독성 확보 */
   #analysis:target .analysis-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
@@ -267,7 +334,6 @@
     line-height: 1.6 !important;
   }
 
-  /* 부동산 콘텐츠: 세로 카드형으로 재구성 */
   #contents:target .content-topic-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
@@ -332,7 +398,6 @@
     font-size: 12px !important;
   }
 
-  /* 오시는 길·상담: 이미지, 정보, 지도 순서의 세로형 */
   #contact:target {
     display: grid !important;
     grid-template-columns: 1fr !important;
@@ -405,7 +470,6 @@
   #contact:target .contact-button { min-height: 48px !important; padding: 0 16px !important; font-size: 13px !important; }
   #contact:target .contact-note { margin-top: 10px !important; font-size: 10px !important; }
 
-  /* 모바일 햄버거 메뉴 자체도 단정하게 */
   .mobile-nav {
     max-height: calc(100dvh - 70px) !important;
     overflow-y: auto !important;
