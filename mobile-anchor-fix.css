@@ -1,8 +1,6 @@
-/* Final mobile anchor/viewport fix */
+/* Final mobile navigation layout fix */
 @media (max-width: 900px) {
-  html {
-    scroll-padding-top: 0 !important;
-  }
+  html { scroll-padding-top: 0 !important; }
 
   #properties,
   #analysis,
@@ -11,26 +9,32 @@
     scroll-margin-top: 0 !important;
   }
 
-  /* JS가 고정 헤더 높이를 빼고 이동하므로 섹션 안에 큰 상단 패딩을 두지 않습니다. */
+  /* 섹션 배경은 화면 맨 위부터 시작하고, 내용만 고정 헤더 아래에서 보이게 합니다. */
   #properties:target,
   #analysis:target,
   #contents:target {
-    padding-top: 24px !important;
+    padding-top: 76px !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
   }
 
   #contact:target {
-    padding-top: 0 !important;
+    padding-top: 70px !important;
+    min-height: 100svh !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    box-sizing: border-box !important;
   }
 }
 
 @media (max-width: 560px) {
-  /* 상가 매물: 상단 흰 여백 제거 + CTA 버튼까지 자연스럽게 보이도록 컴팩트하게 구성 */
+  /* 상가 매물: 상단 흰 여백 없이 시작하고 CTA까지 화면 안에서 보기 좋게 구성 */
   #properties:target {
-    padding: 22px 14px 34px !important;
-    min-height: 0 !important;
-    height: auto !important;
-    box-sizing: border-box !important;
-    overflow: visible !important;
+    padding: 74px 14px 24px !important;
   }
 
   #properties:target .section-heading {
@@ -38,68 +42,70 @@
   }
 
   #properties:target .eyebrow {
-    margin: 0 0 6px !important;
-    font-size: 9px !important;
+    margin: 0 0 5px !important;
+    font-size: 8px !important;
+    letter-spacing: .14em !important;
   }
 
   #properties:target .section-heading h2 {
     margin: 0 !important;
-    font-size: 26px !important;
-    line-height: 1.08 !important;
+    font-size: 25px !important;
+    line-height: 1.06 !important;
   }
 
   #properties:target .section-heading > p:last-child {
-    margin: 8px 0 0 !important;
-    font-size: 11.5px !important;
-    line-height: 1.45 !important;
+    margin: 7px 0 0 !important;
+    font-size: 10.5px !important;
+    line-height: 1.38 !important;
   }
 
   #properties:target .property-feature {
-    margin-top: 14px !important;
-    border-radius: 14px !important;
+    margin-top: 10px !important;
+    border-radius: 12px !important;
     overflow: hidden !important;
   }
 
   #properties:target .property-image {
-    height: 155px !important;
-    min-height: 155px !important;
+    height: 138px !important;
+    min-height: 138px !important;
   }
 
   #properties:target .image-label {
-    left: 14px !important;
-    bottom: 10px !important;
-    font-size: 7px !important;
+    left: 12px !important;
+    bottom: 9px !important;
+    font-size: 6.5px !important;
   }
 
   #properties:target .property-panel {
-    padding: 14px 16px 16px !important;
+    padding: 12px 14px 14px !important;
   }
 
   #properties:target .panel-index {
-    font-size: 8px !important;
+    font-size: 7.5px !important;
   }
 
   #properties:target .property-panel h3 {
-    margin: 7px 0 6px !important;
-    font-size: 19px !important;
-    line-height: 1.18 !important;
+    margin: 6px 0 5px !important;
+    font-size: 18px !important;
+    line-height: 1.16 !important;
   }
 
   #properties:target .property-panel p {
     margin: 0 !important;
-    font-size: 10.5px !important;
-    line-height: 1.42 !important;
+    font-size: 10px !important;
+    line-height: 1.38 !important;
   }
 
   #properties:target .button-light {
-    margin-top: 10px !important;
-    min-height: 42px !important;
+    width: 100% !important;
+    margin-top: 9px !important;
+    min-height: 40px !important;
     padding: 0 12px !important;
-    font-size: 10.5px !important;
+    font-size: 10px !important;
   }
 
-  /* 휴대폰 하단 브라우저 UI와 버튼이 겹치지 않게 여유 확보 */
+  /* 모바일 브라우저 하단 바에 CTA가 붙지 않도록 안전 여백 */
   #properties:target .property-panel {
-    padding-bottom: max(18px, env(safe-area-inset-bottom)) !important;
+    padding-bottom: max(16px, env(safe-area-inset-bottom)) !important;
   }
 }
