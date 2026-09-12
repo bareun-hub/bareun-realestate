@@ -5,7 +5,7 @@ document.head.appendChild(mobileFixStyles);
 
 const mobileAnchorFixStyles = document.createElement('link');
 mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0128';
+mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0134';
 document.head.appendChild(mobileAnchorFixStyles);
 
 const header = document.querySelector('.site-header');
