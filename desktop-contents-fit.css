@@ -1,9 +1,9 @@
-/* PC: 부동산 콘텐츠 메뉴 클릭 시 다음 섹션이 아래에 비치지 않도록 화면 높이에 맞춤 */
+/* PC: 부동산 콘텐츠 메뉴 클릭 시 다음 섹션이 아래에 비치지 않도록 정확히 한 화면에 맞춤 */
 @media (min-width: 901px) {
   #contents:target {
     box-sizing: border-box !important;
-    min-height: calc(100dvh - 70px) !important;
-    height: calc(100dvh - 70px) !important;
+    min-height: 100dvh !important;
+    height: 100dvh !important;
     padding-top: 92px !important;
     padding-bottom: 18px !important;
     overflow: hidden !important;
