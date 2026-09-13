@@ -678,3 +678,19 @@
     color: #343e48 !important;
   }
 }
+
+
+/* Final desktop-only field check readability refinement. */
+@media (min-width: 901px) {
+  #analysis .analysis-note strong {
+    color: #071b2f !important;
+    font-size: 15px !important;
+    font-weight: 700 !important;
+  }
+
+  #analysis .analysis-note p {
+    color: #1f2933 !important;
+    font-size: 18px !important;
+    font-weight: 500 !important;
+  }
+}
