@@ -84,3 +84,26 @@
     line-height: 1 !important;
   }
 }
+
+
+/* PC-only refined slim channel CTA buttons. */
+@media (min-width: 901px) {
+  #contents #barun-youtube-link,
+  #contents #barun-blog-link {
+    right: auto !important;
+    bottom: 18px !important;
+    left: 50% !important;
+    width: 82% !important;
+    min-height: 49px !important;
+    padding: 0 20px !important;
+    border-radius: 6px !important;
+    transform: translateX(-50%) !important;
+    font-size: 16px !important;
+    font-weight: 600 !important;
+  }
+
+  #contents #barun-youtube-link span,
+  #contents #barun-blog-link span {
+    margin-left: 22px !important;
+  }
+}
