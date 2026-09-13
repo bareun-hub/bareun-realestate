@@ -96,6 +96,135 @@
       }
     }
   </style>
+
+  <style id="mobile-about-redesign">
+    /* Phone-only ABOUT layout. Keep the existing copy and behavior intact. */
+    @media (max-width: 560px) {
+      #intro.intro {
+        display: block !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        padding: 110px 22px 40px !important;
+        overflow: visible !important;
+        scroll-margin-top: 0 !important;
+      }
+
+      /* Ignore the existing viewport-fit scale only for this phone section. */
+      #intro.intro > .mobile-fit-inner {
+        display: block !important;
+        box-sizing: border-box !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        padding: 0 !important;
+        transform: none !important;
+        overflow: visible !important;
+      }
+
+      #intro.intro .section-heading {
+        margin: 0 !important;
+        max-width: 100% !important;
+      }
+      #intro.intro .eyebrow {
+        margin: 0 0 12px !important;
+        font-size: 10px !important;
+        line-height: 1.5 !important;
+        letter-spacing: .15em !important;
+      }
+      #intro.intro .section-heading h2 {
+        margin: 0 !important;
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        line-height: 1.3 !important;
+        letter-spacing: -.045em !important;
+      }
+      #intro.intro .intro-copy {
+        max-width: 100% !important;
+        margin: 20px 0 0 !important;
+        padding: 0 !important;
+      }
+      #intro.intro .intro-copy,
+      #intro.intro .intro-copy p {
+        font-size: 15px !important;
+        font-weight: 400 !important;
+        line-height: 1.75 !important;
+      }
+      #intro.intro .intro-copy p {
+        margin: 0 !important;
+      }
+      #intro.intro .text-link {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 16px !important;
+        min-height: 44px !important;
+        max-width: 100% !important;
+        margin: 20px 0 0 !important;
+        padding: 10px 16px !important;
+        border: 1px solid var(--navy) !important;
+        border-radius: 10px !important;
+        background: transparent !important;
+        color: var(--navy) !important;
+        font-size: 14px !important;
+        font-weight: 700 !important;
+        line-height: 1.5 !important;
+        text-decoration: none !important;
+      }
+      #intro.intro .strength-grid {
+        display: grid !important;
+        grid-template-columns: minmax(0, 1fr) !important;
+        grid-auto-rows: auto !important;
+        gap: 14px !important;
+        margin: 28px 0 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+      }
+      #intro.intro .strength-card {
+        box-sizing: border-box !important;
+        min-width: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        margin: 0 !important;
+        padding: 20px !important;
+        border: 1px solid rgba(15, 40, 64, .12) !important;
+        border-radius: 18px !important;
+        background: var(--ivory) !important;
+        overflow: visible !important;
+      }
+      #intro.intro .card-number {
+        display: block !important;
+        margin: 0 !important;
+        color: var(--gold) !important;
+        font-size: 13px !important;
+        font-weight: 600 !important;
+        line-height: 1.4 !important;
+      }
+      #intro.intro .strength-card h3 {
+        margin: 8px 0 !important;
+        color: var(--navy) !important;
+        font-size: 20px !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+      }
+      #intro.intro .strength-card p {
+        margin: 0 !important;
+        font-size: 14.5px !important;
+        font-weight: 400 !important;
+        line-height: 1.7 !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="site-header" id="top">
