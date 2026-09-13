@@ -26,31 +26,23 @@
     padding: 28px 20px 24px !important; background: var(--paper) !important;
   }
   #intro .intro-copy { padding-top: 6px !important; }
-  #intro .strength-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; margin-top: 18px !important; }
-  #intro .strength-card { min-height: 0 !important; padding: 18px 16px !important; }
-  #intro .strength-card h3 { margin: 12px 0 6px !important; }
-
-  /* Intro is taller after the mobile readability increase. Let only this section grow naturally so rows 03/04 are never clipped. */
-  #intro {
-    height: auto !important;
-    min-height: var(--mobile-vh, 100dvh) !important;
-    max-height: none !important;
-    overflow: visible !important;
-    --mobile-fit-scale: 1 !important;
-  }
-  #intro > .mobile-fit-inner {
-    width: 100% !important;
+  #intro .strength-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    grid-auto-rows: auto !important;
+    align-items: stretch !important;
     height: auto !important;
     max-height: none !important;
-    transform: none !important;
     overflow: visible !important;
+    margin-top: 18px !important;
   }
-  #intro .strength-grid,
   #intro .strength-card {
     height: auto !important;
+    min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
+    padding: 18px 16px !important;
   }
+  #intro .strength-card h3 { margin: 12px 0 6px !important; }
 
   #properties > .mobile-fit-inner, #analysis > .mobile-fit-inner, #contents > .mobile-fit-inner { padding: 24px 18px 22px !important; }
 
