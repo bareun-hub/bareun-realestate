@@ -22,10 +22,11 @@
   }
 
   #intro > .mobile-fit-inner {
-    display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important;
-    padding: 28px 20px 24px !important; background: var(--paper) !important;
+    display: grid !important; grid-template-columns: 1fr !important; gap: 7px !important;
+    padding: 14px 20px 18px !important; background: var(--paper) !important;
   }
-  #intro .intro-copy { padding-top: 6px !important; }
+  #intro .intro-copy { padding-top: 2px !important; }
+  #intro .text-link { margin-top: 8px !important; }
   #intro .strength-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
     grid-auto-rows: auto !important;
@@ -33,16 +34,16 @@
     height: auto !important;
     max-height: none !important;
     overflow: visible !important;
-    margin-top: 18px !important;
+    margin-top: 8px !important;
   }
   #intro .strength-card {
     height: auto !important;
     min-height: 0 !important;
     max-height: none !important;
     overflow: visible !important;
-    padding: 18px 16px !important;
+    padding: 12px 16px !important;
   }
-  #intro .strength-card h3 { margin: 12px 0 6px !important; }
+  #intro .strength-card h3 { margin: 8px 0 4px !important; }
 
   #properties > .mobile-fit-inner, #analysis > .mobile-fit-inner, #contents > .mobile-fit-inner { padding: 24px 18px 22px !important; }
 
