@@ -583,3 +583,34 @@
     letter-spacing: .1em !important;
   }
 }
+
+
+/* Mobile-only branded channel labels; desktop copy remains unchanged. */
+@media (max-width: 560px) {
+  html body #contents.contents .platform-card .platform-label,
+  html body #contents.contents:target .platform-card .platform-label {
+    font-size: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  html body #contents.contents .platform-card:nth-child(1) .platform-label::after,
+  html body #contents.contents:target .platform-card:nth-child(1) .platform-label::after {
+    content: "BAREUN YOUTUBE";
+  }
+
+  html body #contents.contents .platform-card:nth-child(2) .platform-label::after,
+  html body #contents.contents:target .platform-card:nth-child(2) .platform-label::after {
+    content: "BAREUN BLOG";
+  }
+
+  html body #contents.contents .platform-card .platform-label::after,
+  html body #contents.contents:target .platform-card .platform-label::after {
+    display: block;
+    color: var(--gold);
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .1em;
+    white-space: nowrap;
+  }
+}
