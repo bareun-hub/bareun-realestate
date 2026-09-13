@@ -516,7 +516,7 @@
 @media (max-width: 560px) {
   #contents .section-heading h2::after,
   #contents:target .section-heading h2::after {
-    content: "현장에서 얻은 정보를 쉽고\A 정확하게 전합니다." !important;
+    content: "현장에서 얻은 정보를\A 쉽고 정확하게 전합니다." !important;
     white-space: pre-line !important;
     line-height: 1.28 !important;
   }
