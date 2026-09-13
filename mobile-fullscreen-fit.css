@@ -284,3 +284,36 @@
   .hero-content { padding-bottom: 92px !important; }
   .hero-region-nav a { min-height: 70px !important; }
 }
+
+/* Phone-only single-line content headings. The original HTML copy remains unchanged. */
+@media (max-width: 560px) {
+  #contents .section-heading h2,
+  #contents:target .section-heading h2,
+  #contents .content-topic.featured h3,
+  #contents:target .content-topic.featured h3 {
+    font-size: 0 !important;
+    white-space: nowrap !important;
+  }
+
+  #contents .section-heading h2::after,
+  #contents:target .section-heading h2::after {
+    content: "현장에서 얻은 정보를 쉽고 정확하게 전합니다.";
+    display: block;
+    font-size: clamp(11.5px, 3.55vw, 13px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.035em;
+    white-space: nowrap;
+  }
+
+  #contents .content-topic.featured h3::after,
+  #contents:target .content-topic.featured h3::after {
+    content: "율하2지구 상권은 어떻게 봐야 할까?";
+    display: block;
+    font-size: clamp(11.5px, 3.3vw, 12.5px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -.03em;
+    white-space: nowrap;
+  }
+}
