@@ -3,158 +3,76 @@
 .mobile-fit-inner { display: contents; }
 
 @media (max-width: 900px) {
-  html {
-    scroll-behavior: smooth !important;
-    scroll-snap-type: y mandatory !important;
-    scroll-padding-top: 0 !important;
-    overflow-y: auto !important;
-  }
+  html { scroll-behavior: smooth !important; scroll-snap-type: y mandatory !important; scroll-padding-top: 0 !important; overflow-y: auto !important; }
+  body { overflow-x: hidden !important; }
+  .site-header { height: 70px !important; }
 
-  body {
-    overflow-x: hidden !important;
+  #home, #intro, #properties, #analysis, #contents, #contact {
+    box-sizing: border-box !important; width: 100% !important; height: var(--mobile-vh, 100dvh) !important;
+    min-height: var(--mobile-vh, 100dvh) !important; max-height: var(--mobile-vh, 100dvh) !important;
+    overflow: hidden !important; scroll-margin-top: 0 !important; scroll-snap-align: start !important; scroll-snap-stop: always !important;
   }
-
-  .site-header {
-    height: 70px !important;
-  }
-
-  #home,
-  #intro,
-  #properties,
-  #analysis,
-  #contents,
-  #contact {
-    box-sizing: border-box !important;
-    width: 100% !important;
-    height: var(--mobile-vh, 100dvh) !important;
-    min-height: var(--mobile-vh, 100dvh) !important;
-    max-height: var(--mobile-vh, 100dvh) !important;
-    overflow: hidden !important;
-    scroll-margin-top: 0 !important;
-    scroll-snap-align: start !important;
-    scroll-snap-stop: always !important;
-  }
-
   #home { padding: 0 !important; }
+  #intro, #properties, #analysis, #contents, #contact { padding: 70px 0 0 !important; }
 
-  #intro,
-  #properties,
-  #analysis,
-  #contents,
-  #contact {
-    padding: 70px 0 0 !important;
-  }
-
-  #intro > .mobile-fit-inner,
-  #properties > .mobile-fit-inner,
-  #analysis > .mobile-fit-inner,
-  #contents > .mobile-fit-inner,
-  #contact > .mobile-fit-inner {
-    display: block !important;
-    box-sizing: border-box !important;
-    width: calc(100% / var(--mobile-fit-scale, 1)) !important;
-    max-width: none !important;
-    height: auto !important;
-    max-height: none !important;
-    transform: scale(var(--mobile-fit-scale, 1));
-    transform-origin: top left;
-    overflow: visible !important;
+  #intro > .mobile-fit-inner, #properties > .mobile-fit-inner, #analysis > .mobile-fit-inner, #contents > .mobile-fit-inner, #contact > .mobile-fit-inner {
+    display: block !important; box-sizing: border-box !important; width: calc(100% / var(--mobile-fit-scale, 1)) !important;
+    max-width: none !important; height: auto !important; max-height: none !important;
+    transform: scale(var(--mobile-fit-scale, 1)); transform-origin: top left; overflow: visible !important;
   }
 
   #intro > .mobile-fit-inner {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    gap: 10px !important;
-    padding: 28px 20px 24px !important;
-    background: var(--paper) !important;
+    display: grid !important; grid-template-columns: 1fr !important; gap: 10px !important;
+    padding: 28px 20px 24px !important; background: var(--paper) !important;
   }
-
   #intro .intro-copy { padding-top: 6px !important; }
   #intro .strength-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; margin-top: 18px !important; }
   #intro .strength-card { min-height: 0 !important; padding: 18px 16px !important; }
   #intro .strength-card h3 { margin: 12px 0 6px !important; }
 
-  #properties > .mobile-fit-inner,
-  #analysis > .mobile-fit-inner,
-  #contents > .mobile-fit-inner {
-    padding: 24px 18px 22px !important;
-  }
-
-  #properties:target,
-  #analysis:target,
-  #contents:target,
-  #contact:target {
-    height: var(--mobile-vh, 100dvh) !important;
-    min-height: var(--mobile-vh, 100dvh) !important;
-    max-height: var(--mobile-vh, 100dvh) !important;
-    overflow: hidden !important;
-    padding-top: 70px !important;
-    padding-bottom: 0 !important;
-  }
-
-  #properties:target .property-feature,
-  #analysis:target .analysis-grid,
-  #contents:target .content-topic-grid,
-  #contents:target .channel-links,
-  #contact:target .contact-visual,
-  #contact:target .contact-panel {
-    max-height: none !important;
-  }
-
-  #properties .section-heading h2,
-  #analysis .section-heading h2,
-  #contents .section-heading h2 {
-    font-size: 30px !important;
-    line-height: 1.12 !important;
-  }
-
-  #properties .eyebrow,
-  #analysis .eyebrow,
-  #contents .eyebrow {
-    margin-bottom: 8px !important;
-    font-size: 9px !important;
-  }
-
-  #properties .section-heading > p:last-child,
-  #analysis .section-heading > p:last-child,
-  #contents .section-heading > p:last-child {
-    margin-top: 10px !important;
-    font-size: 12px !important;
-    line-height: 1.55 !important;
-  }
-
-  #properties .property-feature {
-    grid-template-columns: 1fr !important;
-    grid-template-rows: auto auto !important;
+  /* Intro is taller after the mobile readability increase. Let only this section grow naturally so rows 03/04 are never clipped. */
+  #intro {
     height: auto !important;
-    min-height: 0 !important;
-    margin-top: 18px !important;
-    border-radius: 14px !important;
-    overflow: hidden !important;
+    min-height: var(--mobile-vh, 100dvh) !important;
+    max-height: none !important;
+    overflow: visible !important;
+    --mobile-fit-scale: 1 !important;
+  }
+  #intro > .mobile-fit-inner {
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    transform: none !important;
+    overflow: visible !important;
+  }
+  #intro .strength-grid,
+  #intro .strength-card {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
   }
 
+  #properties > .mobile-fit-inner, #analysis > .mobile-fit-inner, #contents > .mobile-fit-inner { padding: 24px 18px 22px !important; }
+
+  #properties:target, #analysis:target, #contents:target, #contact:target {
+    height: var(--mobile-vh, 100dvh) !important; min-height: var(--mobile-vh, 100dvh) !important; max-height: var(--mobile-vh, 100dvh) !important;
+    overflow: hidden !important; padding-top: 70px !important; padding-bottom: 0 !important;
+  }
+  #properties:target .property-feature, #analysis:target .analysis-grid, #contents:target .content-topic-grid,
+  #contents:target .channel-links, #contact:target .contact-visual, #contact:target .contact-panel { max-height: none !important; }
+
+  #properties .section-heading h2, #analysis .section-heading h2, #contents .section-heading h2 { font-size: 30px !important; line-height: 1.12 !important; }
+  #properties .eyebrow, #analysis .eyebrow, #contents .eyebrow { margin-bottom: 8px !important; font-size: 9px !important; }
+  #properties .section-heading > p:last-child, #analysis .section-heading > p:last-child, #contents .section-heading > p:last-child { margin-top: 10px !important; font-size: 12px !important; line-height: 1.55 !important; }
+
+  #properties .property-feature { grid-template-columns: 1fr !important; grid-template-rows: auto auto !important; height: auto !important; min-height: 0 !important; margin-top: 18px !important; border-radius: 14px !important; overflow: hidden !important; }
   #properties .property-image { height: 210px !important; min-height: 210px !important; }
   #properties .property-panel { height: auto !important; min-height: 0 !important; padding: 20px 18px 22px !important; }
   #properties .property-panel h3 { margin: 10px 0 8px !important; font-size: 22px !important; line-height: 1.22 !important; }
   #properties .property-panel p { font-size: 12px !important; line-height: 1.5 !important; }
-  #properties .button-light {
-    min-height: 44px !important;
-    margin-top: 14px !important;
-    padding: 12px 14px !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0 !important;
-    white-space: normal !important;
-  }
+  #properties .button-light { min-height: 44px !important; margin-top: 14px !important; padding: 12px 14px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; white-space: normal !important; }
 
-  #analysis .analysis-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 8px !important;
-    height: auto !important;
-    margin-top: 18px !important;
-  }
-
+  #analysis .analysis-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; height: auto !important; margin-top: 18px !important; }
   #analysis .area-card { height: 250px !important; min-height: 250px !important; }
   #analysis .area-content { inset: auto 12px 14px !important; }
   #analysis .area-content p { margin: 10px 0 2px !important; font-size: 8px !important; }
@@ -162,45 +80,17 @@
   #analysis .area-content small { font-size: 9px !important; line-height: 1.25 !important; }
   #analysis .analysis-note { grid-template-columns: .35fr 1fr !important; gap: 10px !important; margin-top: 14px !important; padding-top: 10px !important; font-size: 11px !important; line-height: 1.35 !important; }
 
-  #contents .content-topic-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-    gap: 1px !important;
-    height: auto !important;
-    margin-top: 18px !important;
-  }
-
+  #contents .content-topic-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1px !important; height: auto !important; margin-top: 18px !important; }
   #contents .content-topic { min-height: 190px !important; height: auto !important; padding: 16px !important; border-radius: 0 !important; }
   #contents .content-topic h3 { margin: 16px 0 7px !important; font-size: 15px !important; line-height: 1.3 !important; }
   #contents .content-topic p { font-size: 10.5px !important; line-height: 1.4 !important; }
-
-  #contents .channel-links,
-  #contents .platform-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-    gap: 1px !important;
-    height: auto !important;
-    margin-top: 8px !important;
-  }
-
+  #contents .channel-links, #contents .platform-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 1px !important; height: auto !important; margin-top: 8px !important; }
   #contents .platform-card { min-height: 145px !important; height: auto !important; padding: 14px 16px !important; border-radius: 0 !important; }
   #contents .platform-card h3 { margin: 8px 0 5px !important; font-size: 14px !important; line-height: 1.25 !important; }
   #contents .platform-card p { margin-bottom: 6px !important; font-size: 10px !important; line-height: 1.35 !important; }
-  #contents .platform-card a {
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
-    min-height: 44px !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0 !important;
-  }
+  #contents .platform-card a { padding-top: 12px !important; padding-bottom: 12px !important; min-height: 44px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
-  #contact > .mobile-fit-inner {
-    display: grid !important;
-    grid-template-columns: 1fr !important;
-    padding: 0 !important;
-    background: var(--navy-deep) !important;
-  }
-
+  #contact > .mobile-fit-inner { display: grid !important; grid-template-columns: 1fr !important; padding: 0 !important; background: var(--navy-deep) !important; }
   #contact .contact-visual { height: 250px !important; min-height: 250px !important; padding: 26px 20px !important; }
   #contact .contact-visual h2 { font-size: 31px !important; line-height: 1.15 !important; }
   #contact .contact-visual > p:last-child { margin-top: 12px !important; font-size: 11px !important; line-height: 1.5 !important; }
@@ -213,134 +103,28 @@
   #contact .contact-placeholder-grid strong { font-size: 10.5px !important; line-height: 1.35 !important; }
   #contact .naver-map { height: 155px !important; min-height: 155px !important; }
   #contact .naver-map-wrap { margin-bottom: 10px !important; }
-  #contact .naver-directions-button,
-  #contact .contact-button {
-    min-height: 44px !important;
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0 !important;
-    white-space: normal !important;
-  }
-  #contact .naver-directions-button {
-    font-size: 17px !important;
-  }
-  #contact .naver-map-note,
-  #contact .contact-note { font-size: 8.5px !important; }
+  #contact .naver-directions-button, #contact .contact-button { min-height: 44px !important; padding-top: 12px !important; padding-bottom: 12px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; white-space: normal !important; }
+  #contact .naver-directions-button { font-size: 17px !important; }
+  #contact .naver-map-note, #contact .contact-note { font-size: 8.5px !important; }
 
-  .hero-actions .button {
-    min-height: 44px !important;
-    padding-top: 12px !important;
-    padding-bottom: 12px !important;
-    font-size: 16px !important;
-    font-weight: 700 !important;
-    line-height: 1.35 !important;
-    letter-spacing: 0 !important;
-  }
+  .hero-actions .button { min-height: 44px !important; padding-top: 12px !important; padding-bottom: 12px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
-  /* Mobile readability only: preserve the existing layout while making body copy easier to read. */
-  #intro .intro-copy,
-  #intro .intro-copy p {
-    font-size: 16px !important;
-    line-height: 1.7 !important;
-    font-weight: 400 !important;
-    color: #5f6872 !important;
-  }
+  #intro .intro-copy, #intro .intro-copy p { font-size: 16px !important; line-height: 1.7 !important; font-weight: 400 !important; color: #5f6872 !important; }
+  #intro .text-link { font-size: 16px !important; line-height: 1.5 !important; font-weight: 700 !important; }
+  #intro .strength-card p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: #5f6872 !important; }
+  #properties .section-heading > p:last-child { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: rgba(255,255,255,.78) !important; }
+  #properties .property-panel p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: rgba(255,255,255,.78) !important; }
+  #analysis .area-content small { font-size: 15px !important; line-height: 1.5 !important; font-weight: 500 !important; opacity: .82 !important; }
+  #analysis .analysis-note strong { font-size: 14px !important; line-height: 1.5 !important; font-weight: 700 !important; }
+  #analysis .analysis-note p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: #5f6872 !important; }
+  #contact .contact-panel h3 { font-size: 21px !important; line-height: 1.4 !important; font-weight: 700 !important; }
+  #contact .contact-panel > div:first-child > p { font-size: 16px !important; line-height: 1.6 !important; color: rgba(255,255,255,.72) !important; }
+  #contact .contact-placeholder-grid span { font-size: 11px !important; line-height: 1.4 !important; color: rgba(255,255,255,.58) !important; }
+  #contact .contact-placeholder-grid strong, #contact .contact-placeholder-grid strong a { font-size: 16px !important; line-height: 1.55 !important; font-weight: 600 !important; color: #fff !important; overflow-wrap: anywhere !important; }
 
-  #intro .text-link {
-    font-size: 16px !important;
-    line-height: 1.5 !important;
-    font-weight: 700 !important;
-  }
-
-  #intro .strength-card p {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    font-weight: 400 !important;
-    color: #5f6872 !important;
-  }
-
-  #properties .section-heading > p:last-child {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    font-weight: 400 !important;
-    color: rgba(255,255,255,.78) !important;
-  }
-
-  #properties .property-panel p {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    font-weight: 400 !important;
-    color: rgba(255,255,255,.78) !important;
-  }
-
-  #analysis .area-content small {
-    font-size: 15px !important;
-    line-height: 1.5 !important;
-    font-weight: 500 !important;
-    opacity: .82 !important;
-  }
-
-  #analysis .analysis-note strong {
-    font-size: 14px !important;
-    line-height: 1.5 !important;
-    font-weight: 700 !important;
-  }
-
-  #analysis .analysis-note p {
-    font-size: 16px !important;
-    line-height: 1.65 !important;
-    font-weight: 400 !important;
-    color: #5f6872 !important;
-  }
-
-  #contact .contact-panel h3 {
-    font-size: 21px !important;
-    line-height: 1.4 !important;
-    font-weight: 700 !important;
-  }
-
-  #contact .contact-panel > div:first-child > p {
-    font-size: 16px !important;
-    line-height: 1.6 !important;
-    color: rgba(255,255,255,.72) !important;
-  }
-
-  #contact .contact-placeholder-grid span {
-    font-size: 11px !important;
-    line-height: 1.4 !important;
-    color: rgba(255,255,255,.58) !important;
-  }
-
-  #contact .contact-placeholder-grid strong,
-  #contact .contact-placeholder-grid strong a {
-    font-size: 16px !important;
-    line-height: 1.55 !important;
-    font-weight: 600 !important;
-    color: #fff !important;
-    overflow-wrap: anywhere !important;
-  }
-
-  .mobile-nav {
-    position: fixed !important;
-    top: 70px !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    height: auto !important;
-    max-height: calc(var(--mobile-vh, 100dvh) - 70px) !important;
-    overflow-y: auto !important;
-  }
-
+  .mobile-nav { position: fixed !important; top: 70px !important; left: 0 !important; right: 0 !important; bottom: 0 !important; height: auto !important; max-height: calc(var(--mobile-vh, 100dvh) - 70px) !important; overflow-y: auto !important; }
   .site-footer { scroll-snap-align: start !important; }
-
-  /* Mobile content shortcut buttons: keep icon + label only; hide the arrow. */
-  #contents #barun-youtube-link span,
-  #contents #barun-blog-link span {
-    display: none !important;
-  }
+  #contents #barun-youtube-link span, #contents #barun-blog-link span { display: none !important; }
 }
 
 @media (max-width: 560px) {
