@@ -433,3 +433,32 @@
     grid-template-columns: .38fr 1fr !important; gap: 12px !important; margin-top: 14px !important; padding-top: 12px !important;
   }
 }
+
+
+/* Phone content spacing refinement: retain typography, colors and CTA sizing. */
+@media (max-width: 560px) {
+  #contents .content-topic-grid,
+  #contents:target .content-topic-grid {
+    margin-top: 16px !important;
+    gap: 3px !important;
+  }
+
+  #contents .content-topic,
+  #contents:target .content-topic {
+    padding-top: 11px !important;
+    padding-bottom: 11px !important;
+  }
+
+  #contents .channel-links,
+  #contents .platform-grid,
+  #contents:target .channel-links,
+  #contents:target .platform-grid {
+    margin-top: 3px !important;
+    gap: 3px !important;
+  }
+
+  #contents,
+  #contents:target {
+    padding-bottom: 6px !important;
+  }
+}
