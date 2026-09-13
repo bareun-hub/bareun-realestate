@@ -85,6 +85,14 @@
   #contents .platform-card p { margin-bottom: 6px !important; font-size: 10px !important; line-height: 1.35 !important; }
   #contents .platform-card a { padding-top: 12px !important; padding-bottom: 12px !important; min-height: 44px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
+  /* Keep the current mobile content design, but allow the lower cards to be reached instead of being clipped. */
+  #contents,
+  #contents:target {
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
   #contact > .mobile-fit-inner { display: grid !important; grid-template-columns: 1fr !important; padding: 0 !important; background: var(--navy-deep) !important; }
   #contact .contact-visual { height: 250px !important; min-height: 250px !important; padding: 26px 20px !important; }
   #contact .contact-visual h2 { font-size: 31px !important; line-height: 1.15 !important; }
