@@ -332,6 +332,12 @@
   }
 
   .site-footer { scroll-snap-align: start !important; }
+
+  /* Mobile content shortcut buttons: keep icon + label only; hide the arrow. */
+  #contents #barun-youtube-link span,
+  #contents #barun-blog-link span {
+    display: none !important;
+  }
 }
 
 @media (max-width: 560px) {
