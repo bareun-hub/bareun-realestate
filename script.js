@@ -52,31 +52,29 @@ document.head.appendChild(mobileFullscreenFitStyles);
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
-const mobileLinks = document.querySelectorAll('.mobile-nav a');
 const naverPropertyLink = document.querySelector('#naver-property-link');
 
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 30);
+  header?.classList.toggle('scrolled', window.scrollY > 30);
 });
 
 function setMobileMenuOpen(open) {
   if (!menuButton || !mobileNav) return;
+
   mobileNav.classList.toggle('open', open);
+  mobileNav.style.pointerEvents = open ? 'auto' : 'none';
+  menuButton.style.pointerEvents = 'auto';
   menuButton.setAttribute('aria-expanded', String(open));
   menuButton.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
   mobileNav.setAttribute('aria-hidden', String(!open));
 }
 
-// toggle 결과에 의존하지 않고 실제 메뉴 상태를 기준으로 매번 열기/닫기를 동기화합니다.
-if (menuButton && mobileNav) {
+function closeMobileMenu() {
   setMobileMenuOpen(false);
-  menuButton.addEventListener('click', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
-    const nextOpen = !mobileNav.classList.contains('open');
-    setMobileMenuOpen(nextOpen);
-  });
 }
+
+// 최초 상태를 확실히 닫힌 상태로 맞춥니다.
+setMobileMenuOpen(false);
 
 const MOBILE_FIT_SECTION_IDS = ['intro', 'properties', 'analysis', 'contents', 'contact'];
 let mobileFitFrame = 0;
@@ -150,10 +148,6 @@ function goToMobileSection(hash) {
   });
 }
 
-function closeMobileMenu() {
-  setMobileMenuOpen(false);
-}
-
 function moveToMobileHash(hash) {
   if (!hash || !hash.startsWith('#')) return;
   const target = document.querySelector(hash);
@@ -169,36 +163,57 @@ function moveToMobileHash(hash) {
   goToMobileSection(hash);
 }
 
-mobileLinks.forEach((link) => {
-  link.addEventListener('click', (event) => {
-    const hash = link.getAttribute('href');
-    if (!hash || !hash.startsWith('#')) return;
-
-    event.preventDefault();
-    closeMobileMenu();
-    moveToMobileHash(hash);
-  });
-});
-
+// 햄버거/모바일 메뉴는 이벤트 위임으로 한 번만 등록합니다.
+// 화면 이동 후에도 같은 헤더 DOM을 사용하므로 항상 동일하게 작동합니다.
 document.addEventListener('click', (event) => {
   if (window.innerWidth > 900) return;
 
+  const hamburger = event.target.closest('.menu-button');
+  if (hamburger) {
+    event.preventDefault();
+    event.stopPropagation();
+    const shouldOpen = !mobileNav?.classList.contains('open');
+    setMobileMenuOpen(Boolean(shouldOpen));
+    return;
+  }
+
+  const mobileMenuLink = event.target.closest('.mobile-nav a[href^="#"]');
+  if (mobileMenuLink) {
+    const hash = mobileMenuLink.getAttribute('href');
+    if (!hash || !document.querySelector(hash)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    closeMobileMenu();
+    moveToMobileHash(hash);
+    return;
+  }
+
   const link = event.target.closest('a[href^="#"]');
-  if (!link || link.closest('.mobile-nav')) return;
+  if (!link) return;
 
   const hash = link.getAttribute('href');
-  if (!hash || hash === '#') return;
-  if (!document.querySelector(hash)) return;
+  if (!hash || hash === '#' || !document.querySelector(hash)) return;
 
   event.preventDefault();
   closeMobileMenu();
   moveToMobileHash(hash);
-});
+}, true);
 
+// 메뉴 이동, 브라우저 뒤로/앞으로 이동 뒤에도 메뉴 상태를 항상 초기화합니다.
 window.addEventListener('hashchange', () => {
   if (window.innerWidth > 900) return;
+  closeMobileMenu();
   const hash = window.location.hash;
   if (hash && hash !== '#home' && hash !== '#top') goToMobileSection(hash);
+});
+
+window.addEventListener('popstate', () => {
+  if (window.innerWidth <= 900) closeMobileMenu();
+});
+
+window.addEventListener('pageshow', () => {
+  if (window.innerWidth <= 900) closeMobileMenu();
 });
 
 // 브라우저 주소창이 접히고 펴질 때 visualViewport 높이가 계속 변하면서 화면 전체가
