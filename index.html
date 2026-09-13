@@ -13,8 +13,8 @@
   <link rel="stylesheet" href="screen-fit.css?v=20260913-0110" />
   <style>
     @media (max-width: 900px) {
-      #barun-youtube-link,
-      #barun-blog-link {
+      #contents #barun-youtube-link,
+      #contents #barun-blog-link {
         background: var(--gold) !important;
         color: #000 !important;
         display: flex !important;
@@ -26,21 +26,22 @@
         position: relative !important;
       }
 
-      #barun-youtube-link::before,
-      #barun-blog-link::before {
+      #contents #barun-youtube-link::before,
+      #contents #barun-blog-link::before {
         font-size: 16px !important;
         font-weight: 700 !important;
         line-height: 1.35 !important;
         color: #000 !important;
+        text-align: center !important;
       }
 
-      #barun-youtube-link::before { content: "유튜브 바로가기"; }
-      #barun-blog-link::before { content: "블로그 바로가기"; }
+      #contents #barun-youtube-link::before { content: "유튜브 바로가기"; }
+      #contents #barun-blog-link::before { content: "블로그 바로가기"; }
 
-      #barun-youtube-link span,
-      #barun-blog-link span {
+      #contents #barun-youtube-link span,
+      #contents #barun-blog-link span {
         position: absolute !important;
-        right: 0 !important;
+        right: 12px !important;
         font-size: 16px !important;
         line-height: 1 !important;
         color: #000 !important;
