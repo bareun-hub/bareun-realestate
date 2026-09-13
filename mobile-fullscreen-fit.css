@@ -224,6 +224,9 @@
     letter-spacing: 0 !important;
     white-space: normal !important;
   }
+  #contact .naver-directions-button {
+    font-size: 17px !important;
+  }
   #contact .naver-map-note,
   #contact .contact-note { font-size: 8.5px !important; }
 
