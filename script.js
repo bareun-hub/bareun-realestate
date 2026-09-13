@@ -1,3 +1,28 @@
+// 모바일 브라우저에서 한 손가락 스크롤 중 화면이 확대/축소되지 않도록 viewport를 고정합니다.
+const viewportMeta = document.querySelector('meta[name="viewport"]');
+if (viewportMeta) {
+  viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+}
+
+// 시각 디자인에는 영향을 주지 않고 모바일 터치 동작만 안정화합니다.
+const mobileInteractionStyles = document.createElement('style');
+mobileInteractionStyles.textContent = `
+@media (max-width: 900px) {
+  html, body, main { touch-action: pan-y; }
+  a, button, .menu-button, .mobile-nav { touch-action: manipulation; }
+  .menu-button { pointer-events: auto !important; }
+}
+`;
+document.head.appendChild(mobileInteractionStyles);
+
+// iOS Safari의 제스처 확대와 멀티터치 확대만 차단하고 한 손가락 세로 스크롤은 그대로 둡니다.
+['gesturestart', 'gesturechange', 'gestureend'].forEach((eventName) => {
+  document.addEventListener(eventName, (event) => event.preventDefault(), { passive: false });
+});
+document.addEventListener('touchmove', (event) => {
+  if (event.touches && event.touches.length > 1) event.preventDefault();
+}, { passive: false });
+
 const mobileFixStyles = document.createElement('link');
 mobileFixStyles.rel = 'stylesheet';
 mobileFixStyles.href = 'mobile-fix.css?v=20260913-0100';
@@ -34,11 +59,24 @@ window.addEventListener('scroll', () => {
   header.classList.toggle('scrolled', window.scrollY > 30);
 });
 
-menuButton.addEventListener('click', () => {
-  const isOpen = mobileNav.classList.toggle('open');
-  menuButton.setAttribute('aria-expanded', String(isOpen));
-  menuButton.setAttribute('aria-label', isOpen ? '메뉴 닫기' : '메뉴 열기');
-});
+function setMobileMenuOpen(open) {
+  if (!menuButton || !mobileNav) return;
+  mobileNav.classList.toggle('open', open);
+  menuButton.setAttribute('aria-expanded', String(open));
+  menuButton.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+  mobileNav.setAttribute('aria-hidden', String(!open));
+}
+
+// toggle 결과에 의존하지 않고 실제 메뉴 상태를 기준으로 매번 열기/닫기를 동기화합니다.
+if (menuButton && mobileNav) {
+  setMobileMenuOpen(false);
+  menuButton.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    const nextOpen = !mobileNav.classList.contains('open');
+    setMobileMenuOpen(nextOpen);
+  });
+}
 
 const MOBILE_FIT_SECTION_IDS = ['intro', 'properties', 'analysis', 'contents', 'contact'];
 let mobileFitFrame = 0;
@@ -65,13 +103,11 @@ function fitOneMobileSection(section, availableHeight) {
 
   section.style.setProperty('--mobile-fit-scale', '1');
 
-  // 먼저 원래 비율로 높이를 재고, 화면보다 길 때만 전체 구성을 균일하게 축소합니다.
   const naturalHeight = Math.max(inner.scrollHeight, inner.getBoundingClientRect().height || 0);
   let scale = naturalHeight > availableHeight ? availableHeight / naturalHeight : 1;
   scale = Math.min(1, Math.max(0.35, scale));
   section.style.setProperty('--mobile-fit-scale', scale.toFixed(4));
 
-  // 폭이 scale에 맞춰 넓어진 뒤 줄바꿈이 달라질 수 있으므로 한 번 더 보정합니다.
   requestAnimationFrame(() => {
     const secondHeight = Math.max(inner.scrollHeight, 1);
     let secondScale = secondHeight > availableHeight ? availableHeight / secondHeight : 1;
@@ -109,18 +145,13 @@ function goToMobileSection(hash) {
   const target = document.querySelector(hash);
   if (!target) return;
 
-  fitMobileSections();
   requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
 
 function closeMobileMenu() {
-  mobileNav.classList.remove('open');
-  menuButton.setAttribute('aria-expanded', 'false');
-  menuButton.setAttribute('aria-label', '메뉴 열기');
+  setMobileMenuOpen(false);
 }
 
 function moveToMobileHash(hash) {
@@ -149,7 +180,6 @@ mobileLinks.forEach((link) => {
   });
 });
 
-// 모바일 홈의 '상가 매물 보기', '상담 문의', 지역 버튼도 햄버거 메뉴와 같은 화면 맞춤 방식으로 이동합니다.
 document.addEventListener('click', (event) => {
   if (window.innerWidth > 900) return;
 
@@ -171,20 +201,22 @@ window.addEventListener('hashchange', () => {
   if (hash && hash !== '#home' && hash !== '#top') goToMobileSection(hash);
 });
 
-window.addEventListener('resize', fitMobileSections);
-window.addEventListener('orientationchange', () => setTimeout(fitMobileSections, 120));
-window.visualViewport?.addEventListener('resize', fitMobileSections);
+// 브라우저 주소창이 접히고 펴질 때 visualViewport 높이가 계속 변하면서 화면 전체가
+// 재축소/재확대되던 원인이므로 스크롤 중 resize에는 재계산하지 않습니다.
+window.addEventListener('orientationchange', () => setTimeout(fitMobileSections, 180));
 window.addEventListener('load', () => {
   fitMobileSections();
-  setTimeout(fitMobileSections, 250);
+  setTimeout(fitMobileSections, 300);
 });
 
 ensureMobileFitWrappers();
 fitMobileSections();
 
-naverPropertyLink.addEventListener('click', (event) => {
-  if (naverPropertyLink.getAttribute('href') === '#') event.preventDefault();
-});
+if (naverPropertyLink) {
+  naverPropertyLink.addEventListener('click', (event) => {
+    if (naverPropertyLink.getAttribute('href') === '#') event.preventDefault();
+  });
+}
 
 const NAVER_MAP_CLIENT_ID = '7t7c9gatsd';
 const BARUN_SITE_URL = 'https://parkhm750910-hue.github.io/bareun-realestate/';
