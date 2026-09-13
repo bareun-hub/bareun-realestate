@@ -666,3 +666,15 @@
     font-size: 15.6px !important;
   }
 }
+
+
+/* Desktop-only field check contrast refinement. */
+@media (min-width: 901px) {
+  #analysis .analysis-note strong {
+    color: #0b2947 !important;
+  }
+
+  #analysis .analysis-note p {
+    color: #343e48 !important;
+  }
+}
