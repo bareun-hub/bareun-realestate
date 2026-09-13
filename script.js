@@ -10,7 +10,18 @@ mobileInteractionStyles.textContent = `
 @media (max-width: 900px) {
   html, body, main { touch-action: pan-y; }
   a, button, .menu-button, .mobile-nav { touch-action: manipulation; }
-  .menu-button { pointer-events: auto !important; }
+  .site-header {
+    pointer-events: auto !important;
+    z-index: 2147483000 !important;
+  }
+  .site-header .menu-button {
+    position: relative;
+    z-index: 2147483002 !important;
+    pointer-events: auto !important;
+  }
+  .site-header .mobile-nav {
+    z-index: 2147483001 !important;
+  }
 }
 `;
 document.head.appendChild(mobileInteractionStyles);
@@ -163,21 +174,35 @@ function moveToMobileHash(hash) {
   goToMobileSection(hash);
 }
 
-// 햄버거/모바일 메뉴는 이벤트 위임으로 한 번만 등록합니다.
-// 화면 이동 후에도 같은 헤더 DOM을 사용하므로 항상 동일하게 작동합니다.
+// 모바일에서는 pointerup을 우선 사용해 섹션 이동 후에도 햄버거 터치를 안정적으로 받습니다.
+// 뒤이어 발생하는 synthetic click은 시간값으로 무시하여 한 번 터치에 두 번 토글되지 않게 합니다.
+let lastHamburgerPointerUp = 0;
+
+document.addEventListener('pointerup', (event) => {
+  if (window.innerWidth > 900) return;
+  const hamburger = event.target.closest?.('.menu-button');
+  if (!hamburger) return;
+
+  event.preventDefault();
+  event.stopPropagation();
+  lastHamburgerPointerUp = Date.now();
+  setMobileMenuOpen(!mobileNav?.classList.contains('open'));
+}, true);
+
+// 메뉴 링크와 click fallback은 이벤트 위임으로 한 번만 등록합니다.
 document.addEventListener('click', (event) => {
   if (window.innerWidth > 900) return;
 
-  const hamburger = event.target.closest('.menu-button');
+  const hamburger = event.target.closest?.('.menu-button');
   if (hamburger) {
     event.preventDefault();
     event.stopPropagation();
-    const shouldOpen = !mobileNav?.classList.contains('open');
-    setMobileMenuOpen(Boolean(shouldOpen));
+    if (Date.now() - lastHamburgerPointerUp < 700) return;
+    setMobileMenuOpen(!mobileNav?.classList.contains('open'));
     return;
   }
 
-  const mobileMenuLink = event.target.closest('.mobile-nav a[href^="#"]');
+  const mobileMenuLink = event.target.closest?.('.mobile-nav a[href^="#"]');
   if (mobileMenuLink) {
     const hash = mobileMenuLink.getAttribute('href');
     if (!hash || !document.querySelector(hash)) return;
@@ -189,7 +214,7 @@ document.addEventListener('click', (event) => {
     return;
   }
 
-  const link = event.target.closest('a[href^="#"]');
+  const link = event.target.closest?.('a[href^="#"]');
   if (!link) return;
 
   const hash = link.getAttribute('href');
