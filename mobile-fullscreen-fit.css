@@ -85,7 +85,7 @@
   #contents .platform-card p { margin-bottom: 6px !important; font-size: 10px !important; line-height: 1.35 !important; }
   #contents .platform-card a { padding-top: 12px !important; padding-bottom: 12px !important; min-height: 44px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
-  /* Keep the preferred one-column mobile content design and let the whole section flow naturally. */
+  /* Keep the preferred one-column mobile content design and optimize only vertical spacing. */
   #contents,
   #contents:target {
     --mobile-fit-scale: 1 !important;
@@ -94,7 +94,8 @@
     max-height: none !important;
     overflow: visible !important;
     padding-top: 70px !important;
-    padding-bottom: 46px !important;
+    padding-bottom: 34px !important;
+    scroll-margin-top: 0 !important;
     scroll-snap-stop: normal !important;
   }
 
@@ -105,7 +106,7 @@
     max-height: none !important;
     transform: none !important;
     overflow: visible !important;
-    padding: 34px 18px 0 !important;
+    padding: 14px 18px 0 !important;
   }
 
   #contents .content-topic-grid,
@@ -115,7 +116,7 @@
     gap: 12px !important;
     height: auto !important;
     max-height: none !important;
-    margin-top: 26px !important;
+    margin-top: 16px !important;
     border: 0 !important;
     overflow: visible !important;
   }
@@ -125,7 +126,7 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 24px 22px !important;
+    padding: 20px 22px !important;
     border: 1px solid rgba(15,40,64,.08) !important;
     border-radius: 16px !important;
     overflow: visible !important;
@@ -133,7 +134,7 @@
 
   #contents .content-topic h3,
   #contents:target .content-topic h3 {
-    margin: 20px 0 10px !important;
+    margin: 14px 0 8px !important;
     font-size: 22px !important;
     line-height: 1.35 !important;
   }
@@ -157,7 +158,7 @@
     gap: 12px !important;
     height: auto !important;
     max-height: none !important;
-    margin-top: 18px !important;
+    margin-top: 12px !important;
     overflow: visible !important;
   }
 
@@ -166,21 +167,21 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 24px 22px !important;
+    padding: 20px 22px !important;
     border-radius: 16px !important;
     overflow: visible !important;
   }
 
   #contents .platform-card h3,
   #contents:target .platform-card h3 {
-    margin: 14px 0 10px !important;
+    margin: 12px 0 8px !important;
     font-size: 21px !important;
     line-height: 1.35 !important;
   }
 
   #contents .platform-card p,
   #contents:target .platform-card p {
-    margin-bottom: 18px !important;
+    margin-bottom: 14px !important;
     font-size: 14px !important;
     line-height: 1.6 !important;
     overflow: visible !important;
@@ -189,7 +190,7 @@
   #contents .platform-card a,
   #contents:target .platform-card a {
     min-height: 44px !important;
-    padding-top: 16px !important;
+    padding-top: 12px !important;
     padding-bottom: 12px !important;
   }
 
