@@ -85,7 +85,7 @@
   #contents .platform-card p { margin-bottom: 6px !important; font-size: 10px !important; line-height: 1.35 !important; }
   #contents .platform-card a { padding-top: 12px !important; padding-bottom: 12px !important; min-height: 44px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
-  /* Keep the preferred one-column mobile content design and compress vertical space only. */
+  /* Keep the preferred one-column mobile content design and reduce top whitespace first. */
   #contents,
   #contents:target {
     --mobile-fit-scale: 1 !important;
@@ -93,8 +93,8 @@
     min-height: var(--mobile-vh, 100dvh) !important;
     max-height: none !important;
     overflow: visible !important;
-    padding-top: 70px !important;
-    padding-bottom: 24px !important;
+    padding-top: 40px !important;
+    padding-bottom: 22px !important;
     scroll-margin-top: 0 !important;
     scroll-snap-stop: normal !important;
   }
@@ -106,20 +106,29 @@
     max-height: none !important;
     transform: none !important;
     overflow: visible !important;
-    padding: 8px 18px 0 !important;
+    padding: 4px 18px 0 !important;
+  }
+
+  #contents .section-heading,
+  #contents:target .section-heading {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 
   #contents .section-heading h2,
   #contents:target .section-heading h2 {
-    font-size: 26px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    font-size: 25px !important;
     line-height: 1.02 !important;
   }
 
   #contents .eyebrow,
   #contents:target .eyebrow {
+    margin-top: 0 !important;
+    margin-bottom: 4px !important;
     font-size: 9px !important;
-    line-height: 1.15 !important;
-    margin-bottom: 5px !important;
+    line-height: 1.1 !important;
   }
 
   #contents .content-topic-grid,
@@ -129,7 +138,7 @@
     gap: 8px !important;
     height: auto !important;
     max-height: none !important;
-    margin-top: 10px !important;
+    margin-top: 7px !important;
     border: 0 !important;
     overflow: visible !important;
   }
@@ -139,7 +148,7 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 13px 18px !important;
+    padding: 12px 18px !important;
     border: 1px solid rgba(15,40,64,.08) !important;
     border-radius: 16px !important;
     overflow: visible !important;
@@ -147,22 +156,24 @@
 
   #contents .content-topic h3,
   #contents:target .content-topic h3 {
-    margin: 7px 0 5px !important;
-    font-size: 18px !important;
-    line-height: 1.18 !important;
+    margin: 6px 0 4px !important;
+    font-size: 17px !important;
+    line-height: 1.16 !important;
   }
 
   #contents .content-topic p,
   #contents:target .content-topic p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     font-size: 14px !important;
-    line-height: 1.4 !important;
+    line-height: 1.36 !important;
     overflow: visible !important;
   }
 
   #contents .content-category,
   #contents:target .content-category {
     font-size: 9px !important;
-    line-height: 1.15 !important;
+    line-height: 1.1 !important;
   }
 
   #contents .channel-links,
@@ -183,23 +194,24 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 13px 18px !important;
+    padding: 12px 18px !important;
     border-radius: 16px !important;
     overflow: visible !important;
   }
 
   #contents .platform-card h3,
   #contents:target .platform-card h3 {
-    margin: 6px 0 5px !important;
-    font-size: 17px !important;
-    line-height: 1.18 !important;
+    margin: 5px 0 4px !important;
+    font-size: 16px !important;
+    line-height: 1.16 !important;
   }
 
   #contents .platform-card p,
   #contents:target .platform-card p {
-    margin-bottom: 8px !important;
+    margin-top: 0 !important;
+    margin-bottom: 7px !important;
     font-size: 14px !important;
-    line-height: 1.4 !important;
+    line-height: 1.36 !important;
     overflow: visible !important;
   }
 
