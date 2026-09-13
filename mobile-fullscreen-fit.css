@@ -85,7 +85,7 @@
   #contents .platform-card p { margin-bottom: 6px !important; font-size: 10px !important; line-height: 1.35 !important; }
   #contents .platform-card a { padding-top: 12px !important; padding-bottom: 12px !important; min-height: 44px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
-  /* Preferred one-column mobile content design: keep visuals, prevent header overlap, reduce vertical density. */
+  /* Preferred one-column mobile content design: preserve visuals and reduce vertical density only. */
   #contents,
   #contents:target {
     --mobile-fit-scale: 1 !important;
@@ -94,7 +94,7 @@
     max-height: none !important;
     overflow: visible !important;
     padding-top: 72px !important;
-    padding-bottom: 18px !important;
+    padding-bottom: 16px !important;
     scroll-margin-top: 0 !important;
     scroll-snap-stop: normal !important;
   }
@@ -110,9 +110,7 @@
   }
 
   #contents .section-heading,
-  #contents:target .section-heading {
-    margin: 0 !important;
-  }
+  #contents:target .section-heading { margin: 0 !important; }
 
   #contents .section-heading h2,
   #contents:target .section-heading h2 {
@@ -132,7 +130,7 @@
   #contents:target .content-topic-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 7px !important;
+    gap: 6px !important;
     height: auto !important;
     max-height: none !important;
     margin-top: 6px !important;
@@ -145,7 +143,7 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 10px 18px !important;
+    padding: 9px 18px !important;
     border: 1px solid rgba(15,40,64,.08) !important;
     border-radius: 16px !important;
     overflow: visible !important;
@@ -153,16 +151,24 @@
 
   #contents .content-topic h3,
   #contents:target .content-topic h3 {
-    margin: 5px 0 3px !important;
-    font-size: 16px !important;
-    line-height: 1.16 !important;
+    margin: 4px 0 2px !important;
+    font-size: 15px !important;
+    line-height: 1.15 !important;
+  }
+
+  #contents .content-topic.featured h3,
+  #contents:target .content-topic.featured h3 {
+    font-size: 14px !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.025em !important;
   }
 
   #contents .content-topic p,
   #contents:target .content-topic p {
     margin: 0 !important;
-    font-size: 14px !important;
-    line-height: 1.32 !important;
+    font-size: 13.5px !important;
+    line-height: 1.4 !important;
     overflow: visible !important;
   }
 
@@ -178,10 +184,10 @@
   #contents:target .platform-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 7px !important;
+    gap: 6px !important;
     height: auto !important;
     max-height: none !important;
-    margin-top: 7px !important;
+    margin-top: 6px !important;
     overflow: visible !important;
   }
 
@@ -190,37 +196,35 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 10px 18px !important;
+    padding: 9px 18px !important;
     border-radius: 16px !important;
     overflow: visible !important;
   }
 
   #contents .platform-card h3,
   #contents:target .platform-card h3 {
-    margin: 4px 0 3px !important;
-    font-size: 15px !important;
-    line-height: 1.16 !important;
+    margin: 3px 0 2px !important;
+    font-size: 14px !important;
+    line-height: 1.15 !important;
   }
 
   #contents .platform-card p,
   #contents:target .platform-card p {
-    margin: 0 0 6px !important;
-    font-size: 14px !important;
-    line-height: 1.32 !important;
+    margin: 0 0 5px !important;
+    font-size: 13.5px !important;
+    line-height: 1.4 !important;
     overflow: visible !important;
   }
 
   #contents .platform-card a,
   #contents:target .platform-card a {
     min-height: 44px !important;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
+    padding-top: 5px !important;
+    padding-bottom: 5px !important;
   }
 
   #contents #barun-youtube-link span,
-  #contents #barun-blog-link span {
-    display: block !important;
-  }
+  #contents #barun-blog-link span { display: block !important; }
 
   #contact > .mobile-fit-inner { display: grid !important; grid-template-columns: 1fr !important; padding: 0 !important; background: var(--navy-deep) !important; }
   #contact .contact-visual { height: 250px !important; min-height: 250px !important; padding: 26px 20px !important; }
