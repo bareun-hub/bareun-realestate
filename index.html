@@ -20,14 +20,23 @@
         display: flex !important;
         align-items: center !important;
         justify-content: center !important;
+        gap: 12px !important;
         text-align: center !important;
         font-size: 0 !important;
         font-weight: 700 !important;
         position: relative !important;
+        white-space: nowrap !important;
       }
 
       #contents #barun-youtube-link::before,
       #contents #barun-blog-link::before {
+        display: inline-flex !important;
+        align-items: center !important;
+        min-height: 22px !important;
+        padding-left: 29px !important;
+        background-repeat: no-repeat !important;
+        background-position: left center !important;
+        background-size: 21px 21px !important;
         font-size: 16px !important;
         font-weight: 700 !important;
         line-height: 1.35 !important;
@@ -35,14 +44,22 @@
         text-align: center !important;
       }
 
-      #contents #barun-youtube-link::before { content: "유튜브 바로가기"; }
-      #contents #barun-blog-link::before { content: "블로그 바로가기"; }
+      #contents #barun-youtube-link::before {
+        content: "유튜브 바로가기";
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M23 7.1A3 3 0 0 0 20.9 5C19 4.5 12 4.5 12 4.5S5 4.5 3.1 5A3 3 0 0 0 1 7.1 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.9 3 3 0 0 0 3.1 19c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.9 31 31 0 0 0-.5-4.9ZM9.8 15.2V8.8L16 12l-6.2 3.2Z'/%3E%3C/svg%3E") !important;
+      }
+
+      #contents #barun-blog-link::before {
+        content: "블로그 바로가기";
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 11h8v2H8v-2Zm0 4h8v2H8v-2Z'/%3E%3C/svg%3E") !important;
+      }
 
       #contents #barun-youtube-link span,
       #contents #barun-blog-link span {
-        position: absolute !important;
-        right: 12px !important;
-        font-size: 16px !important;
+        position: static !important;
+        flex: 0 0 auto !important;
+        margin: 0 !important;
+        font-size: 17px !important;
         line-height: 1 !important;
         color: #000 !important;
       }
