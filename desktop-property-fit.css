@@ -1,3 +1,8 @@
+/* Match only the Naver property button background to the existing primary button color. */
+#naver-property-link {
+  background: var(--gold) !important;
+}
+
 /* Desktop-only property section viewport fit */
 @media (min-width: 901px) {
   #properties:target {
