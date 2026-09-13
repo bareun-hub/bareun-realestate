@@ -16,6 +16,34 @@
       #barun-youtube-link,
       #barun-blog-link {
         background: var(--gold) !important;
+        color: #000 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+        font-size: 0 !important;
+        font-weight: 700 !important;
+        position: relative !important;
+      }
+
+      #barun-youtube-link::before,
+      #barun-blog-link::before {
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+        color: #000 !important;
+      }
+
+      #barun-youtube-link::before { content: "유튜브 바로가기"; }
+      #barun-blog-link::before { content: "블로그 바로가기"; }
+
+      #barun-youtube-link span,
+      #barun-blog-link span {
+        position: absolute !important;
+        right: 0 !important;
+        font-size: 16px !important;
+        line-height: 1 !important;
+        color: #000 !important;
       }
     }
   </style>
