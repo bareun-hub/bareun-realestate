@@ -566,3 +566,20 @@
     letter-spacing: .12em !important;
   }
 }
+
+
+/* Match mobile channel labels to the content-card category size. */
+@media (max-width: 560px) {
+  html body #contents.contents .platform-card,
+  html body #contents.contents:target .platform-card {
+    min-height: 143px !important;
+  }
+
+  html body #contents.contents .platform-card .platform-label,
+  html body #contents.contents:target .platform-card .platform-label {
+    font-size: 9px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+    letter-spacing: .1em !important;
+  }
+}
