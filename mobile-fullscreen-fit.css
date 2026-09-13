@@ -551,6 +551,6 @@
 @media (max-width: 560px) {
   #contents .section-heading h2::after,
   #contents:target .section-heading h2::after {
-    font-size: clamp(15.5px, 4.6vw, 17.75px) !important;
+    font-size: clamp(17.2px, 5.1vw, 19.7px) !important;
   }
 }
