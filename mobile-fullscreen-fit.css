@@ -317,3 +317,50 @@
     white-space: nowrap;
   }
 }
+
+
+/* Phone content density refinement: keep the current card and CTA design. */
+@media (max-width: 560px) {
+  #contents .section-heading h2::after,
+  #contents:target .section-heading h2::after {
+    font-size: clamp(14px, 4.15vw, 16px);
+  }
+
+  #contents .content-topic-grid,
+  #contents:target .content-topic-grid,
+  #contents .channel-links,
+  #contents .platform-grid,
+  #contents:target .channel-links,
+  #contents:target .platform-grid {
+    gap: 4px !important;
+  }
+
+  #contents .content-topic,
+  #contents:target .content-topic,
+  #contents .platform-card,
+  #contents:target .platform-card {
+    padding-top: 7px !important;
+    padding-bottom: 7px !important;
+  }
+
+  #contents .content-topic h3,
+  #contents:target .content-topic h3,
+  #contents .platform-card h3,
+  #contents:target .platform-card h3 {
+    margin-top: 2px !important;
+    margin-bottom: 1px !important;
+  }
+
+  #contents .content-topic p,
+  #contents:target .content-topic p,
+  #contents .platform-card p,
+  #contents:target .platform-card p {
+    font-size: 12.5px !important;
+    line-height: 1.38 !important;
+  }
+
+  #contents .platform-card p,
+  #contents:target .platform-card p {
+    margin-bottom: 3px !important;
+  }
+}
