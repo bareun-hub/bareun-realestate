@@ -614,3 +614,27 @@
     white-space: nowrap;
   }
 }
+
+
+/* Slim mobile channel CTA buttons only. */
+@media (max-width: 560px) {
+  html body #contents.contents #barun-youtube-link,
+  html body #contents.contents #barun-blog-link,
+  html body #contents.contents:target #barun-youtube-link,
+  html body #contents.contents:target #barun-blog-link {
+    min-height: 33px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+    gap: 8px !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  html body #contents.contents #barun-youtube-link::after,
+  html body #contents.contents #barun-blog-link::after,
+  html body #contents.contents:target #barun-youtube-link::after,
+  html body #contents.contents:target #barun-blog-link::after {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+  }
+}
