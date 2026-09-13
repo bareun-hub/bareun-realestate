@@ -106,7 +106,7 @@
 
   #intro .intro-copy, #intro .intro-copy p { font-size: 16px !important; line-height: 1.7 !important; font-weight: 400 !important; color: #5f6872 !important; }
   #intro .text-link { font-size: 16px !important; line-height: 1.5 !important; font-weight: 700 !important; }
-  #intro .strength-card p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: #5f6872 !important; }
+  #intro .strength-card p { font-size: 14px !important; line-height: 1.55 !important; font-weight: 400 !important; color: #5f6872 !important; }
   #properties .section-heading > p:last-child { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: rgba(255,255,255,.78) !important; }
   #properties .property-panel p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: rgba(255,255,255,.78) !important; }
   #contact .contact-panel h3 { font-size: 21px !important; line-height: 1.4 !important; font-weight: 700 !important; }
