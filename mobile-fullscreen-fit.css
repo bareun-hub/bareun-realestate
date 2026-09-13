@@ -109,6 +109,19 @@
     padding: 14px 18px 0 !important;
   }
 
+  #contents .section-heading h2,
+  #contents:target .section-heading h2 {
+    font-size: 29px !important;
+    line-height: 1.08 !important;
+  }
+
+  #contents .eyebrow,
+  #contents:target .eyebrow {
+    font-size: 9px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 7px !important;
+  }
+
   #contents .content-topic-grid,
   #contents:target .content-topic-grid {
     display: grid !important;
@@ -134,20 +147,23 @@
 
   #contents .content-topic h3,
   #contents:target .content-topic h3 {
-    margin: 14px 0 8px !important;
-    font-size: 22px !important;
-    line-height: 1.35 !important;
+    margin: 12px 0 7px !important;
+    font-size: 21px !important;
+    line-height: 1.28 !important;
   }
 
   #contents .content-topic p,
   #contents:target .content-topic p {
     font-size: 14px !important;
-    line-height: 1.65 !important;
+    line-height: 1.52 !important;
     overflow: visible !important;
   }
 
   #contents .content-category,
-  #contents:target .content-category { font-size: 10px !important; }
+  #contents:target .content-category {
+    font-size: 9px !important;
+    line-height: 1.25 !important;
+  }
 
   #contents .channel-links,
   #contents .platform-grid,
@@ -174,16 +190,16 @@
 
   #contents .platform-card h3,
   #contents:target .platform-card h3 {
-    margin: 12px 0 8px !important;
-    font-size: 21px !important;
-    line-height: 1.35 !important;
+    margin: 10px 0 7px !important;
+    font-size: 20px !important;
+    line-height: 1.28 !important;
   }
 
   #contents .platform-card p,
   #contents:target .platform-card p {
-    margin-bottom: 14px !important;
+    margin-bottom: 12px !important;
     font-size: 14px !important;
-    line-height: 1.6 !important;
+    line-height: 1.5 !important;
     overflow: visible !important;
   }
 
