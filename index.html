@@ -18,12 +18,13 @@
         background: var(--gold) !important;
         color: #000 !important;
         display: flex !important;
+        flex-flow: row nowrap !important;
         align-items: center !important;
         justify-content: center !important;
         gap: 7px !important;
         box-sizing: border-box !important;
-        padding-left: 12px !important;
-        padding-right: 12px !important;
+        padding-left: 10px !important;
+        padding-right: 10px !important;
         overflow: hidden !important;
         text-align: center !important;
         font-size: 0 !important;
@@ -34,10 +35,12 @@
 
       #contents #barun-youtube-link::before,
       #contents #barun-blog-link::before {
+        content: "";
         display: block !important;
         flex: 0 0 20px !important;
         width: 20px !important;
         height: 20px !important;
+        min-width: 20px !important;
         padding: 0 !important;
         margin: 0 !important;
         background-repeat: no-repeat !important;
@@ -49,23 +52,22 @@
       }
 
       #contents #barun-youtube-link::before {
-        content: "";
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M23 7.1A3 3 0 0 0 20.9 5C19 4.5 12 4.5 12 4.5S5 4.5 3.1 5A3 3 0 0 0 1 7.1 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.9 3 3 0 0 0 3.1 19c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.9 31 31 0 0 0-.5-4.9ZM9.8 15.2V8.8L16 12l-6.2 3.2Z'/%3E%3C/svg%3E") !important;
       }
 
       #contents #barun-blog-link::before {
-        content: "";
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 11h8v2H8v-2Zm0 4h8v2H8v-2Z'/%3E%3C/svg%3E") !important;
       }
 
       #contents #barun-youtube-link::after,
       #contents #barun-blog-link::after {
         display: block !important;
-        flex: 0 0 auto !important;
+        flex: 0 1 auto !important;
+        min-width: 0 !important;
         align-self: center !important;
-        font-size: 15px !important;
+        font-size: 14px !important;
         font-weight: 700 !important;
-        line-height: 1.25 !important;
+        line-height: 1 !important;
         color: #000 !important;
         white-space: nowrap !important;
       }
@@ -75,14 +77,16 @@
 
       #contents #barun-youtube-link span,
       #contents #barun-blog-link span {
+        display: block !important;
         position: static !important;
-        flex: 0 0 auto !important;
+        flex: 0 0 18px !important;
         align-self: center !important;
-        width: auto !important;
+        width: 18px !important;
+        min-width: 18px !important;
         margin: 0 !important;
         padding: 0 !important;
         transform: none !important;
-        font-size: 15px !important;
+        font-size: 18px !important;
         line-height: 1 !important;
         color: #000 !important;
         text-align: center !important;
