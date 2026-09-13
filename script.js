@@ -49,7 +49,7 @@ document.head.appendChild(desktopContentsFitStyles);
 // 가장 마지막에 적용되는 모바일 전용 전체화면 보정 CSS입니다.
 const mobileFullscreenFitStyles = document.createElement('link');
 mobileFullscreenFitStyles.rel = 'stylesheet';
-mobileFullscreenFitStyles.href = 'mobile-fullscreen-fit.css?v=20260913-0306';
+mobileFullscreenFitStyles.href = 'mobile-fullscreen-fit.css?v=20260913-2247';
 document.head.appendChild(mobileFullscreenFitStyles);
 
 const header = document.querySelector('.site-header');
