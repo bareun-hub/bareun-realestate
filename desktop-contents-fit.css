@@ -48,3 +48,39 @@
     padding-top: 6px !important;
   }
 }
+
+
+/* PC-only prominent channel CTA buttons. */
+@media (min-width: 901px) {
+  #contents .platform-card {
+    position: relative !important;
+  }
+
+  #contents #barun-youtube-link,
+  #contents #barun-blog-link {
+    position: absolute !important;
+    right: 18px !important;
+    bottom: 14px !important;
+    left: 18px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    box-sizing: border-box !important;
+    width: auto !important;
+    min-height: 64px !important;
+    padding: 0 24px !important;
+    background: var(--gold) !important;
+    color: var(--navy-deep) !important;
+    font-size: 17px !important;
+    font-weight: 600 !important;
+    line-height: 1.3 !important;
+    text-decoration: none !important;
+  }
+
+  #contents #barun-youtube-link span,
+  #contents #barun-blog-link span {
+    color: var(--navy-deep) !important;
+    font-size: 20px !important;
+    line-height: 1 !important;
+  }
+}
