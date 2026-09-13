@@ -462,3 +462,51 @@
     padding-bottom: 6px !important;
   }
 }
+
+
+/* Phone content polish: airier topic cards and unified navy channel cards. */
+@media (max-width: 560px) {
+  #contents .content-topic-grid,
+  #contents:target .content-topic-grid,
+  #contents .channel-links,
+  #contents .platform-grid,
+  #contents:target .channel-links,
+  #contents:target .platform-grid {
+    gap: 8px !important;
+  }
+
+  #contents .content-topic,
+  #contents:target .content-topic {
+    padding-top: 16px !important;
+    padding-bottom: 16px !important;
+  }
+
+  #contents .content-topic p,
+  #contents:target .content-topic p,
+  #contents .platform-card p,
+  #contents:target .platform-card p {
+    font-size: 11.5px !important;
+    line-height: 1.5 !important;
+  }
+
+  #contents .platform-card,
+  #contents:target .platform-card {
+    background: var(--navy) !important;
+    color: #fff !important;
+  }
+
+  #contents .platform-card h3,
+  #contents:target .platform-card h3 {
+    color: #fff !important;
+  }
+
+  #contents .platform-card p,
+  #contents:target .platform-card p {
+    color: rgba(255, 255, 255, .64) !important;
+  }
+
+  #contents .platform-card .platform-label,
+  #contents:target .platform-card .platform-label {
+    color: var(--gold) !important;
+  }
+}
