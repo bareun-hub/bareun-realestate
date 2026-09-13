@@ -17,13 +17,13 @@
       #contents #barun-blog-link {
         background: var(--gold) !important;
         color: #000 !important;
-        display: grid !important;
-        grid-template-columns: 24px minmax(0, 1fr) 20px !important;
+        display: flex !important;
         align-items: center !important;
-        column-gap: 8px !important;
+        justify-content: center !important;
+        gap: 7px !important;
         box-sizing: border-box !important;
-        padding-left: 16px !important;
-        padding-right: 16px !important;
+        padding-left: 12px !important;
+        padding-right: 12px !important;
         overflow: hidden !important;
         text-align: center !important;
         font-size: 0 !important;
@@ -35,14 +35,14 @@
       #contents #barun-youtube-link::before,
       #contents #barun-blog-link::before {
         display: block !important;
-        grid-column: 1 !important;
-        width: 24px !important;
-        height: 24px !important;
+        flex: 0 0 20px !important;
+        width: 20px !important;
+        height: 20px !important;
         padding: 0 !important;
         margin: 0 !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
-        background-size: 22px 22px !important;
+        background-size: 20px 20px !important;
         font-size: 0 !important;
         line-height: 0 !important;
         color: transparent !important;
@@ -60,12 +60,12 @@
 
       #contents #barun-youtube-link::after,
       #contents #barun-blog-link::after {
-        grid-column: 2 !important;
-        justify-self: center !important;
+        display: block !important;
+        flex: 0 0 auto !important;
         align-self: center !important;
-        font-size: 16px !important;
+        font-size: 15px !important;
         font-weight: 700 !important;
-        line-height: 1.35 !important;
+        line-height: 1.25 !important;
         color: #000 !important;
         white-space: nowrap !important;
       }
@@ -75,15 +75,14 @@
 
       #contents #barun-youtube-link span,
       #contents #barun-blog-link span {
-        grid-column: 3 !important;
         position: static !important;
-        justify-self: end !important;
+        flex: 0 0 auto !important;
         align-self: center !important;
-        width: 20px !important;
+        width: auto !important;
         margin: 0 !important;
         padding: 0 !important;
         transform: none !important;
-        font-size: 17px !important;
+        font-size: 15px !important;
         line-height: 1 !important;
         color: #000 !important;
         text-align: center !important;
