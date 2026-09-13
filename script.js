@@ -1,14 +1,14 @@
-// 모바일 브라우저에서 한 손가락 스크롤 중 화면이 확대/축소되지 않도록 viewport를 고정합니다.
+// 모바일 접근성을 위해 사용자의 두 손가락 확대/축소를 허용합니다.
 const viewportMeta = document.querySelector('meta[name="viewport"]');
 if (viewportMeta) {
-  viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover');
+  viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
 }
 
 // 시각 디자인에는 영향을 주지 않고 모바일 터치 동작만 안정화합니다.
 const mobileInteractionStyles = document.createElement('style');
 mobileInteractionStyles.textContent = `
 @media (max-width: 900px) {
-  html, body, main { touch-action: pan-y; }
+  html, body, main { touch-action: auto; }
   a, button, .menu-button, .mobile-nav { touch-action: manipulation; }
   .site-header {
     pointer-events: auto !important;
@@ -25,14 +25,6 @@ mobileInteractionStyles.textContent = `
 }
 `;
 document.head.appendChild(mobileInteractionStyles);
-
-// iOS Safari의 제스처 확대와 멀티터치 확대만 차단하고 한 손가락 세로 스크롤은 그대로 둡니다.
-['gesturestart', 'gesturechange', 'gestureend'].forEach((eventName) => {
-  document.addEventListener(eventName, (event) => event.preventDefault(), { passive: false });
-});
-document.addEventListener('touchmove', (event) => {
-  if (event.touches && event.touches.length > 1) event.preventDefault();
-}, { passive: false });
 
 const mobileFixStyles = document.createElement('link');
 mobileFixStyles.rel = 'stylesheet';
