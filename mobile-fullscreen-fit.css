@@ -237,6 +237,89 @@
     letter-spacing: 0 !important;
   }
 
+  /* Mobile readability only: preserve the existing layout while making body copy easier to read. */
+  #intro .intro-copy,
+  #intro .intro-copy p {
+    font-size: 16px !important;
+    line-height: 1.7 !important;
+    font-weight: 400 !important;
+    color: #5f6872 !important;
+  }
+
+  #intro .text-link {
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-weight: 700 !important;
+  }
+
+  #intro .strength-card p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    font-weight: 400 !important;
+    color: #5f6872 !important;
+  }
+
+  #properties .section-heading > p:last-child {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    font-weight: 400 !important;
+    color: rgba(255,255,255,.78) !important;
+  }
+
+  #properties .property-panel p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    font-weight: 400 !important;
+    color: rgba(255,255,255,.78) !important;
+  }
+
+  #analysis .area-content small {
+    font-size: 15px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+    opacity: .82 !important;
+  }
+
+  #analysis .analysis-note strong {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+    font-weight: 700 !important;
+  }
+
+  #analysis .analysis-note p {
+    font-size: 16px !important;
+    line-height: 1.65 !important;
+    font-weight: 400 !important;
+    color: #5f6872 !important;
+  }
+
+  #contact .contact-panel h3 {
+    font-size: 21px !important;
+    line-height: 1.4 !important;
+    font-weight: 700 !important;
+  }
+
+  #contact .contact-panel > div:first-child > p {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: rgba(255,255,255,.72) !important;
+  }
+
+  #contact .contact-placeholder-grid span {
+    font-size: 11px !important;
+    line-height: 1.4 !important;
+    color: rgba(255,255,255,.58) !important;
+  }
+
+  #contact .contact-placeholder-grid strong,
+  #contact .contact-placeholder-grid strong a {
+    font-size: 16px !important;
+    line-height: 1.55 !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+    overflow-wrap: anywhere !important;
+  }
+
   .mobile-nav {
     position: fixed !important;
     top: 70px !important;
