@@ -545,3 +545,12 @@
     font-size: clamp(15.5px, 4.6vw, 17.75px) !important;
   }
 }
+
+
+/* Increase the phone content heading by a further 11 percent. */
+@media (max-width: 560px) {
+  #contents .section-heading h2::after,
+  #contents:target .section-heading h2::after {
+    font-size: clamp(15.5px, 4.6vw, 17.75px) !important;
+  }
+}
