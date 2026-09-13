@@ -638,3 +638,17 @@
     font-weight: 700 !important;
   }
 }
+
+
+/* Definitive desktop-only field check sizing (30% above the live 10px/12px values). */
+@media (min-width: 901px) {
+  html body #analysis.analysis .analysis-note strong,
+  html body #analysis.analysis:target .analysis-note strong {
+    font-size: 13px !important;
+  }
+
+  html body #analysis.analysis .analysis-note p,
+  html body #analysis.analysis:target .analysis-note p {
+    font-size: 15.6px !important;
+  }
+}
