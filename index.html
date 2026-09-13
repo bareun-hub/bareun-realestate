@@ -17,10 +17,14 @@
       #contents #barun-blog-link {
         background: var(--gold) !important;
         color: #000 !important;
-        display: flex !important;
+        display: grid !important;
+        grid-template-columns: 24px minmax(0, 1fr) 20px !important;
         align-items: center !important;
-        justify-content: center !important;
-        gap: 12px !important;
+        column-gap: 8px !important;
+        box-sizing: border-box !important;
+        padding-left: 16px !important;
+        padding-right: 16px !important;
+        overflow: hidden !important;
         text-align: center !important;
         font-size: 0 !important;
         font-weight: 700 !important;
@@ -30,123 +34,79 @@
 
       #contents #barun-youtube-link::before,
       #contents #barun-blog-link::before {
-        display: inline-flex !important;
-        align-items: center !important;
-        min-height: 22px !important;
-        padding-left: 29px !important;
+        display: block !important;
+        grid-column: 1 !important;
+        width: 24px !important;
+        height: 24px !important;
+        padding: 0 !important;
+        margin: 0 !important;
         background-repeat: no-repeat !important;
-        background-position: left center !important;
-        background-size: 21px 21px !important;
-        font-size: 16px !important;
-        font-weight: 700 !important;
-        line-height: 1.35 !important;
-        color: #000 !important;
-        text-align: center !important;
+        background-position: center !important;
+        background-size: 22px 22px !important;
+        font-size: 0 !important;
+        line-height: 0 !important;
+        color: transparent !important;
       }
 
       #contents #barun-youtube-link::before {
-        content: "유튜브 바로가기";
+        content: "";
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M23 7.1A3 3 0 0 0 20.9 5C19 4.5 12 4.5 12 4.5S5 4.5 3.1 5A3 3 0 0 0 1 7.1 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.9 3 3 0 0 0 3.1 19c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.9 31 31 0 0 0-.5-4.9ZM9.8 15.2V8.8L16 12l-6.2 3.2Z'/%3E%3C/svg%3E") !important;
       }
 
       #contents #barun-blog-link::before {
-        content: "블로그 바로가기";
+        content: "";
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 11h8v2H8v-2Zm0 4h8v2H8v-2Z'/%3E%3C/svg%3E") !important;
       }
 
+      #contents #barun-youtube-link::after,
+      #contents #barun-blog-link::after {
+        grid-column: 2 !important;
+        justify-self: center !important;
+        align-self: center !important;
+        font-size: 16px !important;
+        font-weight: 700 !important;
+        line-height: 1.35 !important;
+        color: #000 !important;
+        white-space: nowrap !important;
+      }
+
+      #contents #barun-youtube-link::after { content: "유튜브 바로가기"; }
+      #contents #barun-blog-link::after { content: "블로그 바로가기"; }
+
       #contents #barun-youtube-link span,
       #contents #barun-blog-link span {
+        grid-column: 3 !important;
         position: static !important;
-        flex: 0 0 auto !important;
+        justify-self: end !important;
+        align-self: center !important;
+        width: 20px !important;
         margin: 0 !important;
+        padding: 0 !important;
+        transform: none !important;
         font-size: 17px !important;
         line-height: 1 !important;
         color: #000 !important;
+        text-align: center !important;
       }
     }
   </style>
 </head>
 <body>
   <header class="site-header" id="top">
-    <a href="#home" class="brand" aria-label="바른부동산공인중개사사무소 홈">
-      <span class="brand-mark">B</span>
-      <span class="brand-text"><strong>바른부동산공인중개사사무소</strong><small>COMMERCIAL REAL ESTATE</small></span>
-    </a>
+    <a href="#home" class="brand" aria-label="바른부동산공인중개사사무소 홈"><span class="brand-mark">B</span><span class="brand-text"><strong>바른부동산공인중개사사무소</strong><small>COMMERCIAL REAL ESTATE</small></span></a>
     <nav class="desktop-nav" aria-label="주요 메뉴"><a href="#home">홈</a><a href="#properties">상가 매물</a><a href="#analysis">상권 분석</a><a href="#contents">부동산 콘텐츠</a><a href="#contact">오시는 길·상담</a></nav>
     <button class="menu-button" type="button" aria-label="메뉴 열기" aria-expanded="false"><span></span><span></span></button>
     <nav class="mobile-nav" aria-label="모바일 메뉴"><a href="#home">홈</a><a href="#properties">상가 매물</a><a href="#analysis">상권 분석</a><a href="#contents">부동산 콘텐츠</a><a href="#contact">오시는 길·상담</a></nav>
   </header>
-
   <main>
-    <section class="hero" id="home">
-      <div class="hero-overlay"></div><div class="hero-grid" aria-hidden="true"></div>
-      <div class="hero-content reveal"><p class="eyebrow">BAREUN COMMERCIAL REAL ESTATE</p><h1><span style="display:block;font-size:.68em;line-height:1.25;letter-spacing:-.035em;margin-bottom:.16em;">율하·장유·김해 상가 전문</span><span>바른부동산공인중개사사무소</span></h1><p class="hero-copy">20년 현장 경험으로 입지부터 계약까지 함께 봅니다.<br />상가는 지도만이 아니라 현장에서 답을 찾습니다.</p><div class="hero-actions"><a class="button button-primary" href="#properties">상가 매물 보기</a><a class="button button-ghost" href="#contact">상담 문의</a></div></div>
-      <div class="hero-region-nav" aria-label="전문 지역"><a href="#analysis"><span>01</span><strong>YULHA</strong><small>율하</small></a><a href="#analysis"><span>02</span><strong>JANGYU</strong><small>장유</small></a><a href="#analysis"><span>03</span><strong>GIMHAE</strong><small>김해</small></a></div>
-      <a class="scroll-indicator" href="#intro" aria-label="아래로 이동"><span>SCROLL</span><i></i></a>
-    </section>
-
-    <section class="intro section" id="intro">
-      <div class="section-heading reveal"><p class="eyebrow dark">ABOUT BAREUN</p><h2>계약보다 먼저,<br />사업의 미래를 봅니다.</h2></div>
-      <div class="intro-copy reveal"><p>바른부동산공인중개사사무소는 율하·장유·김해 상권을 중심으로 상가 임대와 매매를 전문으로 합니다. 직접 걷고, 시간대별 흐름을 확인하고, 업종에 맞는 입지를 살펴 실질적인 판단을 돕습니다.</p><a href="#contact" class="text-link">상담 안내 보기 <span>→</span></a></div>
-      <div class="strength-grid">
-        <article class="strength-card reveal"><span class="card-number">01</span><h3>20년 현장 경험</h3><p>상가 시행·건축 등 다양한 현장에서 쌓은 20년 경험을 바탕으로, 단순히 매물을 소개하는 데 그치지 않고 입지와 조건, 사업 가능성까지 함께 살핍니다.</p></article>
-        <article class="strength-card reveal"><span class="card-number">02</span><h3>지역 상권 전문</h3><p>율하·장유·김해의 배후수요와 상권 특성을 기준으로 입지를 분석합니다.</p></article>
-        <article class="strength-card reveal"><span class="card-number">03</span><h3>업종별 자리 분석</h3><p>카페·음식점·학원·병원·미용 등 업종 특성에 맞는 상가를 찾습니다.</p></article>
-        <article class="strength-card reveal"><span class="card-number">04</span><h3>시설·조건 확인</h3><p>임대조건은 물론 배관·소방·주차·설비 등 실제 영업에 필요한 요소를 확인합니다.</p></article>
-      </div>
-    </section>
-
-    <section class="properties section dark-section" id="properties">
-      <div class="section-heading light reveal"><p class="eyebrow">COMMERCIAL PROPERTY</p><h2>율하·장유·김해<br />상가 매물</h2><p>네이버부동산에서 공개된 상가 매물을 확인하실 수 있습니다.<br />온라인에 공개하지 않은 상가 매물도 다양하게 보유하고 있으니, 방문 상담을 예약하시면 조건에 맞는 더 많은 매물을 안내해드립니다.</p></div>
-      <div class="property-feature reveal">
-        <div class="property-image" role="img" aria-label="도심 상가 건물 이미지"><span class="image-label">BAREUN SELECTED PROPERTY</span></div>
-        <div class="property-panel"><span class="panel-index">01 / PROPERTY</span><h3>현장에서 확인한<br />상가 매물을 만나보세요.</h3><p>온라인에 공개되지 않은 매물은 전화 또는 방문 상담을 통해 확인하실 수 있습니다.</p><a id="naver-property-link" class="button button-light" href="https://fin.land.naver.com/map?center=3Ax2vv-2z9ygK&zoom=17&tradeTypes=A1-B1-B2&realEstateTypes=D02&layer=NobwRAlgJmBcYCcCmBDANgFwPYIPpSQxQjTABowAHFBFAWwGc5xl1sEBJGeahAawAWdAOwBWAAwBmMAF8KDVAgDGAgAo16TWOBoYIStEgAqtAkYCelJFrAAhAEyyKyDAFcEAOxQAjQ3AwIrkgyALpAA" target="_blank" rel="noopener noreferrer" aria-label="네이버부동산 전체 매물 보기">네이버부동산에서 전체 매물 보기 <span>→</span></a></div>
-      </div>
-    </section>
-
-    <section class="analysis section" id="analysis">
-      <div class="section-heading reveal"><p class="eyebrow dark">COMMERCIAL AREA ANALYSIS</p><h2>상가는 건물이 아니라<br />상권을 보고 선택합니다.</h2></div>
-      <div class="analysis-grid">
-        <article class="area-card area-yulha reveal"><div class="area-content"><span>01</span><p>YULHA</p><h3>율하 상권</h3><small>율하1지구 · 율하2지구</small></div></article>
-        <article class="area-card area-jangyu reveal"><div class="area-content"><span>02</span><p>JANGYU</p><h3>장유 상권</h3><small>생활권 · 배후수요 · 업종 분석</small></div></article>
-        <article class="area-card area-gimhae reveal"><div class="area-content"><span>03</span><p>GIMHAE</p><h3>김해 주요 상권</h3><small>지역별 상권 흐름과 입지 분석</small></div></article>
-      </div>
-      <div class="analysis-note reveal"><strong>BAREUN FIELD CHECK</strong><p>배후수요 · 시간대별 유동 · 접근성 · 주차 · 업종 구성 · 임대료 · 공실 이력까지 현장 중심으로 살펴봅니다.</p></div>
-    </section>
-
-    <section class="contents section" id="contents">
-      <div class="section-heading reveal"><p class="eyebrow dark">REAL ESTATE CONTENT</p><h2>현장에서 얻은 정보를<br />쉽고 정확하게 전합니다.</h2></div>
-      <div class="content-topic-grid">
-        <article class="content-topic featured reveal"><span class="content-category">상권 이야기</span><h3>율하2지구 상권은<br />어떻게 봐야 할까?</h3><p>신축 아파트 배후수요와 업종별 상권 흐름을 현장 관점에서 살펴봅니다.</p></article>
-        <article class="content-topic reveal"><span class="content-category">부동산 상식</span><h3>상가 계약 전 반드시 확인할 것</h3><p>계약 조건뿐 아니라 시설과 권리관계까지 놓치지 말아야 할 체크포인트를 정리합니다.</p></article>
-        <article class="content-topic reveal"><span class="content-category">업종별 입지</span><h3>학원·병원·카페 자리는 무엇이 다를까?</h3><p>같은 상권이라도 업종에 따라 좋은 자리는 달라집니다. 업종별 기준을 소개합니다.</p></article>
-      </div>
-      <div class="content-grid platform-grid channel-links">
-        <article class="content-card featured reveal platform-card"><span class="content-category platform-label">YOUTUBE</span><h3>바른부동산공인중개사사무소<br />유튜브</h3><p>복잡한 부동산세제부터 꼭 알아야 할 계약상식까지 안전한 거래의 기준을 영상으로 전합니다.</p><a id="barun-youtube-link" href="https://www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw" target="_blank" rel="noopener noreferrer" aria-label="바른부동산 유튜브 바로가기">바른부동산 유튜브 바로가기 <span>→</span></a></article>
-        <article class="content-card reveal platform-card"><span class="content-category platform-label">BLOG</span><h3>바른부동산공인중개사사무소<br />블로그</h3><p>상권 분석과 상가 계약 체크포인트, 지역 부동산 정보를 자세히 정리합니다.</p><a id="barun-blog-link" href="https://blog.naver.com/parkhm75" target="_blank" rel="noopener noreferrer" aria-label="바른부동산 블로그 바로가기">바른부동산 블로그 바로가기 <span>→</span></a></article>
-      </div>
-    </section>
-
-    <section class="contact section" id="contact">
-      <div class="contact-visual reveal"><p class="eyebrow">CONTACT BAREUN</p><h2>좋은 상가는<br />현장에서 찾습니다.</h2><p>원하는 지역과 업종을 알려주시면 현장 경험을 바탕으로 함께 살펴보겠습니다.</p></div>
-      <div class="contact-panel reveal">
-        <div><span class="contact-label">OFFICE</span><h3>바른부동산공인중개사사무소</h3><p>율하·장유·김해 상가 전문</p></div>
-        <div class="contact-placeholder-grid"><div><span>주소</span><strong>경남 김해시 율하6로 61 성호루브루 102호</strong></div><div><span>대표전화</span><strong><a href="tel:0553130222">055-313-0222</a></strong></div><div><span>공인중개사</span><strong>박형민</strong></div><div><span>상담</span><strong>예약 후 방문 권장</strong></div></div>
-        <div class="naver-map-wrap">
-          <div id="naver-map" class="naver-map" role="region" aria-label="바른부동산공인중개사사무소 네이버지도"><div id="naver-map-status" class="naver-map-status">네이버지도를 불러오는 중입니다.</div></div>
-          <a id="naver-directions-link" class="button naver-directions-button" href="https://map.naver.com/" target="_blank" rel="noopener noreferrer" aria-label="네이버지도에서 바른부동산 길찾기">네이버지도에서 길찾기 <span>→</span></a>
-          <p class="naver-map-note">출발지는 네이버지도에서 현재 위치 또는 원하는 위치로 설정할 수 있습니다.</p>
-        </div>
-        <a href="tel:0553130222" class="button button-primary contact-button">상가 상담 요청하기</a><p class="contact-note">상담 요청 버튼을 누르면 대표전화 055-313-0222로 연결됩니다.</p>
-      </div>
-    </section>
+    <section class="hero" id="home"><div class="hero-overlay"></div><div class="hero-grid" aria-hidden="true"></div><div class="hero-content reveal"><p class="eyebrow">BAREUN COMMERCIAL REAL ESTATE</p><h1><span style="display:block;font-size:.68em;line-height:1.25;letter-spacing:-.035em;margin-bottom:.16em;">율하·장유·김해 상가 전문</span><span>바른부동산공인중개사사무소</span></h1><p class="hero-copy">20년 현장 경험으로 입지부터 계약까지 함께 봅니다.<br />상가는 지도만이 아니라 현장에서 답을 찾습니다.</p><div class="hero-actions"><a class="button button-primary" href="#properties">상가 매물 보기</a><a class="button button-ghost" href="#contact">상담 문의</a></div></div><div class="hero-region-nav" aria-label="전문 지역"><a href="#analysis"><span>01</span><strong>YULHA</strong><small>율하</small></a><a href="#analysis"><span>02</span><strong>JANGYU</strong><small>장유</small></a><a href="#analysis"><span>03</span><strong>GIMHAE</strong><small>김해</small></a></div><a class="scroll-indicator" href="#intro" aria-label="아래로 이동"><span>SCROLL</span><i></i></a></section>
+    <section class="intro section" id="intro"><div class="section-heading reveal"><p class="eyebrow dark">ABOUT BAREUN</p><h2>계약보다 먼저,<br />사업의 미래를 봅니다.</h2></div><div class="intro-copy reveal"><p>바른부동산공인중개사사무소는 율하·장유·김해 상권을 중심으로 상가 임대와 매매를 전문으로 합니다. 직접 걷고, 시간대별 흐름을 확인하고, 업종에 맞는 입지를 살펴 실질적인 판단을 돕습니다.</p><a href="#contact" class="text-link">상담 안내 보기 <span>→</span></a></div><div class="strength-grid"><article class="strength-card reveal"><span class="card-number">01</span><h3>20년 현장 경험</h3><p>상가 시행·건축 등 다양한 현장에서 쌓은 20년 경험을 바탕으로, 단순히 매물을 소개하는 데 그치지 않고 입지와 조건, 사업 가능성까지 함께 살핍니다.</p></article><article class="strength-card reveal"><span class="card-number">02</span><h3>지역 상권 전문</h3><p>율하·장유·김해의 배후수요와 상권 특성을 기준으로 입지를 분석합니다.</p></article><article class="strength-card reveal"><span class="card-number">03</span><h3>업종별 자리 분석</h3><p>카페·음식점·학원·병원·미용 등 업종 특성에 맞는 상가를 찾습니다.</p></article><article class="strength-card reveal"><span class="card-number">04</span><h3>시설·조건 확인</h3><p>임대조건은 물론 배관·소방·주차·설비 등 실제 영업에 필요한 요소를 확인합니다.</p></article></div></section>
+    <section class="properties section dark-section" id="properties"><div class="section-heading light reveal"><p class="eyebrow">COMMERCIAL PROPERTY</p><h2>율하·장유·김해<br />상가 매물</h2><p>네이버부동산에서 공개된 상가 매물을 확인하실 수 있습니다.<br />온라인에 공개하지 않은 상가 매물도 다양하게 보유하고 있으니, 방문 상담을 예약하시면 조건에 맞는 더 많은 매물을 안내해드립니다.</p></div><div class="property-feature reveal"><div class="property-image" role="img" aria-label="도심 상가 건물 이미지"><span class="image-label">BAREUN SELECTED PROPERTY</span></div><div class="property-panel"><span class="panel-index">01 / PROPERTY</span><h3>현장에서 확인한<br />상가 매물을 만나보세요.</h3><p>온라인에 공개되지 않은 매물은 전화 또는 방문 상담을 통해 확인하실 수 있습니다.</p><a id="naver-property-link" class="button button-light" href="https://fin.land.naver.com/map?center=3Ax2vv-2z9ygK&zoom=17&tradeTypes=A1-B1-B2&realEstateTypes=D02&layer=NobwRAlgJmBcYCcCmBDANgFwPYIPpSQxQjTABowAHFBFAWwGc5xl1sEBJGeahAawAWdAOwBWAAwBmMAF8KDVAgDGAgAo16TWOBoYIStEgAqtAkYCelJFrAAhAEyyKyDAFcEAOxQAjQ3AwIrkgyALpAA" target="_blank" rel="noopener noreferrer" aria-label="네이버부동산 전체 매물 보기">네이버부동산에서 전체 매물 보기 <span>→</span></a></div></div></section>
+    <section class="analysis section" id="analysis"><div class="section-heading reveal"><p class="eyebrow dark">COMMERCIAL AREA ANALYSIS</p><h2>상가는 건물이 아니라<br />상권을 보고 선택합니다.</h2></div><div class="analysis-grid"><article class="area-card area-yulha reveal"><div class="area-content"><span>01</span><p>YULHA</p><h3>율하 상권</h3><small>율하1지구 · 율하2지구</small></div></article><article class="area-card area-jangyu reveal"><div class="area-content"><span>02</span><p>JANGYU</p><h3>장유 상권</h3><small>생활권 · 배후수요 · 업종 분석</small></div></article><article class="area-card area-gimhae reveal"><div class="area-content"><span>03</span><p>GIMHAE</p><h3>김해 주요 상권</h3><small>지역별 상권 흐름과 입지 분석</small></div></article></div><div class="analysis-note reveal"><strong>BAREUN FIELD CHECK</strong><p>배후수요 · 시간대별 유동 · 접근성 · 주차 · 업종 구성 · 임대료 · 공실 이력까지 현장 중심으로 살펴봅니다.</p></div></section>
+    <section class="contents section" id="contents"><div class="section-heading reveal"><p class="eyebrow dark">REAL ESTATE CONTENT</p><h2>현장에서 얻은 정보를<br />쉽고 정확하게 전합니다.</h2></div><div class="content-topic-grid"><article class="content-topic featured reveal"><span class="content-category">상권 이야기</span><h3>율하2지구 상권은<br />어떻게 봐야 할까?</h3><p>신축 아파트 배후수요와 업종별 상권 흐름을 현장 관점에서 살펴봅니다.</p></article><article class="content-topic reveal"><span class="content-category">부동산 상식</span><h3>상가 계약 전 반드시 확인할 것</h3><p>계약 조건뿐 아니라 시설과 권리관계까지 놓치지 말아야 할 체크포인트를 정리합니다.</p></article><article class="content-topic reveal"><span class="content-category">업종별 입지</span><h3>학원·병원·카페 자리는 무엇이 다를까?</h3><p>같은 상권이라도 업종에 따라 좋은 자리는 달라집니다. 업종별 기준을 소개합니다.</p></article></div><div class="content-grid platform-grid channel-links"><article class="content-card featured reveal platform-card"><span class="content-category platform-label">YOUTUBE</span><h3>바른부동산공인중개사사무소<br />유튜브</h3><p>복잡한 부동산세제부터 꼭 알아야 할 계약상식까지 안전한 거래의 기준을 영상으로 전합니다.</p><a id="barun-youtube-link" href="https://www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw" target="_blank" rel="noopener noreferrer" aria-label="바른부동산 유튜브 바로가기">바른부동산 유튜브 바로가기 <span>→</span></a></article><article class="content-card reveal platform-card"><span class="content-category platform-label">BLOG</span><h3>바른부동산공인중개사사무소<br />블로그</h3><p>상권 분석과 상가 계약 체크포인트, 지역 부동산 정보를 자세히 정리합니다.</p><a id="barun-blog-link" href="https://blog.naver.com/parkhm75" target="_blank" rel="noopener noreferrer" aria-label="바른부동산 블로그 바로가기">바른부동산 블로그 바로가기 <span>→</span></a></article></div></section>
+    <section class="contact section" id="contact"><div class="contact-visual reveal"><p class="eyebrow">CONTACT BAREUN</p><h2>좋은 상가는<br />현장에서 찾습니다.</h2><p>원하는 지역과 업종을 알려주시면 현장 경험을 바탕으로 함께 살펴보겠습니다.</p></div><div class="contact-panel reveal"><div><span class="contact-label">OFFICE</span><h3>바른부동산공인중개사사무소</h3><p>율하·장유·김해 상가 전문</p></div><div class="contact-placeholder-grid"><div><span>주소</span><strong>경남 김해시 율하6로 61 성호루브루 102호</strong></div><div><span>대표전화</span><strong><a href="tel:0553130222">055-313-0222</a></strong></div><div><span>공인중개사</span><strong>박형민</strong></div><div><span>상담</span><strong>예약 후 방문 권장</strong></div></div><div class="naver-map-wrap"><div id="naver-map" class="naver-map" role="region" aria-label="바른부동산공인중개사사무소 네이버지도"><div id="naver-map-status" class="naver-map-status">네이버지도를 불러오는 중입니다.</div></div><a id="naver-directions-link" class="button naver-directions-button" href="https://map.naver.com/" target="_blank" rel="noopener noreferrer" aria-label="네이버지도에서 바른부동산 길찾기">네이버지도에서 길찾기 <span>→</span></a><p class="naver-map-note">출발지는 네이버지도에서 현재 위치 또는 원하는 위치로 설정할 수 있습니다.</p></div><a href="tel:0553130222" class="button button-primary contact-button">상가 상담 요청하기</a><p class="contact-note">상담 요청 버튼을 누르면 대표전화 055-313-0222로 연결됩니다.</p></div></section>
   </main>
-
-  <footer class="site-footer">
-    <div class="footer-brand"><span class="brand-mark">B</span><div><strong>바른부동산공인중개사사무소</strong><small>COMMERCIAL REAL ESTATE</small></div></div>
-    <p>바른부동산공인중개사사무소<br />경남 김해시 율하6로 61 성호루브루 102호<br />공인중개사 박형민<br />등록번호 48250-2022-00124<br />HP 010.7907.0059 TEL 055.313.0222</p>
-    <a href="#top">TOP ↑</a>
-  </footer>
+  <footer class="site-footer"><div class="footer-brand"><span class="brand-mark">B</span><div><strong>바른부동산공인중개사사무소</strong><small>COMMERCIAL REAL ESTATE</small></div></div><p>바른부동산공인중개사사무소<br />경남 김해시 율하6로 61 성호루브루 102호<br />공인중개사 박형민<br />등록번호 48250-2022-00124<br />HP 010.7907.0059 TEL 055.313.0222</p><a href="#top">TOP ↑</a></footer>
   <script src="script.js?v=20260913-1127"></script>
   <script src="hamburger-runtime-fix.js?v=20260913-1127"></script>
 </body>
