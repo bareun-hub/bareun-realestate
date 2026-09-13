@@ -107,3 +107,40 @@
     margin-left: 22px !important;
   }
 }
+
+
+/* PC-only slim, wide channel CTA bars. */
+@media (min-width: 901px) {
+  #contents #barun-youtube-link,
+  #contents #barun-blog-link {
+    width: 92% !important;
+    min-height: 42px !important;
+    padding: 0 22px !important;
+    border-radius: 4px !important;
+    font-size: 0 !important;
+    gap: 16px !important;
+  }
+
+  #contents #barun-youtube-link::before,
+  #contents #barun-blog-link::before {
+    display: block !important;
+    color: var(--navy-deep) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.2 !important;
+  }
+
+  #contents #barun-youtube-link::before {
+    content: "유튜브 바로가기";
+  }
+
+  #contents #barun-blog-link::before {
+    content: "블로그 바로가기";
+  }
+
+  #contents #barun-youtube-link span,
+  #contents #barun-blog-link span {
+    margin-left: auto !important;
+    font-size: 18px !important;
+  }
+}
