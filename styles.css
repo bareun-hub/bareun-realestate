@@ -261,3 +261,14 @@ button { font: inherit; }
   .site-footer { align-items: flex-start; flex-direction: column; gap: 20px; }
   .site-footer > a { margin-left: 0; }
 }
+
+/* Desktop-only field check typography emphasis. */
+@media (min-width: 901px) {
+  #analysis .analysis-note strong {
+    font-size: 13.2px;
+  }
+
+  #analysis .analysis-note p {
+    font-size: 1.2em;
+  }
+}
