@@ -85,7 +85,7 @@
   #contents .platform-card p { margin-bottom: 6px !important; font-size: 10px !important; line-height: 1.35 !important; }
   #contents .platform-card a { padding-top: 12px !important; padding-bottom: 12px !important; min-height: 44px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; }
 
-  /* Preferred one-column mobile content design: preserve visuals and reduce vertical density only. */
+  /* Preferred one-column mobile content design: preserve visuals and reduce text density only. */
   #contents,
   #contents:target {
     --mobile-fit-scale: 1 !important;
@@ -115,8 +115,18 @@
   #contents .section-heading h2,
   #contents:target .section-heading h2 {
     margin: 0 !important;
-    font-size: 23px !important;
-    line-height: 1.04 !important;
+    font-size: clamp(13px, 3.55vw, 15px) !important;
+    line-height: 1.1 !important;
+    white-space: nowrap !important;
+    letter-spacing: -0.035em !important;
+  }
+  #contents .section-heading h2 br,
+  #contents:target .section-heading h2 br {
+    content: "" !important;
+  }
+  #contents .section-heading h2 br::after,
+  #contents:target .section-heading h2 br::after {
+    content: " " !important;
   }
 
   #contents .eyebrow,
@@ -130,10 +140,10 @@
   #contents:target .content-topic-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 6px !important;
+    gap: 5px !important;
     height: auto !important;
     max-height: none !important;
-    margin-top: 6px !important;
+    margin-top: 5px !important;
     border: 0 !important;
     overflow: visible !important;
   }
@@ -143,7 +153,7 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 9px 18px !important;
+    padding: 8px 18px !important;
     border: 1px solid rgba(15,40,64,.08) !important;
     border-radius: 16px !important;
     overflow: visible !important;
@@ -151,24 +161,32 @@
 
   #contents .content-topic h3,
   #contents:target .content-topic h3 {
-    margin: 4px 0 2px !important;
-    font-size: 15px !important;
-    line-height: 1.15 !important;
+    margin: 3px 0 2px !important;
+    font-size: 14px !important;
+    line-height: 1.16 !important;
   }
 
   #contents .content-topic.featured h3,
   #contents:target .content-topic.featured h3 {
-    font-size: 14px !important;
+    font-size: clamp(12.5px, 3.3vw, 14px) !important;
     line-height: 1.1 !important;
     white-space: nowrap !important;
-    letter-spacing: -0.025em !important;
+    letter-spacing: -0.03em !important;
+  }
+  #contents .content-topic.featured h3 br,
+  #contents:target .content-topic.featured h3 br {
+    content: "" !important;
+  }
+  #contents .content-topic.featured h3 br::after,
+  #contents:target .content-topic.featured h3 br::after {
+    content: " " !important;
   }
 
   #contents .content-topic p,
   #contents:target .content-topic p {
     margin: 0 !important;
-    font-size: 13.5px !important;
-    line-height: 1.4 !important;
+    font-size: 13px !important;
+    line-height: 1.42 !important;
     overflow: visible !important;
   }
 
@@ -184,10 +202,10 @@
   #contents:target .platform-grid {
     display: grid !important;
     grid-template-columns: 1fr !important;
-    gap: 6px !important;
+    gap: 5px !important;
     height: auto !important;
     max-height: none !important;
-    margin-top: 6px !important;
+    margin-top: 5px !important;
     overflow: visible !important;
   }
 
@@ -196,7 +214,7 @@
     min-height: 0 !important;
     height: auto !important;
     max-height: none !important;
-    padding: 9px 18px !important;
+    padding: 8px 18px !important;
     border-radius: 16px !important;
     overflow: visible !important;
   }
@@ -204,15 +222,15 @@
   #contents .platform-card h3,
   #contents:target .platform-card h3 {
     margin: 3px 0 2px !important;
-    font-size: 14px !important;
-    line-height: 1.15 !important;
+    font-size: 13px !important;
+    line-height: 1.16 !important;
   }
 
   #contents .platform-card p,
   #contents:target .platform-card p {
-    margin: 0 0 5px !important;
-    font-size: 13.5px !important;
-    line-height: 1.4 !important;
+    margin: 0 0 4px !important;
+    font-size: 13px !important;
+    line-height: 1.42 !important;
     overflow: visible !important;
   }
 
