@@ -43,7 +43,7 @@ document.head.appendChild(desktopPropertyFitStyles);
 
 const desktopContentsFitStyles = document.createElement('link');
 desktopContentsFitStyles.rel = 'stylesheet';
-desktopContentsFitStyles.href = 'desktop-contents-fit.css?v=20260913-2308';
+desktopContentsFitStyles.href = 'desktop-contents-fit.css?v=20260913-2310';
 document.head.appendChild(desktopContentsFitStyles);
 
 // 가장 마지막에 적용되는 모바일 전용 전체화면 보정 CSS입니다.
