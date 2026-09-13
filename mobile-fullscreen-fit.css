@@ -521,3 +521,18 @@
     line-height: 1.28 !important;
   }
 }
+
+
+/* Phone intro typography refinement: preserve cards and headings. */
+@media (max-width: 560px) {
+  #intro .intro-copy,
+  #intro .intro-copy p {
+    font-size: 14.5px !important;
+    line-height: 1.6 !important;
+  }
+
+  #intro .strength-card p {
+    font-size: 12.25px !important;
+    line-height: 1.52 !important;
+  }
+}
