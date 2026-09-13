@@ -65,13 +65,15 @@
   #properties .property-panel p { font-size: 12px !important; line-height: 1.5 !important; }
   #properties .button-light { min-height: 44px !important; margin-top: 14px !important; padding: 12px 14px !important; font-size: 16px !important; font-weight: 700 !important; line-height: 1.35 !important; letter-spacing: 0 !important; white-space: normal !important; }
 
-  #analysis .analysis-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; height: auto !important; margin-top: 18px !important; }
+  #analysis .analysis-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 8px !important; height: auto !important; margin-top: 14px !important; }
   #analysis .area-card { height: 250px !important; min-height: 250px !important; }
-  #analysis .area-content { inset: auto 12px 14px !important; }
-  #analysis .area-content p { margin: 10px 0 2px !important; font-size: 8px !important; }
-  #analysis .area-content h3 { font-size: 17px !important; }
-  #analysis .area-content small { font-size: 9px !important; line-height: 1.25 !important; }
-  #analysis .analysis-note { grid-template-columns: .35fr 1fr !important; gap: 10px !important; margin-top: 14px !important; padding-top: 10px !important; font-size: 11px !important; line-height: 1.35 !important; }
+  #analysis .area-content { inset: auto 12px 12px !important; }
+  #analysis .area-content p { margin: 7px 0 2px !important; font-size: 7.5px !important; line-height: 1.3 !important; }
+  #analysis .area-content h3 { font-size: 15px !important; line-height: 1.25 !important; }
+  #analysis .area-content small { font-size: 12.5px !important; line-height: 1.4 !important; font-weight: 500 !important; opacity: .82 !important; }
+  #analysis .analysis-note { grid-template-columns: .35fr 1fr !important; gap: 8px !important; margin-top: 10px !important; padding-top: 8px !important; line-height: 1.35 !important; }
+  #analysis .analysis-note strong { font-size: 12.5px !important; line-height: 1.35 !important; font-weight: 700 !important; }
+  #analysis .analysis-note p { font-size: 13.5px !important; line-height: 1.5 !important; font-weight: 400 !important; color: #5f6872 !important; }
 
   #contents .content-topic-grid { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 1px !important; height: auto !important; margin-top: 18px !important; }
   #contents .content-topic { min-height: 190px !important; height: auto !important; padding: 16px !important; border-radius: 0 !important; }
@@ -107,9 +109,6 @@
   #intro .strength-card p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: #5f6872 !important; }
   #properties .section-heading > p:last-child { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: rgba(255,255,255,.78) !important; }
   #properties .property-panel p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: rgba(255,255,255,.78) !important; }
-  #analysis .area-content small { font-size: 15px !important; line-height: 1.5 !important; font-weight: 500 !important; opacity: .82 !important; }
-  #analysis .analysis-note strong { font-size: 14px !important; line-height: 1.5 !important; font-weight: 700 !important; }
-  #analysis .analysis-note p { font-size: 16px !important; line-height: 1.65 !important; font-weight: 400 !important; color: #5f6872 !important; }
   #contact .contact-panel h3 { font-size: 21px !important; line-height: 1.4 !important; font-weight: 700 !important; }
   #contact .contact-panel > div:first-child > p { font-size: 16px !important; line-height: 1.6 !important; color: rgba(255,255,255,.72) !important; }
   #contact .contact-placeholder-grid span { font-size: 11px !important; line-height: 1.4 !important; color: rgba(255,255,255,.58) !important; }
