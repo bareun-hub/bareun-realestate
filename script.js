@@ -59,7 +59,8 @@ const naverPropertyLink = document.querySelector('#naver-property-link');
 const youtubeLinks = document.querySelectorAll('a[href*="youtube.com"]');
 
 const BARUN_YOUTUBE_WEB_URL = 'https://www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
-const BARUN_YOUTUBE_CHANNEL_PATH = 'youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
+const BARUN_YOUTUBE_CHANNEL_PATH = 'www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
+const BARUN_YOUTUBE_ANDROID_INTENT = `intent://${BARUN_YOUTUBE_CHANNEL_PATH}#Intent;scheme=https;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;package=com.google.android.youtube;end`;
 
 function getMobileOperatingSystem() {
   const userAgent = navigator.userAgent || navigator.vendor || '';
@@ -72,21 +73,26 @@ function getMobileOperatingSystem() {
   return null;
 }
 
-function openYoutubeApp(event) {
-  event.preventDefault();
-  const mobileOperatingSystem = getMobileOperatingSystem();
+function openYoutubeApp(e) {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const isAndroid = /android/i.test(userAgent);
+  const isNaver = /naver/i.test(userAgent);
 
-  if (mobileOperatingSystem === 'android') {
-    // 네이버 인앱 브라우저의 웹 fallback을 거치지 않고 유튜브 공식 앱을 직접 지정합니다.
-    window.location.href = `intent://${BARUN_YOUTUBE_CHANNEL_PATH}#Intent;scheme=https;package=com.google.android.youtube;end`;
+  if (isAndroid) {
+    e.preventDefault();
+    // 네이버 인앱 브라우저를 포함한 Android WebView에서 유튜브 공식 앱을 직접 지정합니다.
+    location.href = BARUN_YOUTUBE_ANDROID_INTENT;
     return;
   }
 
+  const mobileOperatingSystem = getMobileOperatingSystem();
   if (mobileOperatingSystem === 'ios') {
+    e.preventDefault();
     window.location.href = `youtube://${BARUN_YOUTUBE_CHANNEL_PATH}`;
     return;
   }
 
+  e.preventDefault();
   window.open(BARUN_YOUTUBE_WEB_URL, '_blank', 'noopener,noreferrer');
 }
 
