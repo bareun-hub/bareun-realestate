@@ -56,7 +56,7 @@ const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
 const naverPropertyLink = document.querySelector('#naver-property-link');
-const youtubeLink = document.querySelector('#barun-youtube-link');
+const youtubeLinks = document.querySelectorAll('a[href*="youtube.com"]');
 
 const BARUN_YOUTUBE_WEB_URL = 'https://www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
 const BARUN_YOUTUBE_CHANNEL_PATH = 'www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
@@ -90,7 +90,9 @@ function openYoutubeApp(event) {
   window.open(BARUN_YOUTUBE_WEB_URL, '_blank', 'noopener,noreferrer');
 }
 
-youtubeLink?.addEventListener('click', openYoutubeApp);
+youtubeLinks.forEach((link) => {
+  link.addEventListener('click', openYoutubeApp);
+});
 
 window.addEventListener('scroll', () => {
   header?.classList.toggle('scrolled', window.scrollY > 30);
