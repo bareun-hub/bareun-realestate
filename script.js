@@ -59,7 +59,7 @@ const naverPropertyLink = document.querySelector('#naver-property-link');
 const youtubeLinks = document.querySelectorAll('a[href*="youtube.com"]');
 
 const BARUN_YOUTUBE_WEB_URL = 'https://www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
-const BARUN_YOUTUBE_CHANNEL_PATH = 'www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
+const BARUN_YOUTUBE_CHANNEL_PATH = 'youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
 
 function getMobileOperatingSystem() {
   const userAgent = navigator.userAgent || navigator.vendor || '';
@@ -73,8 +73,8 @@ function getMobileOperatingSystem() {
 }
 
 function openYoutubeApp(event) {
-  const mobileOperatingSystem = getMobileOperatingSystem();
   event.preventDefault();
+  const mobileOperatingSystem = getMobileOperatingSystem();
 
   if (mobileOperatingSystem === 'android') {
     // 네이버 인앱 브라우저의 웹 fallback을 거치지 않고 유튜브 공식 앱을 직접 지정합니다.
