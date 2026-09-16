@@ -56,6 +56,41 @@ const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
 const naverPropertyLink = document.querySelector('#naver-property-link');
+const youtubeLink = document.querySelector('#barun-youtube-link');
+
+const BARUN_YOUTUBE_WEB_URL = 'https://www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
+const BARUN_YOUTUBE_CHANNEL_PATH = 'www.youtube.com/channel/UCxsdH8u99B_-tY8d_ha5Fyw';
+
+function getMobileOperatingSystem() {
+  const userAgent = navigator.userAgent || navigator.vendor || '';
+
+  if (/android/i.test(userAgent)) return 'android';
+  if (/iPhone|iPod/i.test(userAgent)) return 'ios';
+  // iPadOS 13+는 데스크톱 형태의 user agent를 사용할 수 있습니다.
+  if (/Macintosh/i.test(userAgent) && navigator.maxTouchPoints > 1) return 'ios';
+
+  return null;
+}
+
+function openYoutubeApp(event) {
+  const mobileOperatingSystem = getMobileOperatingSystem();
+  event.preventDefault();
+
+  if (mobileOperatingSystem === 'android') {
+    // 네이버 인앱 브라우저의 웹 fallback을 거치지 않고 유튜브 공식 앱을 직접 지정합니다.
+    window.location.href = `intent://${BARUN_YOUTUBE_CHANNEL_PATH}#Intent;scheme=https;package=com.google.android.youtube;end`;
+    return;
+  }
+
+  if (mobileOperatingSystem === 'ios') {
+    window.location.href = `youtube://${BARUN_YOUTUBE_CHANNEL_PATH}`;
+    return;
+  }
+
+  window.open(BARUN_YOUTUBE_WEB_URL, '_blank', 'noopener,noreferrer');
+}
+
+youtubeLink?.addEventListener('click', openYoutubeApp);
 
 window.addEventListener('scroll', () => {
   header?.classList.toggle('scrolled', window.scrollY > 30);
@@ -416,3 +451,4 @@ const revealObserver = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
+
