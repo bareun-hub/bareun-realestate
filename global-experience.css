@@ -13,6 +13,11 @@
 /* Every mobile section uses the same viewport fit for swipes and menu links. */
 @layer mobile-page-fit {
   @media (max-width: 900px) {
+    html, body, main {
+      touch-action: manipulation !important;
+      -webkit-text-size-adjust: 100% !important;
+      text-size-adjust: 100% !important;
+    }
     /* A fitted page must already be readable when it arrives. Do not stack
        card reveal delays on top of the page transition on mobile. */
     .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image) {

@@ -140,8 +140,14 @@ function ensureMobileFitWrappers() {
   });
 }
 
+// Stable CSS viewport units ignore pinch-zoom and address-bar animations.
+// Measuring visualViewport.height here used to rescale all text after a tap.
+const mobileViewportMeasure = document.createElement('div');
+mobileViewportMeasure.setAttribute('aria-hidden', 'true');
+mobileViewportMeasure.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none;';
+document.body.appendChild(mobileViewportMeasure);
 function getVisibleMobileHeight() {
-  return Math.round(window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight);
+  return Math.round(mobileViewportMeasure.clientHeight || document.documentElement.clientHeight || innerHeight);
 }
 
 function fitMobileSections() {
@@ -193,6 +199,7 @@ function fitMobilePage(target) {
 }
 
 function refreshSelectedMobileSection() {
+  if (window.visualViewport && Math.abs(window.visualViewport.scale - 1) > .01) return;
   fitMobileSections();
 }
 window.visualViewport?.addEventListener('resize', refreshSelectedMobileSection);
