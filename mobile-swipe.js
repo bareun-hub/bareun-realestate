@@ -9,7 +9,7 @@
   document.addEventListener('touchstart', (event) => {
     gesture = null;
     if (!enabled() || event.touches.length !== 1 ||
-        event.target.closest('.site-header, .naver-map, a, button, input, textarea, select, [contenteditable]') ||
+        event.target.closest('.site-header, .naver-map, input, textarea, select, [contenteditable]') ||
         getSelection()?.toString()) return;
     const pages = [...document.querySelectorAll('main > section, .site-footer')];
     const positions = pages.map(offset);
@@ -30,9 +30,10 @@
     const dx = event.changedTouches[0].clientX - current.x;
     const dy = current.y - event.changedTouches[0].clientY;
     const speed = Math.abs(dy) / Math.max(1, performance.now() - current.time);
-    if (Math.abs(dy) <= Math.abs(dx) * 1.2 ||
-        !(Math.abs(dy) >= 40 || (Math.abs(dy) >= 18 && speed >= .3))) return;
-    const next = Math.max(0, Math.min(current.pages.length - 1, current.index + Math.sign(dy)));
+    if (Math.abs(dy) < 8 || Math.abs(dy) <= Math.abs(dx) * 1.2) return;
+    const advance = Math.abs(dy) >= 40 || (Math.abs(dy) >= 18 && speed >= .3);
+    const next = Math.max(0, Math.min(current.pages.length - 1,
+      current.index + (advance ? Math.sign(dy) : 0)));
     requestAnimationFrame(() => {
       window.scrollTo({ top: current.positions[next],
         behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });

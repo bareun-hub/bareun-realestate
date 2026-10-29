@@ -32,13 +32,10 @@
       transition: none !important;
     }
     html.mobile-paging-ready {
-      scroll-snap-type: y mandatory !important;
+      /* Native snap and touch-end alignment must not both settle the page. */
+      scroll-snap-type: none !important;
       scroll-padding-top: 70px !important;
       scroll-behavior: smooth !important;
-    }
-    html.mobile-paging-ready.mobile-paging-drag {
-      scroll-snap-type: none !important;
-      scroll-behavior: auto !important;
     }
     .mobile-paging-ready body {
       scroll-snap-type: none !important;
