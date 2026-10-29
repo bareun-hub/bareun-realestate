@@ -1,15 +1,135 @@
 /* PC only. Original mobile logo and mobile styles remain in use. */
 @layer desktop-refinements {
   @media (min-width: 901px) {
-    /* A forced viewport minimum left a large blank area below the cards. */
-    #contents, #contents:target {
-      min-height: 0 !important;
-      height: auto !important;
-      padding-bottom: 36px !important;
-    }
     /* Match the CONTACT headline's inset while keeping navigation in place. */
     .site-header .brand {
       left: calc(clamp(32px, 7vw, 110px) - clamp(24px, 5vw, 84px)) !important;
+    }
+  }
+}
+
+/* A single PC layout is used for wheel/trackpad scrolling and menu anchors.
+   This stylesheet is loaded before the shared layers so these PC-only
+   important rules also override legacy :target viewport-fit rules. */
+@layer desktop-refinements {
+  @media (min-width: 901px) {
+    html.desktop-pages-ready {
+      --desktop-header-height: 82px;
+      scroll-snap-type: y mandatory !important;
+      scroll-padding-top: var(--desktop-header-height) !important;
+    }
+    .desktop-pages-ready body { overflow-x: clip !important; overflow-y: visible !important; }
+    .desktop-pages-ready .site-header { height: var(--desktop-header-height) !important; }
+    .desktop-pages-ready main > section, .desktop-pages-ready .site-footer {
+      scroll-snap-align: start !important;
+      scroll-snap-stop: always !important;
+      scroll-margin-top: 0 !important;
+    }
+    .desktop-pages-ready main > .hero { min-height: 100dvh !important; height: 100dvh !important; }
+    .desktop-pages-ready .site-footer { min-height: calc(100dvh - var(--desktop-header-height)) !important; }
+    .desktop-pages-ready main > .section {
+      display: block !important;
+      height: calc(100dvh - var(--desktop-header-height)) !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      padding: 28px clamp(24px, 7vw, 120px) !important;
+      overflow: visible !important;
+    }
+    .desktop-pages-ready .section > .mobile-fit-inner {
+      display: grid !important;
+      height: 100% !important;
+      min-height: 0 !important;
+      gap: 14px !important;
+      grid-template-rows: auto minmax(0, 1fr);
+    }
+    .desktop-pages-ready .section-heading { max-width: 900px !important; }
+    .desktop-pages-ready .section-heading h2 {
+      font-size: clamp(28px, 2.7vw, 44px) !important;
+      margin-bottom: 14px !important;
+    }
+    .desktop-pages-ready .section .eyebrow { margin-bottom: 8px !important; }
+    .desktop-pages-ready .section-heading > p:last-child {
+      margin-top: 10px !important;
+      margin-bottom: 0 !important;
+      font-size: 14px !important;
+      max-width: 900px !important;
+    }
+    .desktop-pages-ready #intro > .mobile-fit-inner {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto minmax(0, 1fr);
+      gap: 24px !important;
+    }
+    .desktop-pages-ready .intro-copy { padding-top: 24px !important; }
+    .desktop-pages-ready .strength-grid { margin-top: 8px !important; }
+    .desktop-pages-ready .strength-card { min-height: 0 !important; padding: 24px !important; }
+    .desktop-pages-ready .strength-card h3 { margin-top: clamp(20px, 5vh, 65px) !important; }
+    .desktop-pages-ready .property-feature {
+      grid-template-columns: 1.45fr .8fr !important;
+      margin-top: 0 !important;
+      min-height: 0 !important;
+      height: 100% !important;
+    }
+    .desktop-pages-ready .property-image { min-height: 0 !important; height: 100% !important; }
+    .desktop-pages-ready .property-panel { padding: 26px !important; }
+    .desktop-pages-ready .property-panel h3 { font-size: clamp(23px, 2.2vw, 34px) !important; margin: 16px 0 !important; }
+    .desktop-pages-ready .property-panel .button { margin-top: 16px !important; }
+    .desktop-pages-ready #analysis > .mobile-fit-inner { grid-template-rows: auto minmax(0, 1fr) auto; }
+    .desktop-pages-ready .analysis-grid { margin-top: 0 !important; height: auto !important; min-height: 0 !important; }
+    .desktop-pages-ready .area-card { min-height: 0 !important; height: 100% !important; }
+    .desktop-pages-ready .area-content { inset: auto 24px 24px !important; }
+    .desktop-pages-ready .area-content p { margin-top: 12px !important; }
+    .desktop-pages-ready .area-content h3 { font-size: 24px !important; }
+    .desktop-pages-ready .analysis-note { margin-top: 0 !important; padding-top: 12px !important; }
+    .desktop-pages-ready #contents > .mobile-fit-inner { grid-template-rows: auto minmax(0, 1fr) minmax(0, 1fr); }
+    .desktop-pages-ready :is(.content-topic-grid, .channel-links) { margin-top: 0 !important; height: 100% !important; min-height: 0 !important; }
+    .desktop-pages-ready :is(.content-topic, .platform-card) { min-height: 0 !important; height: 100% !important; padding: 22px !important; }
+    .desktop-pages-ready :is(.content-topic, .platform-card) h3 { margin: 18px 0 14px !important; font-size: 21px !important; }
+    .desktop-pages-ready :is(.content-topic, .platform-card) p { font-size: 13px !important; }
+    .desktop-pages-ready .platform-card { padding-bottom: 84px !important; }
+    .desktop-pages-ready #contact { padding: 0 !important; }
+    .desktop-pages-ready #contact > .mobile-fit-inner {
+      grid-template-columns: 1.1fr .9fr;
+      grid-template-rows: minmax(0, 1fr);
+      gap: 0 !important;
+    }
+    .desktop-pages-ready :is(.contact-visual, .contact-panel) {
+      min-height: 0 !important;
+      height: 100% !important;
+      padding-top: 28px !important;
+      padding-bottom: 28px !important;
+    }
+    .desktop-pages-ready .contact-visual h2 { font-size: clamp(32px, 3.2vw, 48px) !important; }
+    .desktop-pages-ready .contact-panel h3 { font-size: 21px !important; margin: 8px 0 12px !important; }
+    .desktop-pages-ready .contact-placeholder-grid { margin: 16px 0 !important; }
+    .desktop-pages-ready .contact-placeholder-grid > div { padding: 10px 0 !important; }
+    .desktop-pages-ready .naver-map { height: clamp(120px, 24vh, 340px) !important; }
+    .desktop-pages-ready .naver-map-wrap { margin-bottom: 16px !important; }
+    .desktop-pages-ready .contact-note, .desktop-pages-ready .naver-map-note { font-size: 11px !important; }
+    @media (max-width: 1100px) {
+      .desktop-pages-ready .intro-copy { font-size: 14px !important; padding-top: 12px !important; }
+      .desktop-pages-ready .strength-card { padding: 16px !important; }
+      .desktop-pages-ready .strength-card h3 { font-size: 18px !important; margin-top: 20px !important; }
+      .desktop-pages-ready .strength-card p { font-size: 12px !important; }
+      .desktop-pages-ready .contact-panel { padding-inline: 24px !important; }
+      .desktop-pages-ready .contact-panel h3 { font-size: 18px !important; }
+      .desktop-pages-ready .contact-panel p { font-size: 13px !important; }
+      .desktop-pages-ready .contact-placeholder-grid strong { font-size: 13px !important; }
+      .desktop-pages-ready .contact-placeholder-grid span { font-size: 11px !important; }
+      .desktop-pages-ready .naver-map { height: 130px !important; }
+      .desktop-pages-ready .contact-panel .button { min-height: 42px !important; padding: 10px 14px !important; font-size: 13px !important; }
+      .desktop-pages-ready .contact-panel :is(.contact-note, .naver-map-note) { font-size: 10px !important; }
+    }
+    @media (max-height: 760px) {
+      .desktop-pages-ready main > .section { padding-block: 18px !important; }
+      .desktop-pages-ready .section-heading h2 { font-size: 28px !important; margin-bottom: 8px !important; }
+      .desktop-pages-ready :is(.content-topic, .platform-card) { padding: 14px !important; }
+      .desktop-pages-ready :is(.content-topic, .platform-card) h3 { font-size: 18px !important; margin: 8px 0 !important; }
+      .desktop-pages-ready .platform-card { padding-bottom: 70px !important; }
+      .desktop-pages-ready :is(.contact-visual, .contact-panel) { padding-block: 16px !important; }
+      .desktop-pages-ready .contact-placeholder-grid { margin: 8px 0 !important; }
+      .desktop-pages-ready .contact-placeholder-grid > div { padding: 6px 0 !important; }
+      .desktop-pages-ready .naver-map { height: 110px !important; }
+      .desktop-pages-ready .naver-map-wrap { margin-bottom: 8px !important; }
     }
   }
 }
