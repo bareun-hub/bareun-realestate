@@ -124,6 +124,14 @@ setMobileMenuOpen(false);
 
 const MOBILE_FIT_SECTION_IDS = ['intro', 'properties', 'analysis', 'contents', 'contact'];
 let mobileFitFrame = 0;
+let mobileTouchActive = false;
+let mobileViewportBaseline = null;
+const mobilePageMeasurements = new WeakMap();
+document.addEventListener('touchstart', () => { mobileTouchActive = true; }, { passive: true });
+document.addEventListener('touchend', (event) => {
+  mobileTouchActive = event.touches.length > 0;
+}, { passive: true });
+document.addEventListener('touchcancel', () => { mobileTouchActive = false; }, { passive: true });
 const mobileContentObserver = typeof ResizeObserver === 'function'
   ? new ResizeObserver(() => fitMobileSections()) : null;
 
@@ -147,12 +155,20 @@ mobileViewportMeasure.setAttribute('aria-hidden', 'true');
 mobileViewportMeasure.style.cssText = 'position:fixed;top:0;left:0;width:0;height:100svh;visibility:hidden;pointer-events:none;';
 document.body.appendChild(mobileViewportMeasure);
 function getVisibleMobileHeight() {
-  return Math.round(mobileViewportMeasure.clientHeight || document.documentElement.clientHeight || innerHeight);
+  const width = document.documentElement.clientWidth;
+  const orientation = screen.orientation?.angle || 0;
+  if (!mobileViewportBaseline || Math.abs(width - mobileViewportBaseline.width) > 2 ||
+      orientation !== mobileViewportBaseline.orientation) {
+    mobileViewportBaseline = { width, orientation,
+      height: Math.round(mobileViewportMeasure.clientHeight || document.documentElement.clientHeight || innerHeight) };
+  }
+  return mobileViewportBaseline.height;
 }
 
 function fitMobileSections() {
   cancelAnimationFrame(mobileFitFrame);
   mobileFitFrame = requestAnimationFrame(() => {
+    if (mobileTouchActive) return;
     ensureMobileFitWrappers();
 
     if (window.innerWidth > 900) {
@@ -190,11 +206,17 @@ function fitMobilePage(target) {
   ensureMobileFitWrappers();
   target.classList.add('mobile-page-fit');
   const available = Math.floor(getVisibleMobileHeight() - (header?.getBoundingClientRect().height || 70));
-  target.style.setProperty('--menu-fit-height', `${available}px`);
-  target.style.setProperty('--menu-fit-scale', '1');
   const inner = target.querySelector(':scope > .mobile-fit-inner');
-  const scale = Math.min(1, (available - 12) / Math.max(inner.scrollHeight, inner.offsetHeight, 1));
+  const naturalHeight = Math.max(inner.scrollHeight, inner.offsetHeight, 1);
+  const width = inner.offsetWidth;
+  const previous = mobilePageMeasurements.get(target);
+  if (previous?.available === available && previous?.width === width && previous?.naturalHeight === naturalHeight) return;
+  if (mobileTouchActive) return;
+  target.style.setProperty('--menu-fit-height', `${available}px`);
+  // offsetHeight is untransformed. Never reset scale to 1 to measure a page.
+  const scale = Math.min(1, (available - 12) / naturalHeight);
   target.style.setProperty('--menu-fit-scale', String(scale));
+  mobilePageMeasurements.set(target, { available, width, naturalHeight });
 
 }
 
