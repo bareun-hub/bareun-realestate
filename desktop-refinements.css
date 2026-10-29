@@ -1,0 +1,15 @@
+/* PC only. Original mobile logo and mobile styles remain in use. */
+@layer desktop-refinements {
+  @media (min-width: 901px) {
+    /* A forced viewport minimum left a large blank area below the cards. */
+    #contents, #contents:target {
+      min-height: 0 !important;
+      height: auto !important;
+      padding-bottom: 36px !important;
+    }
+    /* Match the CONTACT headline's inset while keeping navigation in place. */
+    .site-header .brand {
+      left: calc(clamp(32px, 7vw, 110px) - clamp(24px, 5vw, 84px)) !important;
+    }
+  }
+}
