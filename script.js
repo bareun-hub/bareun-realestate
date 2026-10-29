@@ -1,57 +1,3 @@
-// 모바일 접근성을 위해 사용자의 두 손가락 확대/축소를 허용합니다.
-const viewportMeta = document.querySelector('meta[name="viewport"]');
-if (viewportMeta) {
-  viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, viewport-fit=cover');
-}
-
-// 시각 디자인에는 영향을 주지 않고 모바일 터치 동작만 안정화합니다.
-const mobileInteractionStyles = document.createElement('style');
-mobileInteractionStyles.textContent = `
-@media (max-width: 900px) {
-  html, body, main { touch-action: auto; }
-  a, button, .menu-button, .mobile-nav { touch-action: manipulation; }
-  .site-header {
-    pointer-events: auto !important;
-    z-index: 2147483000 !important;
-  }
-  .site-header .menu-button {
-    position: relative;
-    z-index: 2147483002 !important;
-    pointer-events: auto !important;
-  }
-  .site-header .mobile-nav {
-    z-index: 2147483001 !important;
-  }
-}
-`;
-document.head.appendChild(mobileInteractionStyles);
-
-const mobileFixStyles = document.createElement('link');
-mobileFixStyles.rel = 'stylesheet';
-mobileFixStyles.href = 'mobile-fix.css?v=20260913-0100';
-document.head.appendChild(mobileFixStyles);
-
-const mobileAnchorFixStyles = document.createElement('link');
-mobileAnchorFixStyles.rel = 'stylesheet';
-mobileAnchorFixStyles.href = 'mobile-anchor-fix.css?v=20260913-0242';
-document.head.appendChild(mobileAnchorFixStyles);
-
-const desktopPropertyFitStyles = document.createElement('link');
-desktopPropertyFitStyles.rel = 'stylesheet';
-desktopPropertyFitStyles.href = 'desktop-property-fit.css?v=20260913-0154';
-document.head.appendChild(desktopPropertyFitStyles);
-
-const desktopContentsFitStyles = document.createElement('link');
-desktopContentsFitStyles.rel = 'stylesheet';
-desktopContentsFitStyles.href = 'desktop-contents-fit.css?v=20260913-2310';
-document.head.appendChild(desktopContentsFitStyles);
-
-// 가장 마지막에 적용되는 모바일 전용 전체화면 보정 CSS입니다.
-const mobileFullscreenFitStyles = document.createElement('link');
-mobileFullscreenFitStyles.rel = 'stylesheet';
-mobileFullscreenFitStyles.href = 'mobile-fullscreen-fit.css?v=20260913-2247';
-document.head.appendChild(mobileFullscreenFitStyles);
-
 const header = document.querySelector('.site-header');
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
@@ -76,7 +22,6 @@ function getMobileOperatingSystem() {
 function openYoutubeApp(e) {
   const userAgent = navigator.userAgent.toLowerCase();
   const isAndroid = /android/i.test(userAgent);
-  const isNaver = /naver/i.test(userAgent);
 
   if (isAndroid) {
     e.preventDefault();
@@ -341,7 +286,7 @@ if (naverPropertyLink) {
 }
 
 const NAVER_MAP_CLIENT_ID = '7t7c9gatsd';
-const BARUN_SITE_URL = 'https://parkhm750910-hue.github.io/bareun-realestate/';
+const BARUN_SITE_URL = new URL('.', window.location.href).href;
 const BARUN_PLACE = {
   name: '바른부동산공인중개사사무소',
   address: '경남 김해시 율하6로 61 성호루브루 102호',
@@ -482,7 +427,7 @@ function loadNaverMaps() {
   if (!mapElement) return;
 
   window.navermap_authFailure = function () {
-    setMapMessage('네이버지도 인증이 거부되었습니다. 네이버 클라우드에서 Dynamic Map 사용 여부와 Web 서비스 URL(parkhm750910-hue.github.io)을 확인해 주세요.', true);
+    setMapMessage(`네이버지도 인증이 거부되었습니다. 네이버 클라우드에서 Dynamic Map 사용 여부와 Web 서비스 URL(${window.location.origin})을 확인해 주세요.`, true);
   };
 
   window.initBarunNaverMap = initBarunNaverMap;

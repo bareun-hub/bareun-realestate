@@ -1,0 +1,12 @@
+@media (max-width: 900px) {
+  .site-header .mobile-nav {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: auto !important;
+    height: calc(var(--mobile-vh, 100dvh) - 70px) !important;
+    max-height: calc(var(--mobile-vh, 100dvh) - 70px) !important;
+    overflow-y: auto !important;
+  }
+}

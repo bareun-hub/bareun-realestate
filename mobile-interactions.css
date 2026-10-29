@@ -1,0 +1,16 @@
+@media (max-width: 900px) {
+  html, body, main { touch-action: auto; }
+  a, button, .menu-button, .mobile-nav { touch-action: manipulation; }
+  .site-header {
+    pointer-events: auto !important;
+    z-index: 2147483000 !important;
+  }
+  .site-header .menu-button {
+    position: relative;
+    z-index: 2147483002 !important;
+    pointer-events: auto !important;
+  }
+  .site-header .mobile-nav {
+    z-index: 2147483001 !important;
+  }
+}

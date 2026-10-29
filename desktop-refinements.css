@@ -42,6 +42,8 @@
       padding: 28px clamp(24px, 7vw, 120px) !important;
       overflow: visible !important;
     }
+    /* The decorative PROPERTY word extends 30px beyond the page. */
+    .desktop-pages-ready #properties { overflow-x: clip !important; }
     .desktop-pages-ready .section > .mobile-fit-inner {
       display: grid !important;
       height: 100% !important;
