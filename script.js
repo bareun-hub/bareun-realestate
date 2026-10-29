@@ -110,9 +110,21 @@ function getVisibleMobileHeight() {
   return mobileViewportBaseline.height;
 }
 
+// Keep text scale stable, but let the outer page follow the visible browser
+// height when its address/tool bars expand or collapse.
+function syncMobilePageHeight() {
+  if (innerWidth > 900 || (visualViewport && Math.abs(visualViewport.scale - 1) > .01)) return;
+  const height = Math.round(visualViewport?.height || innerHeight);
+  const value = `${height}px`;
+  if (document.documentElement.style.getPropertyValue('--mobile-vh') !== value) {
+    document.documentElement.style.setProperty('--mobile-vh', value);
+  }
+}
+
 function fitMobileSections() {
   cancelAnimationFrame(mobileFitFrame);
   mobileFitFrame = requestAnimationFrame(() => {
+    syncMobilePageHeight();
     if (mobileTouchActive || document.documentElement.classList.contains('mobile-page-moving')) return;
     ensureMobileFitWrappers();
 
@@ -125,8 +137,7 @@ function fitMobileSections() {
       return;
     }
 
-    const viewportHeight = getVisibleMobileHeight();
-    document.documentElement.style.setProperty('--mobile-vh', `${viewportHeight}px`);
+    syncMobilePageHeight();
     MOBILE_FIT_SECTION_IDS.forEach((id) => fitMobilePage(document.getElementById(id)));
     document.documentElement.classList.add('mobile-paging-ready');
   });
@@ -171,8 +182,10 @@ function fitMobilePage(target) {
 
 function refreshSelectedMobileSection() {
   if (window.visualViewport && Math.abs(window.visualViewport.scale - 1) > .01) return;
+  syncMobilePageHeight();
   fitMobileSections();
 }
+document.addEventListener('mobile-page-settled', fitMobileSections);
 window.visualViewport?.addEventListener('resize', refreshSelectedMobileSection);
 window.addEventListener('resize', refreshSelectedMobileSection);
 window.addEventListener('load', () => {

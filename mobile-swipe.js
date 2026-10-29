@@ -5,6 +5,8 @@
   let gesture = null;
   let frame = 0;
   let dragFrame = 0;
+  let activePage = null;
+  let lastViewportHeight = '';
   const pages = () => [...document.querySelectorAll('main > section, .site-footer')];
   const offset = (page) => Math.max(0, Math.min(
     document.documentElement.scrollHeight - document.documentElement.clientHeight,
@@ -36,11 +38,18 @@
   function updateMode() {
     root.classList.toggle('mobile-swipe-controlled', enabled());
     if (!enabled()) cancel();
+    const height = root.style.getPropertyValue('--mobile-vh');
+    if (enabled() && height !== lastViewportHeight && activePage && !gesture && !frame) {
+      window.scrollTo({ top: offset(activePage), behavior: 'instant' });
+    }
+    lastViewportHeight = height;
   }
   function goTo(page) {
     cancel();
+    activePage = page;
     const start = scrollY;
-    const destination = offset(page);
+    let destination = offset(page);
+    let viewportHeight = root.style.getPropertyValue('--mobile-vh');
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
       window.scrollTo({ top: destination, behavior: 'instant' });
       return;
@@ -48,6 +57,11 @@
     root.classList.add('mobile-page-moving');
     const started = performance.now();
     function step(now) {
+      const visibleHeight = root.style.getPropertyValue('--mobile-vh');
+      if (visibleHeight !== viewportHeight) {
+        destination = offset(page);
+        viewportHeight = visibleHeight;
+      }
       const t = Math.min(1, (now - started) / 650);
       const eased = 1 - (1 - t) ** 2;
       window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
@@ -57,6 +71,7 @@
         window.scrollTo({ top: offset(page), behavior: 'instant' });
         frame = 0;
         root.classList.remove('mobile-page-moving');
+        document.dispatchEvent(new Event('mobile-page-settled'));
       }
     }
     frame = requestAnimationFrame(step);
@@ -75,6 +90,7 @@
     const positions = list.map(offset);
     const index = positions.reduce((best, y, i) =>
       Math.abs(y - scrollY) < Math.abs(positions[best] - scrollY) ? i : best, 0);
+    activePage = list[index];
     gesture = { x: event.touches[0].clientX, y: event.touches[0].clientY,
       start: scrollY, drawPosition: scrollY, lastDraw: performance.now(),
       min: positions[Math.max(0, index - 1)], max: positions[Math.min(list.length - 1, index + 1)],
