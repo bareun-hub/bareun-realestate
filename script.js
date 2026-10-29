@@ -168,7 +168,7 @@ function getVisibleMobileHeight() {
 function fitMobileSections() {
   cancelAnimationFrame(mobileFitFrame);
   mobileFitFrame = requestAnimationFrame(() => {
-    if (mobileTouchActive) return;
+    if (mobileTouchActive || document.documentElement.classList.contains('mobile-page-moving')) return;
     ensureMobileFitWrappers();
 
     if (window.innerWidth > 900) {
@@ -193,6 +193,10 @@ function goToMobileSection(hash) {
 
   requestAnimationFrame(() => {
     fitMobilePage(target);
+    if (window.MobilePaging && window.innerWidth <= 900) {
+      window.MobilePaging.goTo(target);
+      return;
+    }
     const headerHeight = header?.getBoundingClientRect().height || 70;
     const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - headerHeight);
     const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
@@ -241,6 +245,10 @@ function moveToMobileHash(hash) {
   history.pushState(null, '', hash);
 
   if (hash === '#home' || hash === '#top') {
+    if (window.MobilePaging && window.innerWidth <= 900) {
+      window.MobilePaging.goTo(document.getElementById('home'));
+      return;
+    }
     window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
     return;
   }

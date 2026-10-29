@@ -13,6 +13,9 @@
 /* Every mobile section uses the same viewport fit for swipes and menu links. */
 @layer mobile-page-fit {
   @media (max-width: 900px) {
+    .mobile-swipe-controlled main, .mobile-swipe-controlled .site-footer {
+      touch-action: pan-x pinch-zoom !important;
+    }
     html, body, main {
       touch-action: manipulation !important;
       -webkit-text-size-adjust: 100% !important;
