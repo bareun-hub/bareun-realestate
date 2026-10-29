@@ -17,10 +17,10 @@
     }
     root.classList.add('mobile-paging-drag');
     const started = performance.now();
-    const duration = 820;
+    const duration = 500;
     function step(now) {
       const progress = Math.min(1, (now - started) / duration);
-      const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+      const eased = 1 - (1 - progress) ** 2;
       window.scrollTo({ top: start + (end - start) * eased, behavior: 'instant' });
       if (progress < 1) settleFrame = requestAnimationFrame(step);
       else {
