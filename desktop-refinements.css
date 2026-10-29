@@ -26,7 +26,13 @@
       scroll-margin-top: 0 !important;
     }
     .desktop-pages-ready main > .hero { min-height: 100dvh !important; height: 100dvh !important; }
-    .desktop-pages-ready .site-footer { min-height: calc(100dvh - var(--desktop-header-height)) !important; }
+    /* Footer is a compact end bar, not a separate full-screen chapter. */
+    .desktop-pages-ready .site-footer {
+      height: auto !important;
+      min-height: 0 !important;
+      padding-block: 24px !important;
+      scroll-snap-align: end !important;
+    }
     .desktop-pages-ready main > .section {
       display: block !important;
       height: calc(100dvh - var(--desktop-header-height)) !important;
