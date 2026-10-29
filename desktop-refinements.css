@@ -115,6 +115,10 @@
     .desktop-pages-ready .naver-map { height: clamp(100px, calc((100dvh - 600px) * .28), 240px) !important; }
     .desktop-pages-ready .naver-map-wrap { margin-bottom: 16px !important; }
     .desktop-pages-ready .contact-note, .desktop-pages-ready .naver-map-note { font-size: 11px !important; }
+    .desktop-pages-ready .contact-panel :is(.contact-note, .naver-map-note) {
+      margin-top: 10px !important;
+      flex-shrink: 0;
+    }
     @media (max-width: 1100px) {
       .desktop-pages-ready .intro-copy { font-size: 14px !important; padding-top: 12px !important; }
       .desktop-pages-ready .strength-card { padding: 16px !important; }
@@ -125,7 +129,7 @@
       .desktop-pages-ready .contact-panel p { font-size: 13px !important; }
       .desktop-pages-ready .contact-placeholder-grid strong { font-size: 13px !important; }
       .desktop-pages-ready .contact-placeholder-grid span { font-size: 11px !important; }
-      .desktop-pages-ready .naver-map { height: 110px !important; }
+      .desktop-pages-ready .naver-map { height: 90px !important; }
       .desktop-pages-ready .contact-panel .button { min-height: 42px !important; padding: 10px 14px !important; font-size: 13px !important; }
       .desktop-pages-ready .contact-panel :is(.contact-note, .naver-map-note) { font-size: 10px !important; }
     }
@@ -135,11 +139,11 @@
       .desktop-pages-ready :is(.content-topic, .platform-card) { padding: 14px !important; }
       .desktop-pages-ready :is(.content-topic, .platform-card) h3 { font-size: 18px !important; margin: 8px 0 !important; }
       .desktop-pages-ready .platform-card { padding-bottom: 70px !important; }
-      .desktop-pages-ready :is(.contact-visual, .contact-panel) { padding-block: 10px !important; }
+      .desktop-pages-ready :is(.contact-visual, .contact-panel) { padding-block: 6px !important; }
       .desktop-pages-ready .contact-panel h3 { font-size: 16px !important; margin: 4px 0 6px !important; }
       .desktop-pages-ready .contact-panel p { font-size: 11px !important; }
-      .desktop-pages-ready .contact-placeholder-grid { margin: 4px 0 !important; }
-      .desktop-pages-ready .contact-placeholder-grid > div { padding: 4px 0 !important; }
+      .desktop-pages-ready .contact-placeholder-grid { margin: 2px 0 !important; }
+      .desktop-pages-ready .contact-placeholder-grid > div { padding: 2px 0 !important; }
       .desktop-pages-ready .contact-placeholder-grid strong { font-size: 12px !important; }
       .desktop-pages-ready .contact-panel .button { min-height: 34px !important; padding: 8px 12px !important; font-size: 12px !important; }
       .desktop-pages-ready .contact-panel :is(.naver-map-note, .contact-note) { font-size: 9px !important; }
