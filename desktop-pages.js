@@ -10,7 +10,17 @@
     });
   }, { threshold: .15 });
   document.querySelectorAll('main > section').forEach((section) => observer.observe(section));
-  const sync = () => document.documentElement.classList.toggle('desktop-pages-ready', desktop.matches);
+  const footer = document.querySelector('.site-footer');
+  const fitFooter = () => {
+    if (desktop.matches && footer) document.documentElement.style.setProperty('--desktop-footer-height', `${footer.getBoundingClientRect().height}px`);
+  };
+  const sync = () => {
+    document.documentElement.classList.toggle('desktop-pages-ready', desktop.matches);
+    if (desktop.matches) fitFooter();
+    else document.documentElement.style.removeProperty('--desktop-footer-height');
+  };
   desktop.addEventListener('change', sync);
   sync();
+  if (footer && typeof ResizeObserver === 'function') new ResizeObserver(fitFooter).observe(footer);
+  document.fonts?.ready.then(fitFooter);
 })();
