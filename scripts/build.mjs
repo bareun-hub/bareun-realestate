@@ -81,6 +81,26 @@ if (configuredUrl) {
   // Update existing social/canonical metadata only; business copy stays intact.
   card = card.replaceAll('https://bareun-hub.github.io/bareun-realestate/', site.href);
 }
+// Card assets are split only in production output. Root card.html stays portable.
+// Preserve CSS cascade and script order; do not run unsafe regex minification.
+const cardStyles = [...card.matchAll(/<style\b[^>]*>([\s\S]*?)<\/style>/g)];
+const cardCss = cardStyles.map(match => match[1]).join('\n');
+if (cardStyles.length) {
+  const cardCssName = 'assets/card.' + hash(cardCss) + '.css';
+  await writeFile(path.join(output, cardCssName), cardCss);
+  cardStyles.forEach((match, i) => { card = card.replace(match[0], i ? '' : '<link rel="stylesheet" href="' + cardCssName + '">'); });
+}
+const cardScripts = [...card.matchAll(/<script\b(?![^>]*\bsrc=)[^>]*>([\s\S]*?)<\/script>/g)];
+if (cardScripts.length) {
+  const cardJs = cardScripts.map(match => match[1]).join('\n;\n');
+  const cardJsName = 'assets/card.' + hash(cardJs) + '.js';
+  await writeFile(path.join(output, cardJsName), cardJs);
+  cardScripts.forEach((match, i) => { card = card.replace(match[0], i ? '' : '<script defer src="' + cardJsName + '"></script>'); });
+}
+// Reserve logo geometry before decoding to avoid layout shift.
+const logo = await readFile(path.join(root, 'assets/business-card-logo.png'));
+card = card.replace('<img class="logo"', '<img width="' + logo.readUInt32BE(16) + '" height="' + logo.readUInt32BE(20) + '" decoding="async" class="logo"');
+
 await writeFile(path.join(output, 'index.html'), rewriteAssets(html));
 await writeFile(path.join(output, 'card.html'), card);
 for (const file of ['og-card-20261028.png', 'og-image.png']) await copyFile(path.join(root, file), path.join(output, file));

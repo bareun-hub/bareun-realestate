@@ -35,3 +35,12 @@ npm run build
 생성된 `dist/`를 정적 서버로 열어 확인합니다. 기존 루트 폴더도 개발용으로 바로 열 수 있습니다.
 GitHub Pages 워크플로도 같은 빌드를 수행해 `dist/`만 배포합니다.
 Vercel 실제 프로젝트 생성/도메인 연결은 별도로 진행해야 합니다.
+
+## 디지털 명함 최적화
+- 루트 card.html은 CSS/JS를 내장한 원본으로 유지합니다. 빌드할 때만 dist/card.html의 CSS/JS를 assets/card.<내용해시>.css/js로 분리합니다.
+- 명함 HTML은 약 19.2KB에서 6.9KB로 줄고, CSS/JS는 첫 방문 이후 장기 캐시됩니다. 총 첫 방문 다운로드 크기가 같은 비율로 줄어드는 것은 아닙니다.
+- 로고의 원본 너비·높이를 출력해 이미지 로드 전 공간을 확보합니다.
+- card.html은 재검증 캐시, 내용 해시 assets는 immutable 캐시를 사용합니다. 기존 /card.html 주소는 그대로 유지합니다.
+- 빌드 검사에서 원본 CSS/JS와 링크 보존, 파일 경로, 스크립트 구문, 공유 메타데이터를 확인합니다.
+- Vercel Production의 SITE_URL 권장값: https://bareun-realestate.vercel.app/
+- GitHub Pages는 SITE_URL 없이 빌드해 기존 GitHub 공유 주소를 유지할 수 있습니다.
