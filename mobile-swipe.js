@@ -3,20 +3,55 @@
 (() => {
   const root = document.documentElement;
   let gesture = null;
+  let settleFrame = 0;
+  // Give every page the same unhurried finish instead of the browser's
+  // distance-dependent smooth-scroll speed. Snap resumes only after settling.
+  function settleTo(page) {
+    cancelAnimationFrame(settleFrame);
+    const start = scrollY;
+    const end = offset(page);
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.scrollTo({ top: end, behavior: 'instant' });
+      root.classList.remove('mobile-paging-drag');
+      return;
+    }
+    root.classList.add('mobile-paging-drag');
+    const started = performance.now();
+    const duration = 820;
+    function step(now) {
+      const progress = Math.min(1, (now - started) / duration);
+      const eased = (1 - Math.cos(Math.PI * progress)) / 2;
+      window.scrollTo({ top: start + (end - start) * eased, behavior: 'instant' });
+      if (progress < 1) settleFrame = requestAnimationFrame(step);
+      else {
+        settleFrame = 0;
+        root.classList.remove('mobile-paging-drag');
+      }
+    }
+    settleFrame = requestAnimationFrame(step);
+  }
   const pages = () => [...document.querySelectorAll('main > section, .site-footer')];
   const offset = (page) => Math.max(0, scrollY + page.getBoundingClientRect().top -
     (page.id === 'home' ? 0 : (document.querySelector('.site-header')?.offsetHeight || 70)));
   const isEnabled = () => innerWidth <= 900 && root.classList.contains('mobile-paging-ready');
 
   document.addEventListener('touchstart', (event) => {
+    cancelAnimationFrame(settleFrame);
+    settleFrame = 0;
     gesture = null;
     if (!isEnabled() || event.touches.length !== 1 ||
         event.target.closest('.site-header, .naver-map, a, button, input, textarea, select, [contenteditable]') ||
-        window.getSelection()?.toString()) return;
+        window.getSelection()?.toString()) {
+      root.classList.remove('mobile-paging-drag');
+      return;
+    }
     const list = pages();
     const index = list.reduce((best, page, i) =>
       Math.abs(offset(page) - scrollY) < Math.abs(offset(list[best]) - scrollY) ? i : best, 0);
-    if (list[index].matches('.site-footer')) return;
+    if (list[index].matches('.site-footer')) {
+      root.classList.remove('mobile-paging-drag');
+      return;
+    }
     const touch = event.touches[0];
     gesture = { x: touch.clientX, y: touch.clientY, start: scrollY,
       time: performance.now(), index, list, dragging: false, distance: 0 };
@@ -51,8 +86,7 @@
     const speed = Math.abs(distance) / Math.max(1, performance.now() - time);
     const advance = Math.abs(distance) >= 40 || (Math.abs(distance) >= 18 && speed >= .3);
     const next = Math.max(0, Math.min(list.length - 1, index + (advance ? Math.sign(distance) : 0)));
-    cancel();
-    const behavior = matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
-    window.scrollTo({ top: offset(list[next]), behavior });
+    gesture = null;
+    settleTo(list[next]);
   }, { passive: true });
 })();
