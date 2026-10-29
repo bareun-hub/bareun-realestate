@@ -112,7 +112,7 @@
     .desktop-pages-ready .contact-panel h3 { font-size: 21px !important; margin: 8px 0 12px !important; }
     .desktop-pages-ready .contact-placeholder-grid { margin: 16px 0 !important; }
     .desktop-pages-ready .contact-placeholder-grid > div { padding: 10px 0 !important; }
-    .desktop-pages-ready .naver-map { height: clamp(100px, calc((100dvh - 600px) * .28), 240px) !important; }
+    .desktop-pages-ready .naver-map { height: clamp(130px, calc((100dvh - 600px) * .364), 312px) !important; }
     .desktop-pages-ready .naver-map-wrap { margin-bottom: 16px !important; }
     .desktop-pages-ready .contact-note, .desktop-pages-ready .naver-map-note { font-size: 11px !important; }
     .desktop-pages-ready .contact-panel :is(.contact-note, .naver-map-note) {
@@ -125,11 +125,13 @@
       .desktop-pages-ready .strength-card h3 { font-size: 18px !important; margin-top: 20px !important; }
       .desktop-pages-ready .strength-card p { font-size: 12px !important; }
       .desktop-pages-ready .contact-panel { padding-inline: 24px !important; }
+      .desktop-pages-ready .contact-placeholder-grid { margin-block: 12px !important; }
+      .desktop-pages-ready .contact-placeholder-grid > div { padding-block: 5px !important; }
       .desktop-pages-ready .contact-panel h3 { font-size: 18px !important; }
       .desktop-pages-ready .contact-panel p { font-size: 13px !important; }
       .desktop-pages-ready .contact-placeholder-grid strong { font-size: 13px !important; }
       .desktop-pages-ready .contact-placeholder-grid span { font-size: 11px !important; }
-      .desktop-pages-ready .naver-map { height: 90px !important; }
+      .desktop-pages-ready .naver-map { height: 117px !important; }
       .desktop-pages-ready .contact-panel .button { min-height: 42px !important; padding: 10px 14px !important; font-size: 13px !important; }
       .desktop-pages-ready .contact-panel :is(.contact-note, .naver-map-note) { font-size: 10px !important; }
     }
@@ -139,17 +141,17 @@
       .desktop-pages-ready :is(.content-topic, .platform-card) { padding: 14px !important; }
       .desktop-pages-ready :is(.content-topic, .platform-card) h3 { font-size: 18px !important; margin: 8px 0 !important; }
       .desktop-pages-ready .platform-card { padding-bottom: 70px !important; }
-      .desktop-pages-ready :is(.contact-visual, .contact-panel) { padding-block: 6px !important; }
+      .desktop-pages-ready :is(.contact-visual, .contact-panel) { padding-block: 0 !important; }
       .desktop-pages-ready .contact-panel h3 { font-size: 16px !important; margin: 4px 0 6px !important; }
       .desktop-pages-ready .contact-panel p { font-size: 11px !important; }
-      .desktop-pages-ready .contact-placeholder-grid { margin: 2px 0 !important; }
-      .desktop-pages-ready .contact-placeholder-grid > div { padding: 2px 0 !important; }
+      .desktop-pages-ready .contact-placeholder-grid { margin: 0 !important; }
+      .desktop-pages-ready .contact-placeholder-grid > div { padding: 1px 0 !important; }
       .desktop-pages-ready .contact-placeholder-grid strong { font-size: 12px !important; }
       .desktop-pages-ready .contact-panel .button { min-height: 34px !important; padding: 8px 12px !important; font-size: 12px !important; }
       .desktop-pages-ready .contact-panel :is(.naver-map-note, .contact-note) { font-size: 9px !important; }
-      .desktop-pages-ready .naver-map { height: 72px !important; }
+      .desktop-pages-ready .naver-map { height: 93.6px !important; }
       .desktop-pages-ready .naver-map-status { padding: 12px !important; }
-      .desktop-pages-ready .naver-map-wrap { margin-bottom: 6px !important; }
+      .desktop-pages-ready .naver-map-wrap { margin-bottom: 2px !important; }
     }
   }
 }
