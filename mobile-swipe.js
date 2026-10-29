@@ -13,6 +13,19 @@
   const enabled = () => innerWidth <= 900 && root.classList.contains('mobile-paging-ready') &&
     Math.abs((visualViewport?.scale || 1) - 1) < .01;
 
+  // Touch samples can arrive much less often than display frames. Follow the
+  // latest sample continuously instead of jumping once for every touch event.
+  function drawDrag(now) {
+    if (!gesture?.dragging) { dragFrame = 0; return; }
+    const elapsed = Math.min(48, Math.max(1, now - gesture.lastDraw));
+    gesture.lastDraw = now;
+    const target = Math.max(gesture.min, Math.min(gesture.max, gesture.start + gesture.distance));
+    const blend = 1 - Math.exp(-elapsed / 32);
+    gesture.drawPosition += (target - gesture.drawPosition) * blend;
+    window.scrollTo({ top: gesture.drawPosition, behavior: 'instant' });
+    dragFrame = requestAnimationFrame(drawDrag);
+  }
+
   function cancel() {
     cancelAnimationFrame(frame);
     cancelAnimationFrame(dragFrame);
@@ -63,7 +76,9 @@
     const index = positions.reduce((best, y, i) =>
       Math.abs(y - scrollY) < Math.abs(positions[best] - scrollY) ? i : best, 0);
     gesture = { x: event.touches[0].clientX, y: event.touches[0].clientY,
-      start: scrollY, distance: 0, index, list, positions, time: performance.now(), dragging: false };
+      start: scrollY, drawPosition: scrollY, lastDraw: performance.now(),
+      min: positions[Math.max(0, index - 1)], max: positions[Math.min(list.length - 1, index + 1)],
+      distance: 0, index, list, positions, time: performance.now(), dragging: false };
   }, { passive: true });
   document.addEventListener('touchmove', (event) => {
     if (!gesture) return;
@@ -78,13 +93,7 @@
     }
     if (event.cancelable) event.preventDefault();
     gesture.distance = dy;
-    if (!dragFrame) dragFrame = requestAnimationFrame(() => {
-      dragFrame = 0;
-      if (!gesture) return;
-      const min = gesture.positions[Math.max(0, gesture.index - 1)];
-      const max = gesture.positions[Math.min(gesture.list.length - 1, gesture.index + 1)];
-      window.scrollTo({ top: Math.max(min, Math.min(max, gesture.start + gesture.distance)), behavior: 'instant' });
-    });
+    if (!dragFrame) dragFrame = requestAnimationFrame(drawDrag);
   }, { passive: false });
   document.addEventListener('touchcancel', cancel, { passive: true });
   document.addEventListener('touchend', () => {
