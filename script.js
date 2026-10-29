@@ -119,6 +119,8 @@ function getVisibleMobileHeight() {
 // height when its address/tool bars expand or collapse.
 function syncMobilePageHeight() {
   if (innerWidth > 900 || (visualViewport && Math.abs(visualViewport.scale - 1) > .01)) return;
+  // Browser chrome resize must not relayout sections during a swipe.
+  if (mobileTouchActive || document.documentElement.classList.contains('mobile-page-moving')) return;
   const height = Math.round(visualViewport?.height || innerHeight);
   const value = `${height}px`;
   if (document.documentElement.style.getPropertyValue('--mobile-vh') !== value) {

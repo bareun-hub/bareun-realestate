@@ -7,10 +7,34 @@
   let dragFrame = 0;
   let activePage = null;
   let lastViewportHeight = '';
+  let visualPosition = null;
+  let visualDelta = 0;
+  const surfaces = [...document.querySelectorAll('body > main, body > .site-footer')];
+  // Keep document scrolling out of the animation loop. Fractional transforms
+  // stay on the compositor; commit the scroll once with the transform removed.
+  function paint(position) {
+    visualPosition = position;
+    visualDelta = scrollY - position;
+    surfaces.forEach(surface => {
+      surface.style.willChange = 'translate';
+      surface.style.translate = `0 ${visualDelta}px`;
+    });
+  }
+  function commit() {
+    if (visualPosition === null) return;
+    const position = visualPosition;
+    surfaces.forEach(surface => {
+      surface.style.removeProperty('translate');
+      surface.style.removeProperty('will-change');
+    });
+    visualPosition = null;
+    visualDelta = 0;
+    window.scrollTo({ top: position, behavior: 'instant' });
+  }
   const pages = () => [...document.querySelectorAll('main > section, .site-footer')];
   const offset = (page) => Math.max(0, Math.min(
     document.documentElement.scrollHeight - document.documentElement.clientHeight,
-    scrollY + page.getBoundingClientRect().top -
+    scrollY + page.getBoundingClientRect().top - visualDelta -
     (page.id === 'home' ? 0 : (document.querySelector('.site-header')?.offsetHeight || 70))));
   const enabled = () => innerWidth <= 900 && root.classList.contains('mobile-paging-ready') &&
     Math.abs((visualViewport?.scale || 1) - 1) < .01;
@@ -26,7 +50,7 @@
     const previousPosition = gesture.drawPosition;
     gesture.drawPosition += (target - gesture.drawPosition) * blend;
     gesture.drawVelocity = (gesture.drawPosition - previousPosition) / elapsed;
-    window.scrollTo({ top: gesture.drawPosition, behavior: 'instant' });
+    paint(gesture.drawPosition);
     dragFrame = requestAnimationFrame(drawDrag);
   }
 
@@ -34,6 +58,7 @@
     cancelAnimationFrame(frame);
     cancelAnimationFrame(dragFrame);
     frame = dragFrame = 0;
+    commit();
     gesture = null;
     root.classList.remove('mobile-page-moving');
   }
@@ -84,11 +109,12 @@
       velocity = (position - previousPosition) / Math.max(1, now - previousTime);
       previousPosition = position;
       previousTime = now;
-      window.scrollTo({ top: position, behavior: 'instant' });
+      paint(position);
       if (t < 1) frame = requestAnimationFrame(step);
       else {
         // Resolve from the live section, rather than a stale touch-start offset.
-        window.scrollTo({ top: offset(page), behavior: 'instant' });
+        paint(offset(page));
+        commit();
         frame = 0;
         root.classList.remove('mobile-page-moving');
         document.dispatchEvent(new Event('mobile-page-settled'));
