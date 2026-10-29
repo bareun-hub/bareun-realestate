@@ -58,20 +58,33 @@
     }
     root.classList.add('mobile-page-moving');
     const started = performance.now();
-    const distance = destination - start;
-    const initialSlope = releaseVelocity === undefined ? .7 :
-      (distance && releaseVelocity * distance > 0 ? Math.min(2, releaseVelocity * 650 / distance) : 0);
+    let segmentStart = start, segmentStarted = started, segmentDuration = 650;
+    let velocity = releaseVelocity === undefined ? (destination - start) * .7 / 650 : releaseVelocity;
+    let previousPosition = start, previousTime = started;
+    let initialSlope = releaseVelocity === undefined ? .7 :
+      (destination !== start && releaseVelocity * (destination - start) > 0 ? Math.min(2, releaseVelocity * 650 / (destination - start)) : 0);
     function step(now) {
       const visibleHeight = root.style.getPropertyValue('--mobile-vh');
       if (visibleHeight !== viewportHeight) {
         destination = offset(page);
         viewportHeight = visibleHeight;
+        segmentStart = scrollY;
+        segmentStarted = now;
+        segmentDuration = Math.max(160, 650 - (now - started));
+        const distance = destination - segmentStart;
+        initialSlope = distance && velocity * distance > 0 ? Math.min(2, velocity * segmentDuration / distance) : 0;
+        previousPosition = segmentStart;
+        previousTime = now;
       }
-      const t = Math.min(1, (now - started) / 650);
+      const t = Math.min(1, (now - segmentStarted) / segmentDuration);
       // Match the release speed and finish at zero speed, avoiding a sudden
       // acceleration when finger tracking hands over to page settling.
       const eased = (-2 * t ** 3 + 3 * t ** 2) + initialSlope * (t ** 3 - 2 * t ** 2 + t);
-      window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
+      const position = segmentStart + (destination - segmentStart) * eased;
+      velocity = (position - previousPosition) / Math.max(1, now - previousTime);
+      previousPosition = position;
+      previousTime = now;
+      window.scrollTo({ top: position, behavior: 'instant' });
       if (t < 1) frame = requestAnimationFrame(step);
       else {
         // Resolve from the live section, rather than a stale touch-start offset.
@@ -83,7 +96,16 @@
     }
     frame = requestAnimationFrame(step);
   }
-  window.MobilePaging = { goTo, cancel };
+  window.MobilePaging = { goTo, cancel, getAnchor: () => activePage,
+    adjustViewport: (shift) => {
+      if (!gesture) return;
+      gesture.start += shift;
+      gesture.drawPosition += shift;
+      gesture.positions = gesture.list.map(offset);
+      gesture.min = gesture.positions[Math.max(0, gesture.index - 1)];
+      gesture.max = gesture.positions[Math.min(gesture.list.length - 1, gesture.index + 1)];
+    }
+  };
   requestAnimationFrame(updateMode);
   window.addEventListener('resize', () => requestAnimationFrame(updateMode));
   visualViewport?.addEventListener('resize', updateMode);

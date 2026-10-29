@@ -122,7 +122,16 @@ function syncMobilePageHeight() {
   const height = Math.round(visualViewport?.height || innerHeight);
   const value = `${height}px`;
   if (document.documentElement.style.getPropertyValue('--mobile-vh') !== value) {
+    const anchor = window.MobilePaging?.getAnchor?.();
+    const before = anchor?.getBoundingClientRect().top;
     document.documentElement.style.setProperty('--mobile-vh', value);
+    if (anchor && before !== undefined) {
+      const shift = anchor.getBoundingClientRect().top - before;
+      if (Math.abs(shift) > .01) {
+        window.scrollTo({ top: scrollY + shift, behavior: 'instant' });
+        window.MobilePaging?.adjustViewport?.(shift);
+      }
+    }
   }
 }
 
@@ -173,7 +182,7 @@ function fitMobilePage(target) {
   const available = Math.floor(getVisibleMobileHeight() - (header?.getBoundingClientRect().height || 70));
   const inner = target.querySelector(':scope > .mobile-fit-inner');
   const naturalHeight = Math.max(inner.scrollHeight, inner.offsetHeight, 1);
-  const width = inner.offsetWidth;
+  const width = document.documentElement.clientWidth;
   const previous = mobilePageMeasurements.get(target);
   // Once interaction starts, late font/map/observer updates must not resize
   // text on page arrival. Only a real width/orientation change unlocks it.
@@ -181,10 +190,24 @@ function fitMobilePage(target) {
   if (previous?.available === available && previous?.width === width && previous?.naturalHeight === naturalHeight) return;
   if (mobileTouchActive) return;
   target.style.setProperty('--menu-fit-height', `${available}px`);
-  // offsetHeight is untransformed. Never reset scale to 1 to measure a page.
-  const scale = Math.min(1, (available - 12) / naturalHeight);
+  // Primary headings/descriptions compensate for wrapper scaling. Fit the
+  // surrounding cards and images without shrinking those primary type sizes.
+  const fits = (value) => {
+    target.style.setProperty('--menu-fit-scale', String(value));
+    return Math.max(inner.scrollHeight, inner.offsetHeight, 1) * value <= available - 12;
+  };
+  let scale = 1;
+  if (!fits(1)) {
+    let low = .35, high = 1;
+    for (let i = 0; i < 8; i++) {
+      const middle = (low + high) / 2;
+      if (fits(middle)) low = middle;
+      else high = middle;
+    }
+    scale = low;
+  }
   target.style.setProperty('--menu-fit-scale', String(scale));
-  mobilePageMeasurements.set(target, { available, width, naturalHeight });
+  mobilePageMeasurements.set(target, { available, width, naturalHeight: Math.max(inner.scrollHeight, inner.offsetHeight, 1) });
 
 }
 

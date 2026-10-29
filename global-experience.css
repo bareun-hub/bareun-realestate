@@ -35,6 +35,7 @@
       transition: none !important;
     }
     html.mobile-paging-ready {
+      overflow-anchor: none !important;
       /* Native snap and touch-end alignment must not both settle the page. */
       scroll-snap-type: none !important;
       scroll-padding-top: 70px !important;
@@ -68,19 +69,23 @@
     main > section.mobile-page-fit > .mobile-fit-inner {
       position: absolute !important;
       top: 50% !important;
-      left: 0 !important;
+      left: 50% !important;
       display: block !important;
-      width: 100% !important;
+      width: calc(100% / var(--menu-fit-scale, 1)) !important;
+      max-width: none !important;
       height: auto !important;
       padding: 12px 18px !important;
-      transform: translateY(-50%) scale(var(--menu-fit-scale, 1)) !important;
+      transform: translate3d(-50%, -50%, 0) scale(var(--menu-fit-scale, 1)) !important;
       transform-origin: center !important;
+      backface-visibility: hidden;
     }
     .mobile-page-fit .section-heading { margin: 0 0 12px !important; }
+    .mobile-page-fit :is(.section-heading, .intro-copy) { max-width: none !important; }
     .mobile-page-fit :is(h2, h3) { margin-top: 0 !important; margin-bottom: 10px !important; }
-    .mobile-page-fit h2 { font-size: 24px !important; }
+    .mobile-page-fit h2 { font-size: calc(23.12px / var(--menu-fit-scale, 1)) !important; }
     .mobile-page-fit .eyebrow { margin-bottom: 6px !important; }
-    .mobile-page-fit :is(.property-panel p, .section-heading > p:last-child) { font-size: 13px !important; margin: 8px 0 !important; }
+    .mobile-page-fit :is(.property-panel p, .section-heading > p:last-child) { font-size: calc(12.5px / var(--menu-fit-scale, 1)) !important; margin: 8px 0 !important; }
+    .mobile-page-fit .intro-copy p { font-size: calc(12.5px / var(--menu-fit-scale, 1)) !important; }
     .mobile-page-fit .property-feature { margin-top: 12px !important; }
     .mobile-page-fit .property-image {
       height: clamp(135px, calc(var(--menu-fit-height) * .28), 220px) !important;
@@ -93,8 +98,8 @@
     .mobile-page-fit .content-topic h3 { font-size: 15px !important; margin: 4px 0 8px !important; }
     .mobile-page-fit :is(.content-topic p, .platform-card p) { margin: 0 0 8px !important; font-size: 11.5px !important; }
     .mobile-page-fit .contact-visual { min-height: 0 !important; padding: 14px 16px !important; }
-    .mobile-page-fit .contact-visual h2 { font-size: 24px !important; }
-    .mobile-page-fit .contact-visual > p:last-child { margin-top: 8px !important; font-size: 11px !important; }
+    .mobile-page-fit .contact-visual h2 { font-size: calc(23.12px / var(--menu-fit-scale, 1)) !important; }
+    .mobile-page-fit .contact-visual > p:last-child { margin-top: 8px !important; max-width: none !important; font-size: calc(12.5px / var(--menu-fit-scale, 1)) !important; }
     .mobile-page-fit .contact-panel { padding: 14px 16px !important; }
     .mobile-page-fit .contact-panel h3 { font-size: 18px !important; }
     .mobile-page-fit .contact-panel > div:first-child > p { font-size: 13px !important; margin: 6px 0 !important; }
