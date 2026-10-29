@@ -141,25 +141,6 @@ function getVisibleMobileHeight() {
   return Math.round(window.visualViewport?.height || window.innerHeight || document.documentElement.clientHeight);
 }
 
-function fitOneMobileSection(section, availableHeight) {
-  const inner = section.querySelector(':scope > .mobile-fit-inner');
-  if (!inner) return;
-
-  section.style.setProperty('--mobile-fit-scale', '1');
-
-  const naturalHeight = Math.max(inner.scrollHeight, inner.getBoundingClientRect().height || 0);
-  let scale = naturalHeight > availableHeight ? availableHeight / naturalHeight : 1;
-  scale = Math.min(1, Math.max(0.35, scale));
-  section.style.setProperty('--mobile-fit-scale', scale.toFixed(4));
-
-  requestAnimationFrame(() => {
-    const secondHeight = Math.max(inner.scrollHeight, 1);
-    let secondScale = secondHeight > availableHeight ? availableHeight / secondHeight : 1;
-    secondScale = Math.min(1, Math.max(0.35, secondScale));
-    section.style.setProperty('--mobile-fit-scale', secondScale.toFixed(4));
-  });
-}
-
 function fitMobileSections() {
   cancelAnimationFrame(mobileFitFrame);
   mobileFitFrame = requestAnimationFrame(() => {
@@ -174,14 +155,7 @@ function fitMobileSections() {
     }
 
     const viewportHeight = getVisibleMobileHeight();
-    const headerHeight = Math.round(header?.getBoundingClientRect().height || 70);
-    const availableHeight = Math.max(320, viewportHeight - headerHeight);
     document.documentElement.style.setProperty('--mobile-vh', `${viewportHeight}px`);
-
-    MOBILE_FIT_SECTION_IDS.forEach((id) => {
-      const section = document.getElementById(id);
-      if (section) fitOneMobileSection(section, availableHeight);
-    });
   });
 }
 
@@ -448,15 +422,4 @@ function loadNaverMaps() {
 
 setDirectionsUrl(BARUN_PLACE.lat, BARUN_PLACE.lng);
 loadNaverMaps();
-
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 

@@ -191,8 +191,7 @@ button { font: inherit; }
 .footer-brand small { font-family: "Manrope", sans-serif; font-weight: 600; font-size: 7px; letter-spacing: .16em; opacity: .5; }
 .site-footer > a { margin-left: auto; color: white; font-weight: 600; }
 
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 1; }
 
 @media (max-width: 900px) {
   :root { --header-h: 70px; }
@@ -371,3 +370,6 @@ button { font: inherit; }
     line-height: 1.7;
   }
 }
+
+.footer-logo { display: block; width: 200px; max-width: 100%; height: auto; }
+.footer-brand { flex-shrink: 0; }
