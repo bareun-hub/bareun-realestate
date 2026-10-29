@@ -3,10 +3,31 @@
 (() => {
   const root = document.documentElement;
   let gesture;
+  let settleFrame = 0;
+  // Leave finger tracking native; soften only the final, single alignment.
+  function settleTo(top) {
+    cancelAnimationFrame(settleFrame);
+    const start = scrollY;
+    window.scrollTo({ top: start, behavior: 'instant' });
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      window.scrollTo({ top, behavior: 'instant' });
+      return;
+    }
+    const started = performance.now();
+    function step(now) {
+      const progress = Math.min(1, (now - started) / 400);
+      const eased = Math.sin(progress * Math.PI / 2);
+      window.scrollTo({ top: start + (top - start) * eased, behavior: 'instant' });
+      settleFrame = progress < 1 ? requestAnimationFrame(step) : 0;
+    }
+    settleFrame = requestAnimationFrame(step);
+  }
   const enabled = () => innerWidth <= 900 && root.classList.contains('mobile-paging-ready');
   const offset = (page) => Math.max(0, scrollY + page.getBoundingClientRect().top -
     (page.id === 'home' ? 0 : (document.querySelector('.site-header')?.offsetHeight || 70)));
   document.addEventListener('touchstart', (event) => {
+    cancelAnimationFrame(settleFrame);
+    settleFrame = 0;
     gesture = null;
     if (!enabled() || event.touches.length !== 1 ||
         event.target.closest('.site-header, .naver-map, input, textarea, select, [contenteditable]') ||
@@ -34,9 +55,6 @@
     const advance = Math.abs(dy) >= 40 || (Math.abs(dy) >= 18 && speed >= .3);
     const next = Math.max(0, Math.min(current.pages.length - 1,
       current.index + (advance ? Math.sign(dy) : 0)));
-    requestAnimationFrame(() => {
-      window.scrollTo({ top: current.positions[next],
-        behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
-    });
+    settleTo(current.positions[next]);
   }, { passive: true });
 })();
