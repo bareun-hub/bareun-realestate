@@ -71,8 +71,12 @@ const MOBILE_FIT_SECTION_IDS = ['intro', 'properties', 'analysis', 'contents', '
 let mobileFitFrame = 0;
 let mobileTouchActive = false;
 let mobileViewportBaseline = null;
+let mobileTypographyLocked = false;
 const mobilePageMeasurements = new WeakMap();
-document.addEventListener('touchstart', () => { mobileTouchActive = true; }, { passive: true });
+document.addEventListener('touchstart', () => {
+  mobileTouchActive = true;
+  if (innerWidth <= 900) mobileTypographyLocked = true;
+}, { passive: true });
 document.addEventListener('touchend', (event) => {
   mobileTouchActive = event.touches.length > 0;
 }, { passive: true });
@@ -104,6 +108,7 @@ function getVisibleMobileHeight() {
   const orientation = screen.orientation?.angle || 0;
   if (!mobileViewportBaseline || Math.abs(width - mobileViewportBaseline.width) > 2 ||
       orientation !== mobileViewportBaseline.orientation) {
+    mobileTypographyLocked = false;
     mobileViewportBaseline = { width, orientation,
       height: Math.round(mobileViewportMeasure.clientHeight || document.documentElement.clientHeight || innerHeight) };
   }
@@ -170,6 +175,9 @@ function fitMobilePage(target) {
   const naturalHeight = Math.max(inner.scrollHeight, inner.offsetHeight, 1);
   const width = inner.offsetWidth;
   const previous = mobilePageMeasurements.get(target);
+  // Once interaction starts, late font/map/observer updates must not resize
+  // text on page arrival. Only a real width/orientation change unlocks it.
+  if (mobileTypographyLocked && previous?.available === available && previous?.width === width) return;
   if (previous?.available === available && previous?.width === width && previous?.naturalHeight === naturalHeight) return;
   if (mobileTouchActive) return;
   target.style.setProperty('--menu-fit-height', `${available}px`);

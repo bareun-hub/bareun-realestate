@@ -23,7 +23,9 @@
     gesture.lastDraw = now;
     const target = Math.max(gesture.min, Math.min(gesture.max, gesture.start + gesture.distance));
     const blend = 1 - Math.exp(-elapsed / 32);
+    const previousPosition = gesture.drawPosition;
     gesture.drawPosition += (target - gesture.drawPosition) * blend;
+    gesture.drawVelocity = (gesture.drawPosition - previousPosition) / elapsed;
     window.scrollTo({ top: gesture.drawPosition, behavior: 'instant' });
     dragFrame = requestAnimationFrame(drawDrag);
   }
@@ -44,7 +46,7 @@
     }
     lastViewportHeight = height;
   }
-  function goTo(page) {
+  function goTo(page, releaseVelocity) {
     cancel();
     activePage = page;
     const start = scrollY;
@@ -56,6 +58,9 @@
     }
     root.classList.add('mobile-page-moving');
     const started = performance.now();
+    const distance = destination - start;
+    const initialSlope = releaseVelocity === undefined ? .7 :
+      (distance && releaseVelocity * distance > 0 ? Math.min(2, releaseVelocity * 650 / distance) : 0);
     function step(now) {
       const visibleHeight = root.style.getPropertyValue('--mobile-vh');
       if (visibleHeight !== viewportHeight) {
@@ -63,7 +68,9 @@
         viewportHeight = visibleHeight;
       }
       const t = Math.min(1, (now - started) / 650);
-      const eased = 1 - (1 - t) ** 2;
+      // Match the release speed and finish at zero speed, avoiding a sudden
+      // acceleration when finger tracking hands over to page settling.
+      const eased = (-2 * t ** 3 + 3 * t ** 2) + initialSlope * (t ** 3 - 2 * t ** 2 + t);
       window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
       if (t < 1) frame = requestAnimationFrame(step);
       else {
@@ -119,6 +126,6 @@
     const advance = Math.abs(current.distance) >= 40 || (Math.abs(current.distance) >= 18 && speed >= .3);
     const next = Math.max(0, Math.min(current.list.length - 1,
       current.index + (advance ? Math.sign(current.distance) : 0)));
-    goTo(current.list[next]);
+    goTo(current.list[next], current.drawVelocity || 0);
   }, { passive: true });
 })();
