@@ -13,6 +13,19 @@
 /* Every mobile section uses the same viewport fit for swipes and menu links. */
 @layer mobile-page-fit {
   @media (max-width: 900px) {
+    /* A fitted page must already be readable when it arrives. Do not stack
+       card reveal delays on top of the page transition on mobile. */
+    .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image) {
+      opacity: 1 !important;
+      translate: none !important;
+      scale: none !important;
+      transition: none !important;
+    }
+    .mobile-paging-ready .area-card::before {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
     html.mobile-paging-ready {
       scroll-snap-type: y mandatory !important;
       scroll-padding-top: 70px !important;
