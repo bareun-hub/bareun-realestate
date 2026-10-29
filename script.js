@@ -124,6 +124,8 @@ setMobileMenuOpen(false);
 
 const MOBILE_FIT_SECTION_IDS = ['intro', 'properties', 'analysis', 'contents', 'contact'];
 let mobileFitFrame = 0;
+const mobileContentObserver = typeof ResizeObserver === 'function'
+  ? new ResizeObserver(() => fitMobileSections()) : null;
 
 function ensureMobileFitWrappers() {
   MOBILE_FIT_SECTION_IDS.forEach((id) => {
@@ -134,6 +136,7 @@ function ensureMobileFitWrappers() {
     wrapper.className = 'mobile-fit-inner';
     while (section.firstChild) wrapper.appendChild(section.firstChild);
     section.appendChild(wrapper);
+    mobileContentObserver?.observe(wrapper);
   });
 }
 
@@ -148,14 +151,17 @@ function fitMobileSections() {
 
     if (window.innerWidth > 900) {
       document.documentElement.style.removeProperty('--mobile-vh');
+      document.documentElement.classList.remove('mobile-paging-ready');
       MOBILE_FIT_SECTION_IDS.forEach((id) => {
-        document.getElementById(id)?.style.removeProperty('--mobile-fit-scale');
+        document.getElementById(id)?.classList.remove('mobile-page-fit');
       });
       return;
     }
 
     const viewportHeight = getVisibleMobileHeight();
     document.documentElement.style.setProperty('--mobile-vh', `${viewportHeight}px`);
+    MOBILE_FIT_SECTION_IDS.forEach((id) => fitMobilePage(document.getElementById(id)));
+    document.documentElement.classList.add('mobile-paging-ready');
   });
 }
 
@@ -164,9 +170,39 @@ function goToMobileSection(hash) {
   if (!target) return;
 
   requestAnimationFrame(() => {
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    fitMobilePage(target);
+    const headerHeight = header?.getBoundingClientRect().height || 70;
+    const top = Math.max(0, window.scrollY + target.getBoundingClientRect().top - headerHeight);
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+    window.scrollTo({ top, behavior });
   });
 }
+
+function fitMobilePage(target) {
+  if (!target) return;
+  if (window.innerWidth > 900 || !MOBILE_FIT_SECTION_IDS.includes(target.id)) return;
+  ensureMobileFitWrappers();
+  target.classList.add('mobile-page-fit');
+  const available = Math.floor(getVisibleMobileHeight() - (header?.getBoundingClientRect().height || 70));
+  target.style.setProperty('--menu-fit-height', `${available}px`);
+  target.style.setProperty('--menu-fit-scale', '1');
+  const inner = target.querySelector(':scope > .mobile-fit-inner');
+  const scale = Math.min(1, (available - 12) / Math.max(inner.scrollHeight, inner.offsetHeight, 1));
+  target.style.setProperty('--menu-fit-scale', String(scale));
+
+}
+
+function refreshSelectedMobileSection() {
+  fitMobileSections();
+}
+window.visualViewport?.addEventListener('resize', refreshSelectedMobileSection);
+window.addEventListener('resize', refreshSelectedMobileSection);
+window.addEventListener('load', () => {
+  if (window.innerWidth <= 900 && MOBILE_FIT_SECTION_IDS.includes(location.hash.slice(1))) {
+    goToMobileSection(location.hash);
+  }
+});
+document.fonts?.ready.then(refreshSelectedMobileSection);
 
 function moveToMobileHash(hash) {
   if (!hash || !hash.startsWith('#')) return;
@@ -176,7 +212,7 @@ function moveToMobileHash(hash) {
   history.pushState(null, '', hash);
 
   if (hash === '#home' || hash === '#top') {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
     return;
   }
 
