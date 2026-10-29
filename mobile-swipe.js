@@ -35,7 +35,7 @@
     root.classList.add('mobile-page-moving');
     const started = performance.now();
     function step(now) {
-      const t = Math.min(1, (now - started) / 550);
+      const t = Math.min(1, (now - started) / 650);
       const eased = 1 - (1 - t) ** 2;
       window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
       if (t < 1) frame = requestAnimationFrame(step);
