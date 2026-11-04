@@ -144,6 +144,8 @@ html, body {
       display: none !important;
     }
     .hero h1 { font-size: 32px !important; }
+    .hero h1 > span:first-child { font-size: 21.76px !important; }
+    .hero h1 > span:last-child { font-size: 27.52px !important; }
     .hero-copy { font-size: 12px !important; }
     .mobile-page-fit h2,
     .mobile-page-fit .contact-visual h2 {
@@ -157,6 +159,9 @@ html, body {
     .mobile-page-fit .property-panel h3 { font-size: 20px !important; }
     .mobile-page-fit .contact-panel h3 { font-size: 17px !important; }
     .mobile-page-fit .contact-panel > div:first-child > p { font-size: 12.5px !important; }
+  }
+  @media (max-width: 560px) {
+    .hero h1 > span:last-child { font-size: 21.76px !important; }
   }
   @media (prefers-reduced-motion: reduce) {
     html.mobile-paging-ready { scroll-behavior: auto !important; }
