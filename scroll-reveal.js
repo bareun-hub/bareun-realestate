@@ -58,10 +58,18 @@
   if (!('IntersectionObserver' in window)) return;
   const desktopMotion = matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)');
   const cards = document.querySelectorAll('main :is(.stagger-item, .property-panel, .contact-panel)');
+  const groups = new Map();
+  for (const card of cards) {
+    const group = card.parentElement;
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group).push(card);
+  }
   const observer = new IntersectionObserver((entries) => {
     if (!desktopMotion.matches) return;
     for (const { target, intersectionRatio } of entries) {
-      target.classList.toggle('desktop-card-active', intersectionRatio >= .01);
+      for (const card of groups.get(target)) {
+        card.classList.toggle('desktop-card-active', intersectionRatio >= .01);
+      }
     }
   }, { rootMargin: '-82px 0px 0px', threshold: .01 });
 
@@ -70,8 +78,9 @@
     for (const card of cards) {
       card.classList.remove('desktop-card-active');
       card.classList.toggle('desktop-card-reveal', desktopMotion.matches);
-      if (desktopMotion.matches) observer.observe(card);
     }
+    // The stationary group avoids feedback from the cards' own translation.
+    if (desktopMotion.matches) groups.forEach((_, group) => observer.observe(group));
   }
 
   document.querySelector('.desktop-nav')?.addEventListener('click', (event) => {
@@ -90,6 +99,80 @@
 
   desktopMotion.addEventListener('change', updateDesktopCards);
   updateDesktopCards();
+})();
+
+// The desktop property photo doubles as a selector for the existing services.
+(() => {
+  const feature = document.querySelector('#properties .property-feature');
+  const panel = feature?.querySelector('.property-panel');
+  if (!panel) return;
+
+  const desktop = matchMedia('(min-width: 901px)');
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const fields = [...panel.querySelectorAll('.panel-index, h3, p')];
+  const original = fields.map(field => [...field.childNodes]);
+  const visit = ['02 / CONSULTATION', '방문 상담으로 매물을 찾아보세요.',
+    '온라인에 공개되지 않은 매물은 대표전화 055-313-0222로 문의해 주세요.'];
+  const link = panel.querySelector('#naver-property-link');
+  const originalLink = [...link.childNodes];
+  const linkAttributes = ['href', 'target', 'aria-label'].map(name => [name, link.getAttribute(name)]);
+  const options = document.createElement('div');
+  options.className = 'desktop-property-options';
+  options.setAttribute('role', 'group');
+  options.setAttribute('aria-label', '상가 매물 안내 선택');
+  let selection;
+  let animations = [];
+
+  function select(index, animate = true) {
+    if (index === selection) return;
+    selection = index;
+    animations.forEach(animation => animation.cancel());
+    animations = [];
+    fields.forEach((field, i) => field.replaceChildren(...(index ? [visit[i]] : original[i])));
+    if (index) {
+      link.href = 'tel:0553130222';
+      link.removeAttribute('target');
+      link.setAttribute('aria-label', '대표전화로 방문 상담 문의');
+      link.textContent = '대표전화로 상담 문의 →';
+    } else {
+      for (const [name, value] of linkAttributes) {
+        if (value === null) link.removeAttribute(name);
+        else link.setAttribute(name, value);
+      }
+      link.replaceChildren(...originalLink);
+    }
+    [...options.children].forEach((button, i) => button.setAttribute('aria-pressed', String(i === index)));
+
+    if (animate && !reducedMotion.matches && typeof panel.animate === 'function') {
+      animations = [...fields, link].map(field => field.animate(
+        [{ opacity: 0, translate: '0 10px' }, { opacity: 1, translate: 'none' }],
+        { duration: 280, easing: 'ease-out' }
+      ));
+    }
+  }
+
+  ['공개 매물', '방문 상담'].forEach((label, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.textContent = label;
+    button.addEventListener('click', () => select(index));
+    button.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'mouse' && !panel.contains(document.activeElement)) select(index);
+    });
+    options.append(button);
+  });
+
+  function updateOptions() {
+    if (desktop.matches) {
+      select(0, false);
+      feature.append(options);
+    } else {
+      if (selection !== undefined) select(0, false);
+      options.remove();
+    }
+  }
+  desktop.addEventListener('change', updateOptions);
+  updateOptions();
 })();
 
 // Use static headings as visibility triggers for mobile card groups.
