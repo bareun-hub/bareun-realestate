@@ -342,6 +342,25 @@
   <script src="scroll-reveal.js?v=20261105"></script>
   <script src="mobile-swipe.js?v=20261105"></script>
   <script src="desktop-pages.js?v=20261105"></script>
+  <script>
+    (function() {
+      // 웹뷰가 임의로 부풀린 계산된 폰트 크기를 감지하여 강제 보정
+      function lockMobileFonts() {
+        var targets = document.querySelectorAll('.hero-title, .property-card-title, h1, h2, h3, .card-title');
+        targets.forEach(function(el) {
+          el.style.setProperty('-webkit-text-size-adjust', 'none', 'important');
+          el.style.setProperty('text-size-adjust', 'none', 'important');
+          el.style.zoom = '1';
+        });
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', lockMobileFonts);
+      } else {
+        lockMobileFonts();
+      }
+      window.addEventListener('resize', lockMobileFonts);
+    })();
+  </script>
 </body>
 </html>
 
