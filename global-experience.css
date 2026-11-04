@@ -283,12 +283,7 @@
   }
 
   main > section :is(h1, h2).mobile-heading-entered {
-    animation: mobile-heading-slide-in 360ms cubic-bezier(.22, 1, .36, 1);
-  }
-
-  ::highlight(mobile-heading-untyped) {
-    color: transparent;
-    text-shadow: none;
+    animation: mobile-heading-slide-in 420ms cubic-bezier(.22, 1, .36, 1);
   }
 
   @keyframes mobile-card-enter {
