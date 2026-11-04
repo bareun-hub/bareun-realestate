@@ -376,6 +376,26 @@ html, body {
 .motion-ready :is(.hero, .area-card).is-visible::before { opacity: 1; transform: scale(1); }
 
 @media (min-width: 901px) {
+  html {
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+  }
+
+  :is(.desktop-card-reveal, .property-panel, .desktop-nav a,
+      .desktop-property-options button, .button, .platform-card a, .hero-region-nav a) {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+  }
+
+  :is(.desktop-card-reveal, .property-panel, .desktop-nav a, .desktop-property-options button) {
+    transform: translateZ(0);
+  }
+
+  /* Keep existing button transforms, including hover movement and CTA centering. */
+  :is(.button, .platform-card a, .hero-region-nav a) {
+    translate: 0 0 0;
+  }
+
   .desktop-property-options {
     position: absolute;
     inset: 16px auto auto 16px;
