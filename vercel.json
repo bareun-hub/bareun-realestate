@@ -3,7 +3,22 @@
   "framework": null,
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/m",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
+    {
+      "source": "/m",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
     {
       "source": "/",
       "headers": [
