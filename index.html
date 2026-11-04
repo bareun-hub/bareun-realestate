@@ -5,55 +5,6 @@
   <meta http-equiv="Pragma" content="no-cache" />
   <meta http-equiv="Expires" content="0" />
   <meta charset="UTF-8" />
-  <script>
-    (() => {
-      const agent = navigator.userAgent;
-      const android = /Android/i.test(agent);
-      const ios = /iPhone|iPad|iPod/i.test(agent) ||
-        (/Macintosh/i.test(agent) && navigator.maxTouchPoints > 1);
-      if (!/Instagram|FB/i.test(agent) || (!android && !ios) || location.protocol !== 'https:') return;
-
-      const intent = android
-        ? 'intent://' + location.host + location.pathname + location.search +
-          '#Intent;scheme=https;action=android.intent.action.VIEW;category=android.intent.category.BROWSABLE;end'
-        : '';
-
-      document.addEventListener('DOMContentLoaded', () => {
-        const notice = document.createElement('aside');
-        notice.setAttribute('aria-label', '외부 브라우저 안내');
-        notice.style.cssText = 'position:fixed;inset:auto 12px max(12px,env(safe-area-inset-bottom));z-index:10000;padding:12px;background:#fff;color:#17202a;border:1px solid #ccd4dc;border-radius:8px;font:14px/1.5 system-ui,sans-serif;';
-        notice.textContent = '앱 메뉴(⋯)에서 ‘외부 브라우저에서 열기’를 선택해 주세요. 메뉴에 없으면 링크를 복사해 ' +
-          (ios ? 'Safari' : 'Chrome 또는 삼성 인터넷') + '에서 열어 주세요. ';
-
-        if (intent) {
-          const link = document.createElement('a');
-          link.href = intent;
-          link.textContent = '브라우저로 열기';
-          link.style.cssText = 'display:inline-block;padding:8px;color:#164f80;text-decoration:underline;';
-          notice.append(link);
-        }
-
-        const close = document.createElement('button');
-        close.type = 'button';
-        close.textContent = '닫기';
-        close.style.cssText = 'padding:8px;background:#fff;color:#17202a;border:1px solid #ccd4dc;border-radius:4px;';
-        close.addEventListener('click', () => notice.remove());
-        notice.append(close);
-        document.body.append(notice);
-      }, { once: true });
-
-      if (!intent) return;
-      try {
-        const key = 'bareun-external-browser-attempted';
-        if (!sessionStorage.getItem(key)) {
-          sessionStorage.setItem(key, '1');
-          location.href = intent;
-        }
-      } catch {
-        // The tap link and app menu remain available if the WebView blocks this.
-      }
-    })();
-  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="율하·장유·김해 상가 전문 바른부동산공인중개사사무소. 20년 현장 경험으로 상권, 입지, 시설, 임대조건까지 함께 봅니다." />
   <title>바른부동산공인중개사사무소 | 율하·장유·김해 상가 전문</title>
