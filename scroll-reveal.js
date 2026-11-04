@@ -86,7 +86,7 @@
       section.classList.remove('mobile-cards-ready');
       cards.forEach((card, index) => {
         card.classList.toggle('mobile-stagger-card', mobileMotion.matches);
-        if (mobileMotion.matches) card.style.setProperty('--mobile-card-delay', `${150 + index * 125}ms`);
+        if (mobileMotion.matches) card.style.setProperty('--mobile-card-delay', `${150 + index * 95}ms`);
         else card.style.removeProperty('--mobile-card-delay');
       });
       if (mobileMotion.matches) sectionObserver.observe(section);
