@@ -10,7 +10,7 @@
   }
 
   #contents:target .section-heading h2 {
-    font-size: clamp(28px, 2.7vw, 40px) !important;
+    font-size: clamp(24.64px, 2.376vw, 35.2px) !important;
     line-height: 1.08 !important;
   }
 

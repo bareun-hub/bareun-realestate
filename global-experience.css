@@ -283,6 +283,37 @@
 }
 .motion-ready :is(.hero, .area-card).is-visible::before { opacity: 1; transform: scale(1); }
 
+@media (min-width: 901px) {
+  .hero h1 { font-size: clamp(42.24px, 5.456vw, 80.96px); }
+  .hero-copy { font-size: clamp(13.2px, 1.1vw, 15.84px); }
+  .intro-copy { font-size: 14.96px; }
+  :is(.strength-card, .property-panel) p { font-size: 12.32px; }
+  .strength-card h3 { font-size: 18.48px; }
+  main :is(.eyebrow, .panel-index, .content-category, .area-content p) { font-size: 9.68px; }
+  .contact-visual > p:last-child { font-size: .88em; }
+  .contact-panel > div:first-child > p { font-size: .88em; }
+  .area-content small { font-size: 11.73px; }
+  html body #analysis.analysis:is(:target, .analysis) .analysis-note strong { font-size: 11.44px !important; }
+  html body #analysis.analysis:is(:target, .analysis) .analysis-note p { font-size: 13.73px !important; }
+
+  .motion-ready main :is(h1, h2, h3).fade-up {
+    opacity: 1;
+    translate: none;
+    transition: none;
+  }
+}
+
+@media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
+  .motion-ready main .stagger-item {
+    transition-duration: 500ms;
+    transition-timing-function: ease-out;
+  }
+
+  .motion-ready main .stagger-item:not(.is-visible) {
+    translate: 0 10px;
+  }
+}
+
 @media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
   @keyframes mobile-fade-up {
     from { opacity: 0; transform: translateY(7px); }
