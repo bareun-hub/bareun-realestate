@@ -53,6 +53,45 @@
   window.ScrollReveal = { refresh: register };
 })();
 
+// Desktop cards stay observed so a later visit can replay their entrance.
+(() => {
+  if (!('IntersectionObserver' in window)) return;
+  const desktopMotion = matchMedia('(min-width: 901px) and (prefers-reduced-motion: no-preference)');
+  const cards = document.querySelectorAll('main :is(.stagger-item, .property-panel, .contact-panel)');
+  const observer = new IntersectionObserver((entries) => {
+    if (!desktopMotion.matches) return;
+    for (const { target, intersectionRatio } of entries) {
+      target.classList.toggle('desktop-card-active', intersectionRatio >= .01);
+    }
+  }, { rootMargin: '-82px 0px 0px', threshold: .01 });
+
+  function updateDesktopCards() {
+    observer.disconnect();
+    for (const card of cards) {
+      card.classList.remove('desktop-card-active');
+      card.classList.toggle('desktop-card-reveal', desktopMotion.matches);
+      if (desktopMotion.matches) observer.observe(card);
+    }
+  }
+
+  document.querySelector('.desktop-nav')?.addEventListener('click', (event) => {
+    if (!desktopMotion.matches || event.defaultPrevented || event.metaKey ||
+        event.ctrlKey || event.shiftKey || event.altKey) return;
+    const hash = event.target.closest('a[href^="#"]')?.hash;
+    const section = hash && document.getElementById(hash.slice(1));
+    if (!section) return;
+    const active = section.querySelectorAll('.desktop-card-active');
+    if (!active.length) return;
+    active.forEach(card => card.classList.remove('desktop-card-active'));
+    // Commit the reset before replaying cards already visible on a repeat click.
+    void section.offsetWidth;
+    active.forEach(card => card.classList.add('desktop-card-active'));
+  });
+
+  desktopMotion.addEventListener('change', updateDesktopCards);
+  updateDesktopCards();
+})();
+
 // Use static headings as visibility triggers for mobile card groups.
 (() => {
   if (!('IntersectionObserver' in window)) return;
