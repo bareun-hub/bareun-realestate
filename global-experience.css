@@ -151,7 +151,7 @@ html, body {
     .mobile-page-fit .contact-visual h2 {
       font-size: calc(22px / var(--menu-fit-scale, 1)) !important;
     }
-    .mobile-page-fit :is(.property-panel p, .section-heading > p:last-child),
+    .mobile-page-fit .section-heading > p:last-child,
     .mobile-page-fit .intro-copy p,
     .mobile-page-fit .contact-visual > p:last-child {
       font-size: calc(12px / var(--menu-fit-scale, 1)) !important;
@@ -162,6 +162,41 @@ html, body {
   }
   @media (max-width: 560px) {
     .hero h1 > span:last-child { font-size: 21.76px !important; }
+  }
+  @media screen and (max-width: 768px) {
+    :is(.hero-content, .hero h1, .property-panel, .strength-card, .area-content,
+      .content-topic, .platform-card) {
+      -webkit-text-size-adjust: none !important;
+      text-size-adjust: none !important;
+    }
+
+    .hero h1, .hero h1 > span, .hero-copy,
+    :is(.strength-card, .property-panel, .content-topic, .area-content) > h3,
+    :is(.strength-card, .property-panel, .content-topic, .platform-card) > p {
+      display: block !important;
+      width: 100%;
+    }
+
+    .hero h1 { line-height: 38.4px !important; }
+    .hero h1 > span:first-child { line-height: 28.288px !important; }
+    .hero h1 > span:last-child { line-height: 35.776px !important; }
+    .hero-copy { line-height: 20.4px !important; }
+    .strength-card > h3 { font-size: 21px !important; line-height: 29.4px !important; }
+    .strength-card > p { font-size: 14px !important; line-height: 23.8px !important; }
+    .area-content > h3, .content-topic > h3 { font-size: 15px !important; line-height: 21px !important; }
+    .property-panel > h3 { font-size: 20px !important; line-height: 28px !important; }
+    #properties .property-panel > p {
+      font-size: 12px !important;
+      line-height: 20.4px !important;
+    }
+    .platform-card > h3 { font-size: 13px !important; line-height: 18.2px !important; }
+    :is(.content-topic, .platform-card) > p { font-size: 11.5px !important; line-height: 19.55px !important; }
+  }
+  @media screen and (max-width: 560px) {
+    .hero h1 > span:last-child { line-height: 28.288px !important; }
+    .strength-card > h3 { font-size: 17px !important; line-height: 23.8px !important; }
+    .strength-card > p { font-size: 11.75px !important; line-height: 19.975px !important; }
+    .area-content > h3 { font-size: 18px !important; line-height: 25.2px !important; }
   }
   @media (prefers-reduced-motion: reduce) {
     html.mobile-paging-ready { scroll-behavior: auto !important; }
