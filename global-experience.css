@@ -5,6 +5,15 @@ html, body {
   text-size-adjust: 100% !important;
 }
 
+@media (max-width: 900px) {
+  :where(h1, h2, h3, h4, p, span, .property-panel, .strength-card,
+    .area-card, .content-topic, .platform-card, .stagger-item) {
+    -webkit-text-size-adjust: none !important;
+    text-size-adjust: none !important;
+    max-height: 999999px;
+  }
+}
+
 /* Shared typography tokens. The important layer takes priority over legacy
    viewport-fit overrides, including styles loaded dynamically by script.js. */
 @layer mobile-page-fit, global-experience;
