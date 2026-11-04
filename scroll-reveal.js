@@ -53,7 +53,7 @@
   window.ScrollReveal = { refresh: register };
 })();
 
-// Observe headings separately so section snapping remains browser-controlled.
+// Use static headings as visibility triggers for mobile card groups.
 (() => {
   if (!('IntersectionObserver' in window)) return;
   const mobileMotion = matchMedia('(max-width: 900px) and (prefers-reduced-motion: no-preference)');
@@ -64,25 +64,11 @@
     const cards = section.querySelectorAll(':is(.strength-grid, .analysis-grid, .content-topic-grid, .platform-grid, .stagger-group) > .stagger-item, .property-feature');
     if (cards.length) cardsBySection.set(section, cards);
   }
-  for (const heading of headings) {
-    heading.addEventListener('animationend', (event) => {
-      if (event.target === heading && event.animationName === 'mobile-fade-up' &&
-          mobileMotion.matches && heading.classList.contains('mobile-heading-entered')) {
-        heading.closest('section').classList.add('mobile-cards-ready');
-      }
-    });
-  }
-
   const observer = new IntersectionObserver((entries) => {
     if (!mobileMotion.matches) return;
-    for (const { target, isIntersecting, intersectionRatio } of entries) {
-      if (intersectionRatio >= .65 && !target.classList.contains('mobile-heading-entered')) {
-        target.classList.add('mobile-heading-entered');
-      } else if (!isIntersecting) {
-        if (target.classList.contains('mobile-heading-entered')) {
-          target.closest('section').classList.add('mobile-cards-ready');
-        }
-        target.classList.remove('mobile-heading-entered');
+    for (const { target, intersectionRatio } of entries) {
+      if (intersectionRatio >= .65) {
+        target.closest('section').classList.add('mobile-cards-ready');
       }
     }
   }, { rootMargin: '-70px 0px 0px 0px', threshold: [0, .65] });
@@ -106,8 +92,7 @@
       if (mobileMotion.matches) sectionObserver.observe(section);
     }
     for (const heading of headings) {
-      heading.classList.remove('mobile-heading-entered');
-      if (mobileMotion.matches) observer.observe(heading);
+      if (mobileMotion.matches && cardsBySection.has(heading.closest('section'))) observer.observe(heading);
     }
   }
 

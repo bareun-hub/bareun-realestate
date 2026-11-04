@@ -13,6 +13,13 @@
 /* Every mobile section uses the same viewport fit for swipes and menu links. */
 @layer mobile-page-fit {
   @media (max-width: 900px) {
+    main > section :is(.hero-content > h1, .section-heading > h2, .contact-visual > h2) {
+      opacity: 1 !important;
+      animation: none !important;
+      transition: none !important;
+      transform: none !important;
+      translate: none !important;
+    }
     html, body, main {
       touch-action: manipulation !important;
       -webkit-text-size-adjust: 100% !important;
@@ -25,7 +32,7 @@
       scale: none !important;
       transition: none !important;
     }
-    .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image):not(.mobile-heading-entered, .mobile-stagger-card) {
+    .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image):not(.mobile-stagger-card) {
       opacity: 1 !important;
     }
     .mobile-paging-ready .area-card::before {
@@ -280,10 +287,6 @@
   @keyframes mobile-fade-up {
     from { opacity: 0; transform: translateY(12px); }
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  main > section :is(h1, h2).mobile-heading-entered {
-    animation: mobile-fade-up 400ms var(--reveal-ease);
   }
 
   .motion-ready main > section .mobile-stagger-card:not(:focus-within) {
