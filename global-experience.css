@@ -277,18 +277,13 @@
 .motion-ready :is(.hero, .area-card).is-visible::before { opacity: 1; transform: scale(1); }
 
 @media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
-  @keyframes mobile-heading-slide-in {
-    from { opacity: 0; transform: translateX(-16px); }
-    to { opacity: 1; transform: translateX(0); }
+  @keyframes mobile-fade-up {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   main > section :is(h1, h2).mobile-heading-entered {
-    animation: mobile-heading-slide-in 420ms cubic-bezier(.22, 1, .36, 1);
-  }
-
-  @keyframes mobile-card-enter {
-    from { opacity: 0; transform: translateY(12px); }
-    to { opacity: 1; transform: none; }
+    animation: mobile-fade-up 400ms var(--reveal-ease);
   }
 
   .motion-ready main > section .mobile-stagger-card:not(:focus-within) {
@@ -296,7 +291,7 @@
   }
 
   .mobile-cards-ready .mobile-stagger-card {
-    animation: mobile-card-enter 360ms var(--reveal-ease) var(--mobile-card-delay) both;
+    animation: mobile-fade-up 360ms var(--reveal-ease) var(--mobile-card-delay) both;
   }
 
   .motion-ready main > section .mobile-stagger-card:focus-within {

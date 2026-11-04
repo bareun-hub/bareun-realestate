@@ -66,7 +66,7 @@
   }
   for (const heading of headings) {
     heading.addEventListener('animationend', (event) => {
-      if (event.target === heading && event.animationName === 'mobile-heading-slide-in' &&
+      if (event.target === heading && event.animationName === 'mobile-fade-up' &&
           mobileMotion.matches && heading.classList.contains('mobile-heading-entered')) {
         heading.closest('section').classList.add('mobile-cards-ready');
       }
@@ -100,7 +100,7 @@
       section.classList.remove('mobile-cards-ready');
       cards.forEach((card, index) => {
         card.classList.toggle('mobile-stagger-card', mobileMotion.matches);
-        if (mobileMotion.matches) card.style.setProperty('--mobile-card-delay', `${index * 110}ms`);
+        if (mobileMotion.matches) card.style.setProperty('--mobile-card-delay', `${index * 100}ms`);
         else card.style.removeProperty('--mobile-card-delay');
       });
       if (mobileMotion.matches) sectionObserver.observe(section);
