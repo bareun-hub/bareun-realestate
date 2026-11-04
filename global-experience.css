@@ -170,11 +170,24 @@ html, body {
       text-size-adjust: none !important;
     }
 
-    .hero h1, .hero h1 > span, .hero-copy,
+    .hero h1 > span, .hero-copy,
     :is(.strength-card, .property-panel, .content-topic, .area-content) > h3,
     :is(.strength-card, .property-panel, .content-topic, .platform-card) > p {
-      display: block !important;
-      width: 100%;
+      display: inline !important;
+      flex-shrink: 1;
+      min-width: 0;
+    }
+
+    .hero h1 > span:first-child::after {
+      content: "\a";
+      white-space: pre;
+    }
+
+    .hero-copy::before,
+    :is(.strength-card, .content-topic, .area-content) > h3::before,
+    :is(.strength-card, .content-topic, .platform-card) > p::before {
+      content: "";
+      display: block;
     }
 
     .hero h1 { line-height: 38.4px !important; }
@@ -201,6 +214,14 @@ html, body {
   @media (prefers-reduced-motion: reduce) {
     html.mobile-paging-ready { scroll-behavior: auto !important; }
   }
+}
+
+.hero h1 > span:first-child {
+  display: block;
+  font-size: .68em;
+  line-height: 1.25;
+  letter-spacing: -.035em;
+  margin-bottom: .16em;
 }
 
 @layer global-experience {
