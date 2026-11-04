@@ -12,6 +12,7 @@ await mkdir(path.join(output, 'assets'), { recursive: true });
 const read = (file) => readFile(path.join(root, file), 'utf8');
 const hash = (data) => createHash('sha256').update(data).digest('hex').slice(0, 12);
 const assets = new Map();
+const buildTimestamp = Date.now();
 
 // All files under dist/assets are content-addressed and safe to cache forever.
 for (const entry of await readdir(path.join(root, 'assets'), { withFileTypes: true })) {
@@ -101,7 +102,11 @@ if (cardScripts.length) {
 const logo = await readFile(path.join(root, 'assets/business-card-logo.png'));
 card = card.replace('<img class="logo"', '<img width="' + logo.readUInt32BE(16) + '" height="' + logo.readUInt32BE(20) + '" decoding="async" class="logo"');
 
-await writeFile(path.join(output, 'index.html'), rewriteAssets(html));
+const versionedHomepage = rewriteAssets(html).replace(
+  /(\b(?:href|src|srcset)="assets\/[^"?]+)"/g,
+  `$1?v=${buildTimestamp}"`
+);
+await writeFile(path.join(output, 'index.html'), versionedHomepage);
 await writeFile(path.join(output, 'card.html'), card);
 for (const file of ['og-card-20261028.png', 'og-image.png']) await copyFile(path.join(root, file), path.join(output, file));
 await writeFile(path.join(output, '.nojekyll'), '');
