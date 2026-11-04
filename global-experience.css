@@ -328,15 +328,26 @@
 
 @media (min-width: 901px) and (prefers-reduced-motion: no-preference) {
   .motion-ready main :is(.desktop-card-reveal, .fade-up, .reveal-image),
-  .motion-ready main .property-panel :is(.panel-index, h3, p, #naver-property-link) {
-    will-change: translate, opacity;
+  .motion-ready main .property-panel :is(.panel-index, h3, p, #naver-property-link),
+  .motion-ready main :is(.hero, .area-card)::before,
+  .motion-ready main :is(.button-primary, .naver-directions-button) {
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     transform-style: preserve-3d;
   }
 
+  .motion-ready main :is(.desktop-card-reveal, .fade-up),
+  .motion-ready main .property-panel :is(.panel-index, h3, p, #naver-property-link) {
+    will-change: translate, opacity;
+  }
+
   .motion-ready main .reveal-image {
     will-change: translate, scale, opacity;
+  }
+
+  .motion-ready main :is(.hero, .area-card)::before,
+  .motion-ready main :is(.button-primary, .naver-directions-button) {
+    will-change: transform, opacity;
   }
 
   @keyframes desktop-card-enter {
