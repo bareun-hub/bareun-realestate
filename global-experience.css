@@ -13,9 +13,6 @@
 /* Every mobile section uses the same viewport fit for swipes and menu links. */
 @layer mobile-page-fit {
   @media (max-width: 900px) {
-    .mobile-swipe-controlled main, .mobile-swipe-controlled .site-footer {
-      touch-action: pan-x pinch-zoom !important;
-    }
     html, body, main {
       touch-action: manipulation !important;
       -webkit-text-size-adjust: 100% !important;
@@ -24,10 +21,12 @@
     /* A fitted page must already be readable when it arrives. Do not stack
        card reveal delays on top of the page transition on mobile. */
     .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image) {
-      opacity: 1 !important;
       translate: none !important;
       scale: none !important;
       transition: none !important;
+    }
+    .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image):not(.mobile-heading-entered) {
+      opacity: 1 !important;
     }
     .mobile-paging-ready .area-card::before {
       opacity: 1 !important;
@@ -36,8 +35,8 @@
     }
     html.mobile-paging-ready {
       overflow-anchor: none !important;
-      /* Native snap and touch-end alignment must not both settle the page. */
-      scroll-snap-type: none !important;
+      -webkit-overflow-scrolling: touch;
+      scroll-snap-type: y mandatory !important;
       scroll-padding-top: 70px !important;
       scroll-behavior: smooth !important;
     }
@@ -110,6 +109,31 @@
     .mobile-page-fit .naver-map-wrap { margin-bottom: 10px !important; }
     .mobile-page-fit .button { margin-top: 8px !important; }
     .mobile-page-fit :is(.naver-map-note, .contact-note) { margin: 4px 0 0 !important; }
+  }
+  @media (max-width: 768px) {
+    #contents .content-topic-grid > .content-topic h3 {
+      font-size: 15px !important;
+    }
+    #contents .content-topic-grid > .content-topic.featured h3 {
+      white-space: nowrap !important;
+    }
+    #contents .content-topic-grid > .content-topic.featured h3 br {
+      display: none !important;
+    }
+    .hero h1 { font-size: 32px !important; }
+    .hero-copy { font-size: 12px !important; }
+    .mobile-page-fit h2,
+    .mobile-page-fit .contact-visual h2 {
+      font-size: calc(22px / var(--menu-fit-scale, 1)) !important;
+    }
+    .mobile-page-fit :is(.property-panel p, .section-heading > p:last-child),
+    .mobile-page-fit .intro-copy p,
+    .mobile-page-fit .contact-visual > p:last-child {
+      font-size: calc(12px / var(--menu-fit-scale, 1)) !important;
+    }
+    .mobile-page-fit .property-panel h3 { font-size: 20px !important; }
+    .mobile-page-fit .contact-panel h3 { font-size: 17px !important; }
+    .mobile-page-fit .contact-panel > div:first-child > p { font-size: 12.5px !important; }
   }
   @media (prefers-reduced-motion: reduce) {
     html.mobile-paging-ready { scroll-behavior: auto !important; }
@@ -251,6 +275,23 @@
   transition-delay: var(--reveal-delay, 0s);
 }
 .motion-ready :is(.hero, .area-card).is-visible::before { opacity: 1; transform: scale(1); }
+
+@media (max-width: 900px) and (prefers-reduced-motion: no-preference) {
+  @keyframes mobile-heading-slide-in {
+    from { opacity: 0; transform: translateX(-16px); }
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  main > section :is(h1, h2, h3).mobile-heading-entered {
+    animation: mobile-heading-slide-in 360ms cubic-bezier(.22, 1, .36, 1);
+  }
+
+  ::highlight(mobile-heading-untyped) {
+    color: transparent;
+    text-shadow: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .motion-ready :is(.hero, .area-card)::before { opacity: 1; transform: none; transition: none; }
   .motion-ready :is(.fade-up, .stagger-item, .reveal-image) {

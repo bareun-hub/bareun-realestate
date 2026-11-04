@@ -36,7 +36,9 @@
     document.documentElement.scrollHeight - document.documentElement.clientHeight,
     scrollY + page.getBoundingClientRect().top - visualDelta -
     (page.id === 'home' ? 0 : (document.querySelector('.site-header')?.offsetHeight || 70))));
-  const enabled = () => innerWidth <= 900 && root.classList.contains('mobile-paging-ready') &&
+  const usesNativeSnap = () => innerWidth <= 900 &&
+    getComputedStyle(root).scrollSnapType === 'y mandatory';
+  const enabled = () => innerWidth <= 900 && root.classList.contains('mobile-paging-ready') && !usesNativeSnap() &&
     Math.abs((visualViewport?.scale || 1) - 1) < .01;
 
   // Touch samples can arrive much less often than display frames. Follow the
@@ -73,6 +75,11 @@
   }
   function goTo(page, releaseVelocity) {
     cancel();
+    if (usesNativeSnap()) {
+      activePage = null;
+      window.scrollTo({ top: offset(page), behavior: 'auto' });
+      return;
+    }
     activePage = page;
     const start = scrollY;
     let destination = offset(page);
