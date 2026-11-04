@@ -57,7 +57,13 @@
 (() => {
   if (!('IntersectionObserver' in window)) return;
   const mobileMotion = matchMedia('(max-width: 900px) and (prefers-reduced-motion: no-preference)');
-  const headings = document.querySelectorAll('main > section :is(h1, h2, h3)');
+  const headings = document.querySelectorAll('main > section :is(.hero-content > h1, .section-heading > h2, .contact-visual > h2)');
+  const cardsBySection = new Map();
+  for (const heading of headings) {
+    const section = heading.closest('section');
+    const cards = section.querySelectorAll(':is(.strength-grid, .analysis-grid, .content-topic-grid, .platform-grid, .stagger-group) > .stagger-item, .property-feature');
+    if (cards.length) cardsBySection.set(section, cards);
+  }
   const hiddenText = window.CSS?.highlights && typeof Highlight === 'function'
     ? new Highlight()
     : null;
@@ -71,12 +77,19 @@
     const state = typing.get(heading);
     if (!state) return;
     cancelAnimationFrame(state.frame);
+    clearTimeout(state.timer);
     for (const { range } of state.parts) hiddenText.delete(range);
     typing.delete(heading);
   }
 
-  function typeHeading(heading) {
-    if (!hiddenText) return;
+  function typeHeading(heading, onComplete) {
+    if (!hiddenText) {
+      typing.set(heading, { parts: [], frame: 0, timer: setTimeout(() => {
+        typing.delete(heading);
+        onComplete();
+      }, 360) });
+      return;
+    }
     const walker = document.createTreeWalker(heading, NodeFilter.SHOW_TEXT);
     const parts = [];
     let total = 0;
@@ -93,16 +106,20 @@
       parts.push({ node, range, offsets, start: total });
       total += segments.length;
     }
-    if (!total) return;
+    if (!total) {
+      onComplete();
+      return;
+    }
 
     const state = { parts, frame: 0 };
     const started = performance.now();
-    const duration = Math.min(850, Math.max(180, total * 24));
+    const duration = Math.min(1800, Math.max(480, total * 48));
     typing.set(heading, state);
     function reveal(now) {
       const count = Math.floor(total * Math.max(0, now - started) / duration);
       if (count >= total) {
         stopTyping(heading);
+        onComplete();
         return;
       }
       for (const { node, range, offsets, start } of parts) {
@@ -122,17 +139,35 @@
     if (!mobileMotion.matches) return;
     for (const { target, isIntersecting, intersectionRatio } of entries) {
       if (intersectionRatio >= .65 && !target.classList.contains('mobile-heading-entered')) {
-        typeHeading(target);
+        const section = target.closest('section');
+        typeHeading(target, () => section.classList.add('mobile-cards-ready'));
         target.classList.add('mobile-heading-entered');
       } else if (!isIntersecting) {
+        if (typing.has(target)) target.closest('section').classList.add('mobile-cards-ready');
         stopTyping(target);
         target.classList.remove('mobile-heading-entered');
       }
     }
   }, { rootMargin: '-70px 0px 0px 0px', threshold: [0, .65] });
 
+  const sectionObserver = new IntersectionObserver((entries) => {
+    for (const { target, isIntersecting } of entries) {
+      if (!isIntersecting) target.classList.remove('mobile-cards-ready');
+    }
+  });
+
   function updateHeadingObserver() {
     observer.disconnect();
+    sectionObserver.disconnect();
+    for (const [section, cards] of cardsBySection) {
+      section.classList.remove('mobile-cards-ready');
+      cards.forEach((card, index) => {
+        card.classList.toggle('mobile-stagger-card', mobileMotion.matches);
+        if (mobileMotion.matches) card.style.setProperty('--mobile-card-delay', `${index * 110}ms`);
+        else card.style.removeProperty('--mobile-card-delay');
+      });
+      if (mobileMotion.matches) sectionObserver.observe(section);
+    }
     for (const heading of headings) {
       stopTyping(heading);
       heading.classList.remove('mobile-heading-entered');

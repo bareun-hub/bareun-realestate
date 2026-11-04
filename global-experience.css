@@ -25,7 +25,7 @@
       scale: none !important;
       transition: none !important;
     }
-    .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image):not(.mobile-heading-entered) {
+    .mobile-paging-ready .mobile-page-fit :is(.fade-up, .stagger-item, .reveal-image):not(.mobile-heading-entered, .mobile-stagger-card) {
       opacity: 1 !important;
     }
     .mobile-paging-ready .area-card::before {
@@ -282,13 +282,31 @@
     to { opacity: 1; transform: translateX(0); }
   }
 
-  main > section :is(h1, h2, h3).mobile-heading-entered {
+  main > section :is(h1, h2).mobile-heading-entered {
     animation: mobile-heading-slide-in 360ms cubic-bezier(.22, 1, .36, 1);
   }
 
   ::highlight(mobile-heading-untyped) {
     color: transparent;
     text-shadow: none;
+  }
+
+  @keyframes mobile-card-enter {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  .motion-ready main > section .mobile-stagger-card:not(:focus-within) {
+    opacity: 0;
+  }
+
+  .mobile-cards-ready .mobile-stagger-card {
+    animation: mobile-card-enter 360ms var(--reveal-ease) var(--mobile-card-delay) both;
+  }
+
+  .motion-ready main > section .mobile-stagger-card:focus-within {
+    animation: none;
+    opacity: 1;
   }
 }
 
